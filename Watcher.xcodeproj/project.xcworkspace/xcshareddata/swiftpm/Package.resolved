@@ -2,6 +2,24 @@
   "object": {
     "pins": [
       {
+        "package": "CrossPlatformKit",
+        "repositoryURL": "https://github.com/bengottlieb/crossplatformkit.git",
+        "state": {
+          "branch": null,
+          "revision": "94243baffde14adb5efb08f8c0af6ecd1ce683fb",
+          "version": "1.0.2"
+        }
+      },
+      {
+        "package": "Nearby",
+        "repositoryURL": "https://github.com/bengottlieb/nearby",
+        "state": {
+          "branch": null,
+          "revision": "de7bedd9d648503234e5038ddbe9182b9730c2dc",
+          "version": "0.9.5"
+        }
+      },
+      {
         "package": "Suite",
         "repositoryURL": "https://github.com/bengottlieb/suite",
         "state": {

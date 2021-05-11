@@ -11,19 +11,20 @@ import Foundation
 
 extension ScriptRunner {
 	enum Command: String, CaseIterable, Identifiable, Hashable {
-		case safariCurrentTab = "Current Tab for Safari", safariAllFrontWindowTabs = "All Tabs for Safari"
+		case safariCurrentTab = "Current Tab for Safari", safariAllFrontWindowTabs = "All Tabs for Safari", safariAllCurrentTabs = "All Visible Tabs for Safari"
 		
-		case chromeCurrentTab = "Current Tab for Chrome"
-		case chromeAllFrontWindowTabs = "All Tabs for Chrome"
+		case chromeCurrentTab = "Current Tab for Chrome", chromeAllFrontWindowTabs = "All Tabs for Chrome", chromeAllCurrentTabs = "All Visible Tabs for Chrome"
 
 		
 		var script: String {
 			switch self {
 			case .safariCurrentTab: return "tell application \"Safari\" to get URL of current tab of front window"
 			case .safariAllFrontWindowTabs: return "tell application \"Safari\" to get URL of current tab of every window"
+			case .safariAllCurrentTabs: return "tell application \"Safari\" to get URL of current tab of every window"
 
 			case .chromeCurrentTab: return "tell application \"Google Chrome\" to get URL of active tab of front window"
-			case .chromeAllFrontWindowTabs: return "tell application \"Google Chrome\" to get URL of active tab of front window"
+			case .chromeAllFrontWindowTabs: return "tell application \"Google Chrome\" to get URL of every tab of front window"
+			case .chromeAllCurrentTabs: return "tell application \"Google Chrome\" to get URL of active tab of every window"
 			}
 		}
 		

@@ -34,7 +34,7 @@ struct ScriptEditor: View {
 				case .failure(let err):
 					self.error = err
 				default:
-					print("ran")
+					break
 				}
 			} receiveValue: { result in
 				self.result = result
@@ -46,6 +46,7 @@ struct ScriptEditor: View {
 		VStack() {
 			Picker("Command", selection: $command.onChange { command in
 				script = command.script
+				run()
 			}) {
 				ForEach(ScriptRunner.Command.allCases) { command in
 					Text(command.title).tag(command)

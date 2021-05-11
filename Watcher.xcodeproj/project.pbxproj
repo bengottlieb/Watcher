@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B5585832264A8D4100A91281 /* ScriptRunner.Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585831264A8D4100A91281 /* ScriptRunner.Command.swift */; };
 		B5585834264A8F5F00A91281 /* ScriptEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585833264A8F5F00A91281 /* ScriptEditor.swift */; };
+		B5585837264A991E00A91281 /* Nearby in Frameworks */ = {isa = PBXBuildFile; productRef = B5585836264A991E00A91281 /* Nearby */; };
 		B5872B76264A16E8001755F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872B75264A16E8001755F6 /* AppDelegate.swift */; };
 		B5872B78264A16E8001755F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872B77264A16E8001755F6 /* ContentView.swift */; };
 		B5872B7A264A16E9001755F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5872B79264A16E9001755F6 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5872B8C264A1717001755F6 /* Suite in Frameworks */,
+				B5585837264A991E00A91281 /* Nearby in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +110,7 @@
 			name = Watcher;
 			packageProductDependencies = (
 				B5872B8B264A1717001755F6 /* Suite */,
+				B5585836264A991E00A91281 /* Nearby */,
 			);
 			productName = Watcher;
 			productReference = B5872B72264A16E8001755F6 /* Watcher.app */;
@@ -138,6 +141,7 @@
 			mainGroup = B5872B69264A16E8001755F6;
 			packageReferences = (
 				B5872B8A264A1717001755F6 /* XCRemoteSwiftPackageReference "suite" */,
+				B5585835264A991E00A91281 /* XCRemoteSwiftPackageReference "nearby" */,
 			);
 			productRefGroup = B5872B73264A16E8001755F6 /* Products */;
 			projectDirPath = "";
@@ -376,6 +380,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B5585835264A991E00A91281 /* XCRemoteSwiftPackageReference "nearby" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bengottlieb/nearby";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.5;
+			};
+		};
 		B5872B8A264A1717001755F6 /* XCRemoteSwiftPackageReference "suite" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bengottlieb/suite";
@@ -387,6 +399,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B5585836264A991E00A91281 /* Nearby */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5585835264A991E00A91281 /* XCRemoteSwiftPackageReference "nearby" */;
+			productName = Nearby;
+		};
 		B5872B8B264A1717001755F6 /* Suite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B5872B8A264A1717001755F6 /* XCRemoteSwiftPackageReference "suite" */;
