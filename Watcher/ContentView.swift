@@ -6,17 +6,23 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
-    var body: some View {
-        Text("Hello, World!")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
+	
+	var body: some View {
+		if #available(macOS 11.0, *) {
+			ScriptEditor()
+				.padding()
+		} else {
+			Text("Unsupported OS")
+		}
+	}
 }
 
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+	static var previews: some View {
+		ContentView()
+	}
 }
