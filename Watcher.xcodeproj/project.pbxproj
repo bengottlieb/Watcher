@@ -10,6 +10,8 @@
 		B5585832264A8D4100A91281 /* ScriptRunner.Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585831264A8D4100A91281 /* ScriptRunner.Command.swift */; };
 		B5585834264A8F5F00A91281 /* ScriptEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585833264A8F5F00A91281 /* ScriptEditor.swift */; };
 		B5585837264A991E00A91281 /* Nearby in Frameworks */ = {isa = PBXBuildFile; productRef = B5585836264A991E00A91281 /* Nearby */; };
+		B5585839264BDCFE00A91281 /* ApplicationMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585838264BDCFE00A91281 /* ApplicationMonitor.swift */; };
+		B558583B264BDE4400A91281 /* NSRunningApplication+Browsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558583A264BDE4400A91281 /* NSRunningApplication+Browsers.swift */; };
 		B5872B76264A16E8001755F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872B75264A16E8001755F6 /* AppDelegate.swift */; };
 		B5872B78264A16E8001755F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872B77264A16E8001755F6 /* ContentView.swift */; };
 		B5872B7A264A16E9001755F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5872B79264A16E9001755F6 /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 /* Begin PBXFileReference section */
 		B5585831264A8D4100A91281 /* ScriptRunner.Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptRunner.Command.swift; sourceTree = "<group>"; };
 		B5585833264A8F5F00A91281 /* ScriptEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptEditor.swift; sourceTree = "<group>"; };
+		B5585838264BDCFE00A91281 /* ApplicationMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationMonitor.swift; sourceTree = "<group>"; };
+		B558583A264BDE4400A91281 /* NSRunningApplication+Browsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRunningApplication+Browsers.swift"; sourceTree = "<group>"; };
 		B5872B72264A16E8001755F6 /* Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5872B75264A16E8001755F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5872B77264A16E8001755F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +75,8 @@
 			children = (
 				B5872B75264A16E8001755F6 /* AppDelegate.swift */,
 				B5872B77264A16E8001755F6 /* ContentView.swift */,
+				B5585838264BDCFE00A91281 /* ApplicationMonitor.swift */,
+				B558583A264BDE4400A91281 /* NSRunningApplication+Browsers.swift */,
 				B5585833264A8F5F00A91281 /* ScriptEditor.swift */,
 				B5872B8D264A17AD001755F6 /* ScriptRunner.swift */,
 				B5585831264A8D4100A91281 /* ScriptRunner.Command.swift */,
@@ -171,7 +177,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5585832264A8D4100A91281 /* ScriptRunner.Command.swift in Sources */,
+				B558583B264BDE4400A91281 /* NSRunningApplication+Browsers.swift in Sources */,
 				B5585834264A8F5F00A91281 /* ScriptEditor.swift in Sources */,
+				B5585839264BDCFE00A91281 /* ApplicationMonitor.swift in Sources */,
 				B5872B8E264A17AD001755F6 /* ScriptRunner.swift in Sources */,
 				B5872B89264A16FC001755F6 /* Process+Extensions.swift in Sources */,
 				B5872B78264A16E8001755F6 /* ContentView.swift in Sources */,

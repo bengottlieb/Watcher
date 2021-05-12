@@ -12,6 +12,7 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
 	override init() {
 		ScriptRunner.instance.setup()
+		ApplicationMonitor.instance.setup()
 	}
 	
 	var window: NSWindow!
