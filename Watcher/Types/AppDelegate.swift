@@ -13,6 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	override init() {
 		ScriptRunner.instance.setup()
 		ApplicationMonitor.instance.setup()
+		BrowserMonitor.instance.setup()
 	}
 	
 	var window: NSWindow!

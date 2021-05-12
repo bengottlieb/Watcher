@@ -9,14 +9,15 @@ import Foundation
 import Cocoa
 
 extension NSRunningApplication {
-	enum BrowserKind: String { case safari, chrome }
 	var isBrowser: Bool {
 		browserKind != nil
 	}
 	
 	var browserKind: BrowserKind? {
-		if bundleIdentifier?.lowercased() == "com.apple.safari" { return .safari }
-		if bundleIdentifier?.lowercased() == "com.google.chrome" { return .chrome }
-		return nil
+		BrowserKind.allCases.first { $0.bundleIdentifier == bundleIdentifier }
+	}
+	
+	static func isRunning(browser: BrowserKind) -> Bool {
+		NSWorkspace.shared.runningApplications.contains { $0.bundleIdentifier == browser.bundleIdentifier }
 	}
 }
