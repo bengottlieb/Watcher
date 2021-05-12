@@ -32,22 +32,22 @@ class BrowserMonitor: NSObject {
 			.store(in: &cancellables)
 	}
 	
-	var safariFrontTabs: AnyPublisher<[URL], Never> {
+	var safariFrontTabs: AnyPublisher<[BrowserURL], Never> {
 		guard NSRunningApplication.isRunning(browser: .safari) else { return Just([]).eraseToAnyPublisher() }
 		return ScriptRunner.instance.run(command: .safariAllCurrentTabs)
 			.replaceError(with: "")
 			.map { string in
-				string.components(separatedBy: ",").compactMap { URL(string: $0.trimmingCharacters(in: .whitespacesAndNewlines)) }
+        string.components(separatedBy: ",").compactMap { BrowserURL($0, .safari) }
 			}
 			.eraseToAnyPublisher()
 	}
 
-	var chromeFrontTabs: AnyPublisher<[URL], Never> {
+	var chromeFrontTabs: AnyPublisher<[BrowserURL], Never> {
 		guard NSRunningApplication.isRunning(browser: .chrome) else { return Just([]).eraseToAnyPublisher() }
 		return ScriptRunner.instance.run(command: .chromeAllCurrentTabs)
 			.replaceError(with: "")
 			.map { string in
-				string.components(separatedBy: ",").compactMap { URL(string: $0.trimmingCharacters(in: .whitespacesAndNewlines)) }
+				string.components(separatedBy: ",").compactMap { BrowserURL($0, .chrome) }
 			}
 			.eraseToAnyPublisher()
 	}

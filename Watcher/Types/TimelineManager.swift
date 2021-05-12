@@ -11,74 +11,32 @@ class TimelineManager {
 	static let instance = TimelineManager()
 	
 	private let queue = DispatchQueue(label: "timeline", qos: .userInitiated)
-	var timeline: [TimelineEntry] = []
+	var timeline: [Entry] = []
 	
 	func switched(to applicationBundleID: String?) {
 		guard let id = applicationBundleID else { return }
-		addEntry(TimelineEntry(for: id))
+		addEntry(Entry(for: id))
 	}
 	
-	func logCurrent(urls: [URL]) {
-		addEntry(TimelineEntry(with: urls))
+	func logCurrent(urls: [BrowserURL]) {
+		addEntry(Entry(with: urls))
 	}
 	
-	func addEntry(_ entry: TimelineEntry) {
+	func addEntry(_ entry: Entry) {
 		queue.async {
-			if self.timeline.last == entry { return }
+      if entry.isTabEntry, entry == self.timeline.mostRecentTabsEntry { return }
+      if entry.isAppEntry, entry == self.timeline.mostRecentAppEntry { return }
 			
 			self.timeline.append(entry)
-			print(entry)
+      print(self.currentEntry ?? entry)
 		}
 	}
 	
-	var currentEntry: TimelineEntry? {
-		guard timeline.isNotEmpty else { return nil }
+	var currentEntry: Entry? {
+		guard let last = timeline.last else { return nil }
 		
-		var result = TimelineEntry()
-		
-		for entry in timeline.reversed() {
-			if result.bundleIDs == nil {
-				result.bundleIDs = entry.bundleIDs
-			}
-			
-			if result.tabURLs == nil {
-				result.tabURLs = entry.tabURLs
-			}
-			
-			if result.tabURLs != nil, result.bundleIDs != nil { break }
-		}
-		
-		return result
+    return (timeline.mostRecentAppEntry ?? last) + (timeline.mostRecentTabsEntry ?? last)
 	}
 	
 }
 
-extension TimelineManager {
-	struct TimelineEntry: Codable, Equatable, CustomStringConvertible {
-		var date = Date()
-		var bundleIDs: [String]?
-		var tabURLs: [URL]?
-		
-		var description: String {
-			if let id = bundleIDs?.first { return id }
-			if let urls = tabURLs { return urls.compactMap { $0.host }.joined(separator: ", ") }
-			return "no data"
-		}
-
-		init(for applicationBundleID: String) {
-			bundleIDs = [applicationBundleID]
-		}
-		
-		init(with urls: [URL]) {
-			tabURLs = urls.sorted { $0.absoluteString < $1.absoluteString }
-		}
-		
-		init() {
-			
-		}
-		
-		static func ==(lhs: TimelineEntry, rhs: TimelineEntry) -> Bool {
-			lhs.bundleIDs == rhs.bundleIDs && lhs.tabURLs == rhs.tabURLs
-		}
-	}
-}

@@ -23,6 +23,8 @@
 		B5872B89264A16FC001755F6 /* Process+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872B88264A16FC001755F6 /* Process+Extensions.swift */; };
 		B5872B8C264A1717001755F6 /* Suite in Frameworks */ = {isa = PBXBuildFile; productRef = B5872B8B264A1717001755F6 /* Suite */; };
 		B5872B8E264A17AD001755F6 /* ScriptRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872B8D264A17AD001755F6 /* ScriptRunner.swift */; };
+		B5872B92264BF25F001755F6 /* BrowserURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872B91264BF25F001755F6 /* BrowserURL.swift */; };
+		B5872B94264C0008001755F6 /* TimelineManager.Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872B93264C0008001755F6 /* TimelineManager.Entry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		B5872B82264A16E9001755F6 /* Watcher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Watcher.entitlements; sourceTree = "<group>"; };
 		B5872B88264A16FC001755F6 /* Process+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Process+Extensions.swift"; sourceTree = "<group>"; };
 		B5872B8D264A17AD001755F6 /* ScriptRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptRunner.swift; sourceTree = "<group>"; };
+		B5872B91264BF25F001755F6 /* BrowserURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserURL.swift; sourceTree = "<group>"; };
+		B5872B93264C0008001755F6 /* TimelineManager.Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineManager.Entry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +68,9 @@
 				B5872B75264A16E8001755F6 /* AppDelegate.swift */,
 				B5585838264BDCFE00A91281 /* ApplicationMonitor.swift */,
 				B5585840264BE03900A91281 /* TimelineManager.swift */,
+				B5872B93264C0008001755F6 /* TimelineManager.Entry.swift */,
 				B5585842264BE5F000A91281 /* BrowserMonitor.swift */,
+				B5872B91264BF25F001755F6 /* BrowserURL.swift */,
 				B5585844264BE68E00A91281 /* BrowserKind.swift */,
 				B558583F264BE01600A91281 /* Script Runner */,
 			);
@@ -219,6 +225,7 @@
 			files = (
 				B5585832264A8D4100A91281 /* ScriptRunner.Command.swift in Sources */,
 				B558583B264BDE4400A91281 /* NSRunningApplication+Browsers.swift in Sources */,
+				B5872B92264BF25F001755F6 /* BrowserURL.swift in Sources */,
 				B5585834264A8F5F00A91281 /* ScriptEditor.swift in Sources */,
 				B5585843264BE5F000A91281 /* BrowserMonitor.swift in Sources */,
 				B5585839264BDCFE00A91281 /* ApplicationMonitor.swift in Sources */,
@@ -226,6 +233,7 @@
 				B5872B89264A16FC001755F6 /* Process+Extensions.swift in Sources */,
 				B5872B78264A16E8001755F6 /* ContentView.swift in Sources */,
 				B5872B76264A16E8001755F6 /* AppDelegate.swift in Sources */,
+				B5872B94264C0008001755F6 /* TimelineManager.Entry.swift in Sources */,
 				B5585845264BE68E00A91281 /* BrowserKind.swift in Sources */,
 				B5585841264BE03900A91281 /* TimelineManager.swift in Sources */,
 			);
