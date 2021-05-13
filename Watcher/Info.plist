@@ -22,6 +22,13 @@
 	<string>1</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_WatchSAI._tcp</string>
+		<string>_WatchSAI._udp</string>
+	</array>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>See Nearby Devices</string>
 	<key>NSMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
