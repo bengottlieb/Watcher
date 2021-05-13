@@ -21,3 +21,8 @@ class StatusMessage: NearbyMessage {
 class RequestStatusMessage: NearbyMessage {
   var command = "RequestStatus"
 }
+
+
+class TerminateMessage: NearbyMessage {
+  var command = "Terminate"
+}

@@ -12,11 +12,11 @@ extension NearbyDevice {
   enum Role: String { case unknown, host, monitor }
 
   var role: Role {
-    guard let raw = deviceInfo?["role"] else { return .unknown }
+    guard let raw = deviceInfo?[Keys.role] else { return .unknown }
     return Role(rawValue: raw) ?? .unknown
   }
 	
 	var name: String {
-		self.deviceInfo?["name"] ?? "Unknown Device"
+    self.deviceInfo?[Keys.userName] ?? self.deviceInfo?[Keys.deviceName] ?? "Unknown Device"
 	}
 }

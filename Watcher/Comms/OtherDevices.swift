@@ -10,6 +10,12 @@ import Combine
 import Suite
 import Nearby
 
+struct Keys {
+  static let deviceName = "name"
+  static let userName = "user"
+  static let role = "role"
+}
+
 class OtherDevices {
   static let instance = OtherDevices()
   
@@ -20,7 +26,11 @@ class OtherDevices {
     NotificationCenter.default.addObserver(self, selector: #selector(discoveredDevice), name: NearbyDevice.Notifications.deviceConnectedWithInfo, object: nil)
     
     NearbySession.instance.serviceType = "WatchSAI"
-    NearbySession.instance.localDeviceInfo = ["name": Gestalt.deviceName, "role": role.rawValue]
+    NearbySession.instance.localDeviceInfo = [
+      Keys.userName: NSUserName(),
+      Keys.deviceName: Gestalt.deviceName,
+      Keys.role: role.rawValue
+    ]
     NearbySession.instance.startup(withRouter: self, application: .app)
   }
   
@@ -42,11 +52,15 @@ extension OtherDevices: NearbyMessageRouter {
 			return message
 		}
 
-		if payload.modulelessClassName == String(describing: StatusMessage.self), let message = try? payload.reconstitute(StatusMessage.self) {
-			NearbyHostManager.instance.record(timelineEntry: message.timelineEntry, for: device)
-			return message
-		}
-		
+    if payload.modulelessClassName == String(describing: StatusMessage.self), let message = try? payload.reconstitute(StatusMessage.self) {
+      NearbyHostManager.instance.record(timelineEntry: message.timelineEntry, for: device)
+      return message
+    }
+    
+    if payload.modulelessClassName == String(describing: TerminateMessage.self), let _ = try? payload.reconstitute(TerminateMessage.self) {
+      exit(0)
+    }
+    
 		return nil
   }
   
