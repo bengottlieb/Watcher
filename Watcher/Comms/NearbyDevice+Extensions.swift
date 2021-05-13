@@ -15,4 +15,8 @@ extension NearbyDevice {
     guard let raw = deviceInfo?["role"] else { return .unknown }
     return Role(rawValue: raw) ?? .unknown
   }
+	
+	var name: String {
+		self.deviceInfo?["name"] ?? "Unknown Device"
+	}
 }

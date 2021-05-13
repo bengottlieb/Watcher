@@ -12,7 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   override init() {
     super.init()
     
-    NearbyDevices.instance.setup(mode: .monitor)
+    OtherDevices.instance.setup(mode: .monitor)
   }
 
 

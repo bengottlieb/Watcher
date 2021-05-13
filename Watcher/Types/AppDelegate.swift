@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		ScriptRunner.instance.setup()
 		ApplicationMonitor.instance.setup()
 		BrowserMonitor.instance.setup()
-    NearbyDevices.instance.setup(mode: .host)
+    OtherDevices.instance.setup(mode: .host)
 	}
 	
 	var window: NSWindow!

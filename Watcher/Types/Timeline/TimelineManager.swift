@@ -29,6 +29,7 @@ class TimelineManager {
 			
 			self.timeline.append(entry)
       print(self.currentEntry ?? entry)
+			NearbyMonitorManager.instance.sendStatusToAllMonitors()
 		}
 	}
 	

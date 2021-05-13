@@ -10,6 +10,11 @@ import Nearby
 
 class StatusMessage: NearbyMessage {
   var command = "Status"
+	var timelineEntry: TimelineManager.Entry?
+	
+	init(request: RequestStatusMessage?) {
+		timelineEntry = TimelineManager.instance.currentEntry
+	}
 }
 
 

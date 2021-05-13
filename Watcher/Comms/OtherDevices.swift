@@ -1,5 +1,5 @@
 //
-//  NearbyDevices.swift
+//  OtherDevices.swift
 //  Watcher
 //
 //  Created by Ben Gottlieb on 5/12/21.
@@ -10,8 +10,8 @@ import Combine
 import Suite
 import Nearby
 
-class NearbyDevices {
-  static let instance = NearbyDevices()
+class OtherDevices {
+  static let instance = OtherDevices()
   
   var role: NearbyDevice.Role = .host
   
@@ -26,26 +26,28 @@ class NearbyDevices {
   
   @objc func discoveredDevice(note: Notification) {
     if let device = note.object as? NearbyDevice {
+			print("Discovered: \(device)")
       if device.role == .host, role == .monitor {
-        device.send(message: StatusMessage())
+        device.send(message: RequestStatusMessage())
       }
     }
-  }
-  
-  var nearbyHosts: [NearbyDevice] {
-    NearbySession.instance.connectedDevices.filter { $0.role == .host }
-  }
-
-  var nearbyMonitors: [NearbyDevice] {
-    NearbySession.instance.connectedDevices.filter { $0.role == .monitor }
   }
 }
 
 
-extension NearbyDevices: NearbyMessageRouter {
+extension OtherDevices: NearbyMessageRouter {
   func route(_ payload: NearbyMessagePayload, from device: NearbyDevice) -> NearbyMessage? {
-    print(payload)
-    return nil
+		if payload.modulelessClassName == String(describing: RequestStatusMessage.self), let message = try? payload.reconstitute(RequestStatusMessage.self) {
+			NearbyMonitorManager.instance.received(request: message, from: device)
+			return message
+		}
+
+		if payload.modulelessClassName == String(describing: StatusMessage.self), let message = try? payload.reconstitute(StatusMessage.self) {
+			NearbyHostManager.instance.record(timelineEntry: message.timelineEntry, for: device)
+			return message
+		}
+		
+		return nil
   }
   
   func received(dictionary: [String : String], from device: NearbyDevice) {
