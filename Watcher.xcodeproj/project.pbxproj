@@ -55,6 +55,10 @@
 		B5872BC0264CBAED001755F6 /* NearbyDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872BBF264CBAED001755F6 /* NearbyDevice+Extensions.swift */; };
 		B5872BC1264CBAED001755F6 /* NearbyDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872BBF264CBAED001755F6 /* NearbyDevice+Extensions.swift */; };
 		B5872BC4264CC20D001755F6 /* CrossPlatformKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5872BC3264CC20D001755F6 /* CrossPlatformKit */; };
+		B59EB1EE264D538700516CBB /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1ED264D538700516CBB /* Notifications.swift */; };
+		B59EB1EF264D538700516CBB /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1ED264D538700516CBB /* Notifications.swift */; };
+		B59EB1F1264D545300516CBB /* TimelineManager.Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1F0264D545300516CBB /* TimelineManager.Save.swift */; };
+		B59EB1F2264D545300516CBB /* TimelineManager.Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1F0264D545300516CBB /* TimelineManager.Save.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +99,8 @@
 		B5872BAC264C7F41001755F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5872BBB264CB808001755F6 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		B5872BBF264CBAED001755F6 /* NearbyDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+Extensions.swift"; sourceTree = "<group>"; };
+		B59EB1ED264D538700516CBB /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		B59EB1F0264D545300516CBB /* TimelineManager.Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineManager.Save.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +136,7 @@
 				B5872B91264BF25F001755F6 /* BrowserURL.swift */,
 				B5585844264BE68E00A91281 /* BrowserKind.swift */,
 				B558583F264BE01600A91281 /* Script Runner */,
+				B59EB1ED264D538700516CBB /* Notifications.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -165,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				B5585840264BE03900A91281 /* TimelineManager.swift */,
+				B59EB1F0264D545300516CBB /* TimelineManager.Save.swift */,
 				B5872B93264C0008001755F6 /* TimelineManager.Entry.swift */,
 			);
 			path = Timeline;
@@ -378,6 +386,8 @@
 			files = (
 				B5585832264A8D4100A91281 /* ScriptRunner.Command.swift in Sources */,
 				B558583B264BDE4400A91281 /* NSRunningApplication+Browsers.swift in Sources */,
+				B59EB1F1264D545300516CBB /* TimelineManager.Save.swift in Sources */,
+				B59EB1EE264D538700516CBB /* Notifications.swift in Sources */,
 				B5585856264D3CD300A91281 /* NearbyMonitor.swift in Sources */,
 				B5872B92264BF25F001755F6 /* BrowserURL.swift in Sources */,
 				B5585834264A8F5F00A91281 /* ScriptEditor.swift in Sources */,
@@ -416,7 +426,9 @@
 				B5872BA1264C7F3F001755F6 /* SceneDelegate.swift in Sources */,
 				B5872BC1264CBAED001755F6 /* NearbyDevice+Extensions.swift in Sources */,
 				B5585847264D307700A91281 /* HostListView.swift in Sources */,
+				B59EB1F2264D545300516CBB /* TimelineManager.Save.swift in Sources */,
 				B558584E264D383C00A91281 /* NearbyHostManager.swift in Sources */,
+				B59EB1EF264D538700516CBB /* Notifications.swift in Sources */,
 				B5872BB5264C7FD9001755F6 /* TimelineManager.swift in Sources */,
 				B5872BB8264C7FE2001755F6 /* BrowserKind.swift in Sources */,
 				B5872BA3264C7F3F001755F6 /* ContentView.swift in Sources */,

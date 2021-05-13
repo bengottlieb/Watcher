@@ -12,7 +12,13 @@ class TimelineManager {
 	
 	private let queue = DispatchQueue(label: "timeline", qos: .userInitiated)
 	var timeline: [Entry] = []
+  let directory = FileManager.documentsDirectory.appendingPathComponent("timelines")
 	
+  init() {
+    load()
+    try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+  }
+  
 	func switched(to applicationBundleID: String?) {
 		guard let id = applicationBundleID else { return }
 		addEntry(Entry(for: id))

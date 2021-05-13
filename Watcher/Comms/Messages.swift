@@ -17,9 +17,21 @@ class StatusMessage: NearbyMessage {
 	}
 }
 
+class TodayReportMessage: NearbyMessage {
+  var command = "TodayReport"
+  var timeline: [TimelineManager.Entry]
+  
+  init(request: RequestTodayMessage?) {
+    timeline = TimelineManager.instance.timeline
+  }
+}
 
 class RequestStatusMessage: NearbyMessage {
   var command = "RequestStatus"
+}
+
+class RequestTodayMessage: NearbyMessage {
+  var command = "RequestToday"
 }
 
 

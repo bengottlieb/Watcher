@@ -57,8 +57,23 @@ extension OtherDevices: NearbyMessageRouter {
       return message
     }
     
-    if payload.modulelessClassName == String(describing: TerminateMessage.self), let _ = try? payload.reconstitute(TerminateMessage.self) {
-      exit(0)
+    if payload.modulelessClassName == String(describing: RequestTodayMessage.self), let message = try? payload.reconstitute(RequestTodayMessage.self) {
+      device.send(message: TodayReportMessage(request: message))
+      return message
+    }
+    
+    if payload.modulelessClassName == String(describing: TerminateMessage.self), let message = try? payload.reconstitute(TerminateMessage.self) {
+      
+      NearbySession.instance.shutdown()
+      
+      DispatchQueue.main.async() {
+        Notifications.willTerminate.notify()
+      }
+      
+      DispatchQueue.main.async(after: 5) {
+        exit(0)
+      }
+      return message
     }
     
 		return nil
