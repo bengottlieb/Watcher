@@ -7,16 +7,34 @@
 
 import Foundation
 
-class TimelineManager {
-	static let instance = TimelineManager()
+class Timeline {
+	static let instance = Timeline()
 	
 	private let queue = DispatchQueue(label: "timeline", qos: .userInitiated)
+  var saveInterval = TimeInterval.minute { didSet { setupSaveTimer() }}
 	var timeline: [Entry] = []
+  var lastSaveURL: URL!
   let directory = FileManager.documentsDirectory.appendingPathComponent("timelines")
 	
   init() {
-    load()
+    lastSaveURL = saveURL
     try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+    load()
+    
+    if timeline.isNotEmpty {
+      timeline.append(Entry(.interruption))
+    }
+    setupSaveTimer()
+    #if os(macOS)
+      BrowserMonitor.instance.checkTabs()
+    #endif
+    Notifications.willTerminate.watch(self, message: #selector(save))
+  }
+  
+  private var saveTimer: Timer?
+  func setupSaveTimer() {
+    saveTimer?.invalidate()
+    saveTimer = Timer.scheduledTimer(timeInterval: saveInterval, target: self, selector: #selector(save), userInfo: nil, repeats: true)
   }
   
 	func switched(to applicationBundleID: String?) {

@@ -7,16 +7,20 @@
 
 import Foundation
 
-extension TimelineManager {
+extension Timeline {
   struct Entry: Codable, Equatable, CustomStringConvertible {
+    enum Special: String, Codable { case interruption }
+    
     var isTabEntry: Bool { tabURLs != nil }
     var isAppEntry: Bool { bundleIDs != nil }
 
     var date = Date()
     var bundleIDs: [String]?
     var tabURLs: [BrowserURL]?
+    var special: Special?
     
     var description: String {
+      if let special = special { return special.rawValue }
       var result = ""
       if let ids = bundleIDs, ids.isNotEmpty {
         result += ids.joined(separator: ", ")
@@ -27,6 +31,10 @@ extension TimelineManager {
         result += urls.map { $0.description }.joined(separator: ", ")
       }
       return result
+    }
+    
+    init(_ special: Special) {
+      self.special = special
     }
 
     init(for applicationBundleID: String) {
@@ -57,7 +65,7 @@ extension TimelineManager {
   }
 }
 
-extension Array where Element == TimelineManager.Entry {
+extension Array where Element == Timeline.Entry {
   var mostRecentTabsEntry: Element? {
     reversed().first { $0.isTabEntry }
   }

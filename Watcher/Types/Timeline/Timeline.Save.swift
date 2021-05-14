@@ -8,10 +8,10 @@
 import Foundation
 import Suite
 
-extension TimelineManager {
+extension Timeline {
   
   var saveURL: URL {
-    let dateString = Date().localTimeString(date: .abbr, time: .none)
+    let dateString = Date().localTimeString(date: .abbr, time: .none).replacingOccurrences(of: "/", with: "-")
     let filename = dateString + ".txt"
     
     return directory.appendingPathComponent(filename)
@@ -28,7 +28,7 @@ extension TimelineManager {
     }
   }
   
-  func save() {
+  @objc func save() {
     let url = saveURL
     try? FileManager.default.removeItem(at: url)
     
@@ -37,6 +37,11 @@ extension TimelineManager {
       try json.write(to: url)
     } catch {
       logg(error: error, "Problem saving timeline")
+    }
+    
+    if url != lastSaveURL {
+      lastSaveURL = url
+      timeline = []
     }
   }
 }

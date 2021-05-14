@@ -10,19 +10,19 @@ import Nearby
 
 class StatusMessage: NearbyMessage {
   var command = "Status"
-	var timelineEntry: TimelineManager.Entry?
+	var timelineEntry: Timeline.Entry?
 	
 	init(request: RequestStatusMessage?) {
-		timelineEntry = TimelineManager.instance.currentEntry
+		timelineEntry = Timeline.instance.currentEntry
 	}
 }
 
 class TodayReportMessage: NearbyMessage {
   var command = "TodayReport"
-  var timeline: [TimelineManager.Entry]
+  var timeline: [Timeline.Entry]
   
   init(request: RequestTodayMessage?) {
-    timeline = TimelineManager.instance.timeline
+    timeline = Timeline.instance.timeline
   }
 }
 

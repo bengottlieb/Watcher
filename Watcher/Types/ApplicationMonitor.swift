@@ -21,7 +21,7 @@ class ApplicationMonitor: NSObject {
 	}
 	
 	func process(application: NSRunningApplication?) {
-		TimelineManager.instance.switched(to: application?.bundleIdentifier)
+		Timeline.instance.switched(to: application?.bundleIdentifier)
 	}
 	
 	@objc func didActivateApplication(_ note: Notification) {

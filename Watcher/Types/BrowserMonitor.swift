@@ -27,7 +27,7 @@ class BrowserMonitor: NSObject {
 		Publishers.Merge(safariFrontTabs, chromeFrontTabs)
 			.collect()
 			.sink { tabs in
-				TimelineManager.instance.logCurrent(urls: tabs.flatMap { $0 })
+				Timeline.instance.logCurrent(urls: tabs.flatMap { $0 })
 			}
 			.store(in: &cancellables)
 	}

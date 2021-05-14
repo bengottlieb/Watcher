@@ -8,7 +8,7 @@
 import Foundation
 import Nearby
 
-class NearbyMonitor: Identifiable {
+class NearbyMonitor: Identifiable, ObservableObject {
 	weak var device: NearbyDevice? { didSet {
 		if let name = device?.name { self.name = name }
 		state = device?.state ?? .none
@@ -17,6 +17,7 @@ class NearbyMonitor: Identifiable {
 	var name: String
 	var state: NearbyDevice.State
 	var id: String { deviceID }
+  var lastUpdatedAt: Date
 	
 	var connectedDevice: NearbyDevice? {
 		if let state = device?.state, state == .connected { return device }
@@ -24,6 +25,7 @@ class NearbyMonitor: Identifiable {
 	}
 	
 	init(device: NearbyDevice) {
+    lastUpdatedAt = Date()
 		deviceID = device.uniqueID
 		state = device.state
 		name = device.name
@@ -32,7 +34,11 @@ class NearbyMonitor: Identifiable {
 	
 	func matches(_ device: NearbyDevice) -> Bool {
 		if device === device { return true }
-		if deviceID == device.uniqueID { return true }
+		if deviceID == device.uniqueID {
+      self.device = device
+      self.lastUpdatedAt = Date()
+      return true
+    }
 		return false
 	}
 }

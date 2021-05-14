@@ -9,12 +9,14 @@ import Foundation
 import Nearby
 
 class NearbyHost: NearbyMonitor {
-	var timeline: [TimelineManager.Entry] = []
-	var currentTimelineEntry: TimelineManager.Entry? { timeline.last }
+	var timeline: [Timeline.Entry] = []
+	var currentTimelineEntry: Timeline.Entry? { timeline.last }
 	
-	func record(timelineEntry: TimelineManager.Entry?) {
+	func record(timelineEntry: Timeline.Entry?) {
 		guard let entry = timelineEntry else { return }
 		
 		timeline.append(entry)
+    lastUpdatedAt = Date()
+    objectWillChange.sendOnMain()
 	}
 }

@@ -13,9 +13,8 @@ class NearbyHostManager: ObservableObject {
 	var hosts: [NearbyHost] = []
 	var serializer = DispatchQueue(label: "NearbyHostManager", qos: .userInitiated, attributes: [])
 	
-	func record(timelineEntry: TimelineManager.Entry?, for device: NearbyDevice) {
+	func record(timelineEntry: Timeline.Entry?, for device: NearbyDevice) {
 		host(matching: device).record(timelineEntry: timelineEntry)
-		self.objectWillChange.sendOnMain()
 	}
 	
 	func host(matching device: NearbyDevice) -> NearbyHost {
@@ -24,6 +23,7 @@ class NearbyHostManager: ObservableObject {
 			
 			let newHost = NearbyHost(device: device)
 			hosts.append(newHost)
+      self.objectWillChange.sendOnMain()
 			return newHost
 		}
 	}
