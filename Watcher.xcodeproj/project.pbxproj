@@ -59,6 +59,7 @@
 		B59EB1EF264D538700516CBB /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1ED264D538700516CBB /* Notifications.swift */; };
 		B59EB1F1264D545300516CBB /* Timeline.Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1F0264D545300516CBB /* Timeline.Save.swift */; };
 		B59EB1F2264D545300516CBB /* Timeline.Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1F0264D545300516CBB /* Timeline.Save.swift */; };
+		B59EB1FA264E98B600516CBB /* HostRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1F8264E98B600516CBB /* HostRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +102,8 @@
 		B5872BBF264CBAED001755F6 /* NearbyDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+Extensions.swift"; sourceTree = "<group>"; };
 		B59EB1ED264D538700516CBB /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		B59EB1F0264D545300516CBB /* Timeline.Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.Save.swift; sourceTree = "<group>"; };
+		B59EB1F8264E98B600516CBB /* HostRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRow.swift; sourceTree = "<group>"; };
+		B59EB1FC264E997B00516CBB /* Suite */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Suite; path = ../../Frameworks/Suite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,7 @@
 		B5872B69264A16E8001755F6 = {
 			isa = PBXGroup;
 			children = (
+				B59EB1FC264E997B00516CBB /* Suite */,
 				B5872B97264C1293001755F6 /* Nearby */,
 				B5872B74264A16E8001755F6 /* Watcher */,
 				B5872B9D264C7F3F001755F6 /* Monitor */,
@@ -231,6 +235,7 @@
 				B5872BA0264C7F3F001755F6 /* SceneDelegate.swift */,
 				B5872BA2264C7F3F001755F6 /* ContentView.swift */,
 				B5585846264D307700A91281 /* HostListView.swift */,
+				B59EB1F8264E98B600516CBB /* HostRow.swift */,
 				B5872BA4264C7F41001755F6 /* Assets.xcassets */,
 				B5872BA9264C7F41001755F6 /* LaunchScreen.storyboard */,
 				B5872BAC264C7F41001755F6 /* Info.plist */,
@@ -427,6 +432,7 @@
 				B5872BC1264CBAED001755F6 /* NearbyDevice+Extensions.swift in Sources */,
 				B5585847264D307700A91281 /* HostListView.swift in Sources */,
 				B59EB1F2264D545300516CBB /* Timeline.Save.swift in Sources */,
+				B59EB1FA264E98B600516CBB /* HostRow.swift in Sources */,
 				B558584E264D383C00A91281 /* NearbyHostManager.swift in Sources */,
 				B59EB1EF264D538700516CBB /* Notifications.swift in Sources */,
 				B5872BB5264C7FD9001755F6 /* Timeline.swift in Sources */,

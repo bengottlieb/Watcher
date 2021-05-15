@@ -33,7 +33,7 @@ class NearbyMonitor: Identifiable, ObservableObject {
 	}
 	
 	func matches(_ device: NearbyDevice) -> Bool {
-		if device === device { return true }
+    if device === self.device { return true }
 		if deviceID == device.uniqueID {
       self.device = device
       self.lastUpdatedAt = Date()
