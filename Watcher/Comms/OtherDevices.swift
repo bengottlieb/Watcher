@@ -76,6 +76,20 @@ extension OtherDevices: NearbyMessageRouter {
       return message
     }
     
+    if payload.modulelessClassName == String(describing: RequestImageMessage.self), let message = try? payload.reconstitute(RequestImageMessage.self) {
+      
+      IconImagesCache.instance.fetchImage(for: message.identifier, from: device)
+        .onSuccess { image in
+          device.send(message: SendImageMessage(image: image, identifier: message.identifier))
+        }
+    }
+    
+    if payload.modulelessClassName == String(describing: SendImageMessage.self), let message = try? payload.reconstitute(SendImageMessage.self) {
+      if let image = message.image {
+        IconImagesCache.instance.store(image: image, for: message.identifier)
+      }
+    }
+    
 		return nil
   }
   

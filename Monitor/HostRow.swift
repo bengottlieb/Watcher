@@ -10,12 +10,19 @@ import Suite
 
 struct HostRow: View {
   @ObservedObject var host: NearbyHost
+  @State var frontAppImage: UIImage?
   
   var body: some View {
     
     HStack() {
-      Image(systemName: "laptopcomputer")
-      
+      if let image = frontAppImage {
+        Image(uiImage: image)
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+          .frame(50)
+      } else {
+        Image(systemName: "laptopcomputer")
+      }
       VStack(alignment: .leading) {
         Text(host.name)
           .font(.title)
@@ -30,20 +37,33 @@ struct HostRow: View {
         Text(host.lastUpdatedAt.localTimeString(date: .none, time: .short))
           .font(.caption)
       }
-
+      
       Spacer()
       
-      Button(action: refresh) {
-        Image(.arrow_clockwise)
-          .padding()
+      if host.isRefreshing {
+        ProgressView()
+      } else {
+        Button(action: refresh) {
+          Image(.arrow_clockwise)
+            .padding()
+        }
       }
       
     }
     .addSwipeActions(trailing: killButton, id: host.deviceID)
+    .onReceive(host.objectWillChange, perform: { _ in
+      if let ident = host.frontmostAppIdentifier, let device = host.device {
+        print("Fetching image for \(ident)")
+        IconImagesCache.instance.fetchImage(for: ident, from: device)
+          .onSuccess { image in
+            self.frontAppImage = image
+          }
+      }
+    })
   }
   
   func refresh() {
-    host.device?.send(message: RequestStatusMessage())
+    host.refresh()
   }
   
   var killButton: some View {
