@@ -22,13 +22,17 @@ class Timeline {
     load()
     
     if timeline.isNotEmpty {
-      timeline.append(Entry(.interruption))
+      record(special: .interruption)
     }
     setupSaveTimer()
     #if os(macOS)
       BrowserMonitor.instance.checkTabs()
     #endif
     Notifications.willTerminate.watch(self, message: #selector(save))
+  }
+  
+  public func record(special: Entry.Special) {
+    timeline.append(Entry(special))
   }
   
   private var saveTimer: Timer?

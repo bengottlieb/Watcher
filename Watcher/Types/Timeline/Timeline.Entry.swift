@@ -9,7 +9,7 @@ import Foundation
 
 extension Timeline {
   struct Entry: Codable, Equatable, CustomStringConvertible {
-    enum Special: String, Codable { case interruption }
+    enum Special: String, Codable { case interruption, sleep, wake, powerOff }
     
     var isTabEntry: Bool { tabURLs != nil }
     var isAppEntry: Bool { bundleIDs != nil }

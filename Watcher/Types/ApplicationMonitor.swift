@@ -33,15 +33,15 @@ class ApplicationMonitor: NSObject {
 	}
 	
 	@objc func didWake(_ note: Notification) {
-		print("Woke up")
+    Timeline.instance.record(special: .wake)
 	}
 	
 	@objc func willSleep(_ note: Notification) {
-		print("Will Sleep")
+    Timeline.instance.record(special: .sleep)
 	}
 	
 	@objc func willPowerOff(_ note: Notification) {
-		print("Will Power Off")
+    Timeline.instance.record(special: .powerOff)
 	}
 
 	

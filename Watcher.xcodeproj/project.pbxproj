@@ -59,6 +59,9 @@
 		B5897C7E2655E7C200D8D981 /* IconImagesCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5897C7C2655E7C200D8D981 /* IconImagesCache.swift */; };
 		B5897CD9265B127800D8D981 /* IconImagesCache+Mac.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5897CD8265B127800D8D981 /* IconImagesCache+Mac.swift */; };
 		B5897CDC265B468600D8D981 /* IconImagesCache+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5897CDA265B465100D8D981 /* IconImagesCache+iOS.swift */; };
+		B5897CF02666575000D8D981 /* TimelineScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5897CEF2666575000D8D981 /* TimelineScreen.swift */; };
+		B5897CF22666579600D8D981 /* TimelineWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5897CF12666579600D8D981 /* TimelineWindow.swift */; };
+		B5897CF4266671E100D8D981 /* TimelineWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5897CF3266671E100D8D981 /* TimelineWindow.xib */; };
 		B59EB1EE264D538700516CBB /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1ED264D538700516CBB /* Notifications.swift */; };
 		B59EB1EF264D538700516CBB /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1ED264D538700516CBB /* Notifications.swift */; };
 		B59EB1F1264D545300516CBB /* Timeline.Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1F0264D545300516CBB /* Timeline.Save.swift */; };
@@ -107,6 +110,9 @@
 		B5897C7C2655E7C200D8D981 /* IconImagesCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconImagesCache.swift; sourceTree = "<group>"; };
 		B5897CD8265B127800D8D981 /* IconImagesCache+Mac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IconImagesCache+Mac.swift"; sourceTree = "<group>"; };
 		B5897CDA265B465100D8D981 /* IconImagesCache+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IconImagesCache+iOS.swift"; sourceTree = "<group>"; };
+		B5897CEF2666575000D8D981 /* TimelineScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineScreen.swift; sourceTree = "<group>"; };
+		B5897CF12666579600D8D981 /* TimelineWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWindow.swift; sourceTree = "<group>"; };
+		B5897CF3266671E100D8D981 /* TimelineWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimelineWindow.xib; sourceTree = "<group>"; };
 		B59EB1ED264D538700516CBB /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		B59EB1F0264D545300516CBB /* Timeline.Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.Save.swift; sourceTree = "<group>"; };
 		B59EB1F8264E98B600516CBB /* HostRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRow.swift; sourceTree = "<group>"; };
@@ -164,6 +170,9 @@
 			children = (
 				B5872B77264A16E8001755F6 /* ContentView.swift */,
 				B5585833264A8F5F00A91281 /* ScriptEditor.swift */,
+				B5897CEF2666575000D8D981 /* TimelineScreen.swift */,
+				B5897CF12666579600D8D981 /* TimelineWindow.swift */,
+				B5897CF3266671E100D8D981 /* TimelineWindow.xib */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -374,6 +383,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5897CF4266671E100D8D981 /* TimelineWindow.xib in Resources */,
 				B5872B80264A16E9001755F6 /* Main.storyboard in Resources */,
 				B5872B7D264A16E9001755F6 /* Preview Assets.xcassets in Resources */,
 				B5872B7A264A16E9001755F6 /* Assets.xcassets in Resources */,
@@ -404,6 +414,7 @@
 				B5585856264D3CD300A91281 /* NearbyMonitor.swift in Sources */,
 				B5872B92264BF25F001755F6 /* BrowserURL.swift in Sources */,
 				B5585834264A8F5F00A91281 /* ScriptEditor.swift in Sources */,
+				B5897CF22666579600D8D981 /* TimelineWindow.swift in Sources */,
 				B5872BC0264CBAED001755F6 /* NearbyDevice+Extensions.swift in Sources */,
 				B5585853264D3C8700A91281 /* NearbyMonitorManager.swift in Sources */,
 				B5585850264D38B800A91281 /* NearbyHost.swift in Sources */,
@@ -419,6 +430,7 @@
 				B5872B94264C0008001755F6 /* Timeline.Entry.swift in Sources */,
 				B5897C7D2655E7C200D8D981 /* IconImagesCache.swift in Sources */,
 				B5585845264BE68E00A91281 /* BrowserKind.swift in Sources */,
+				B5897CF02666575000D8D981 /* TimelineScreen.swift in Sources */,
 				B5872B96264C0362001755F6 /* OtherDevices.swift in Sources */,
 				B5585849264D310C00A91281 /* NearbySession+Extension.swift in Sources */,
 				B5585841264BE03900A91281 /* Timeline.swift in Sources */,

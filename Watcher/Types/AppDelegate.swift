@@ -7,6 +7,7 @@
 
 import Cocoa
 import SwiftUI
+import Suite
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -39,7 +40,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationWillTerminate(_ aNotification: Notification) {
 		// Insert code here to tear down your application
 	}
+  
+  var windows: [NSWindow] = []
 	
-	
+  func application(_ application: NSApplication, open urls: [URL]) {
+    for url in urls {
+      do {
+        let timeline = try [Timeline.Entry].loadJSON(from: url)
+        DispatchQueue.main.async {
+          let window = HostingWindow(root: TimelineScreen(timeline: timeline))
+          self.windows.append(window)
+          window.makeKeyAndOrderFront(nil)
+        }
+      } catch {
+        print("Problem opening \(url.path): \(error)")
+      }
+    }
+  }
 }
 
