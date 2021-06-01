@@ -15,6 +15,8 @@ extension ScriptRunner {
 		
 		case chromeCurrentTab = "Current Tab for Chrome", chromeAllFrontWindowTabs = "All Tabs for Chrome", chromeAllCurrentTabs = "All Visible Tabs for Chrome"
 
+		case operaCurrentTab = "Current Tab for Opera", operaAllFrontWindowTabs = "All Tabs for Opera", operaAllCurrentTabs = "All Visible Tabs for Opera"
+
 		
 		var script: String {
 			switch self {
@@ -25,6 +27,10 @@ extension ScriptRunner {
 			case .chromeCurrentTab: return "tell application \"Google Chrome\" to get URL of active tab of front window"
 			case .chromeAllFrontWindowTabs: return "tell application \"Google Chrome\" to get URL of every tab of front window"
 			case .chromeAllCurrentTabs: return "tell application \"Google Chrome\" to get URL of active tab of every window"
+
+			case .operaCurrentTab: return "tell application \"Opera\" to get URL of active tab of front window"
+			case .operaAllFrontWindowTabs: return "tell application \"Opera\" to get URL of every tab of front window"
+			case .operaAllCurrentTabs: return "tell application \"Opera\" to get URL of active tab of every window"
 			}
 		}
 		

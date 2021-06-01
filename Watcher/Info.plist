@@ -47,7 +47,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSUIElement</key>
-	<string>1</string>
+	<string>0</string>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>

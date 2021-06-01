@@ -24,7 +24,7 @@ class BrowserMonitor: NSObject {
 	}
 	
 	@objc func checkTabs() {
-		Publishers.Merge(safariFrontTabs, chromeFrontTabs)
+		Publishers.Merge3(safariFrontTabs, chromeFrontTabs, operaFrontTabs)
 			.collect()
 			.sink { tabs in
 				Timeline.instance.logCurrent(urls: tabs.flatMap { $0 })
@@ -48,6 +48,16 @@ class BrowserMonitor: NSObject {
 			.replaceError(with: "")
 			.map { string in
 				string.components(separatedBy: ",").compactMap { BrowserURL($0, .chrome) }
+			}
+			.eraseToAnyPublisher()
+	}
+
+	var operaFrontTabs: AnyPublisher<[BrowserURL], Never> {
+		guard NSRunningApplication.isRunning(browser: .opera) else { return Just([]).eraseToAnyPublisher() }
+		return ScriptRunner.instance.run(command: .operaAllCurrentTabs)
+			.replaceError(with: "")
+			.map { string in
+				string.components(separatedBy: ",").compactMap { BrowserURL($0, .opera) }
 			}
 			.eraseToAnyPublisher()
 	}
