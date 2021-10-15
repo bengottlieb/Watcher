@@ -23,6 +23,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		// Create the SwiftUI view that provides the window contents.
+		if Gestalt.isAttachedToDebugger {
+			setupWindow()
+		}
+	}
+	
+	func setupWindow() {
 		let contentView = ContentView()
 		
 		// Create the window and set the content view.
@@ -46,7 +52,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func application(_ application: NSApplication, open urls: [URL]) {
     for url in urls {
       do {
-        let timeline = try [Timeline.Entry].loadJSON(from: url)
+        let timeline = try [Timeline.Entry].loadJSON(file: url)
         DispatchQueue.main.async {
           let window = HostingWindow(root: TimelineScreen(timeline: timeline))
           self.windows.append(window)

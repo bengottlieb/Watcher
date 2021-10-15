@@ -116,6 +116,7 @@
 		B59EB1ED264D538700516CBB /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		B59EB1F0264D545300516CBB /* Timeline.Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.Save.swift; sourceTree = "<group>"; };
 		B59EB1F8264E98B600516CBB /* HostRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRow.swift; sourceTree = "<group>"; };
+		B5EE66572719872A0035BC47 /* Suite */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Suite; path = ../../Frameworks/Suite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +200,7 @@
 		B5872B69264A16E8001755F6 = {
 			isa = PBXGroup;
 			children = (
+				B5EE66572719872A0035BC47 /* Suite */,
 				B5872B97264C1293001755F6 /* Nearby */,
 				B5872B74264A16E8001755F6 /* Watcher */,
 				B5872B9D264C7F3F001755F6 /* Monitor */,
@@ -747,7 +749,7 @@
 			repositoryURL = "https://github.com/bengottlieb/suite";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.5;
+				minimumVersion = 1.0.8;
 			};
 		};
 		B5872BC2264CC20D001755F6 /* XCRemoteSwiftPackageReference "CrossPlatformKit" */ = {
