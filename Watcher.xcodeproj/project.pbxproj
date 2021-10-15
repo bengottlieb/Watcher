@@ -67,6 +67,10 @@
 		B59EB1F1264D545300516CBB /* Timeline.Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1F0264D545300516CBB /* Timeline.Save.swift */; };
 		B59EB1F2264D545300516CBB /* Timeline.Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1F0264D545300516CBB /* Timeline.Save.swift */; };
 		B59EB1FA264E98B600516CBB /* HostRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1F8264E98B600516CBB /* HostRow.swift */; };
+		B5EE6659271990CD0035BC47 /* sample_log.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5EE6658271990CD0035BC47 /* sample_log.txt */; };
+		B5EE665A271990CD0035BC47 /* sample_log.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5EE6658271990CD0035BC47 /* sample_log.txt */; };
+		B5EE665C2719910B0035BC47 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE665B2719910B0035BC47 /* HistoryView.swift */; };
+		B5EE665D2719910B0035BC47 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE665B2719910B0035BC47 /* HistoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +121,8 @@
 		B59EB1F0264D545300516CBB /* Timeline.Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.Save.swift; sourceTree = "<group>"; };
 		B59EB1F8264E98B600516CBB /* HostRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRow.swift; sourceTree = "<group>"; };
 		B5EE66572719872A0035BC47 /* Suite */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Suite; path = ../../Frameworks/Suite; sourceTree = "<group>"; };
+		B5EE6658271990CD0035BC47 /* sample_log.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample_log.txt; sourceTree = "<group>"; };
+		B5EE665B2719910B0035BC47 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +245,7 @@
 		B5872B7B264A16E9001755F6 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				B5EE6658271990CD0035BC47 /* sample_log.txt */,
 				B5872B7C264A16E9001755F6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -250,6 +257,7 @@
 				B5872B9E264C7F3F001755F6 /* AppDelegate.swift */,
 				B5872BA0264C7F3F001755F6 /* SceneDelegate.swift */,
 				B5872BA2264C7F3F001755F6 /* ContentView.swift */,
+				B5EE665B2719910B0035BC47 /* HistoryView.swift */,
 				B5585846264D307700A91281 /* HostListView.swift */,
 				B59EB1F8264E98B600516CBB /* HostRow.swift */,
 				B5872BA4264C7F41001755F6 /* Assets.xcassets */,
@@ -387,6 +395,7 @@
 			files = (
 				B5897CF4266671E100D8D981 /* TimelineWindow.xib in Resources */,
 				B5872B80264A16E9001755F6 /* Main.storyboard in Resources */,
+				B5EE6659271990CD0035BC47 /* sample_log.txt in Resources */,
 				B5872B7D264A16E9001755F6 /* Preview Assets.xcassets in Resources */,
 				B5872B7A264A16E9001755F6 /* Assets.xcassets in Resources */,
 			);
@@ -399,6 +408,7 @@
 				B5872BAB264C7F41001755F6 /* LaunchScreen.storyboard in Resources */,
 				B5872BA8264C7F41001755F6 /* Preview Assets.xcassets in Resources */,
 				B5872BA5264C7F41001755F6 /* Assets.xcassets in Resources */,
+				B5EE665A271990CD0035BC47 /* sample_log.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +440,7 @@
 				B5872B78264A16E8001755F6 /* ContentView.swift in Sources */,
 				B5872B76264A16E8001755F6 /* AppDelegate.swift in Sources */,
 				B5872B94264C0008001755F6 /* Timeline.Entry.swift in Sources */,
+				B5EE665C2719910B0035BC47 /* HistoryView.swift in Sources */,
 				B5897C7D2655E7C200D8D981 /* IconImagesCache.swift in Sources */,
 				B5585845264BE68E00A91281 /* BrowserKind.swift in Sources */,
 				B5897CF02666575000D8D981 /* TimelineScreen.swift in Sources */,
@@ -448,6 +459,7 @@
 				B5872BBD264CBA7C001755F6 /* Messages.swift in Sources */,
 				B5897C7E2655E7C200D8D981 /* IconImagesCache.swift in Sources */,
 				B5585851264D38B800A91281 /* NearbyHost.swift in Sources */,
+				B5EE665D2719910B0035BC47 /* HistoryView.swift in Sources */,
 				B5872BB6264C7FD9001755F6 /* Timeline.Entry.swift in Sources */,
 				B5872BB9264C80AC001755F6 /* OtherDevices.swift in Sources */,
 				B5872BB7264C7FE2001755F6 /* BrowserURL.swift in Sources */,

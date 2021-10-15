@@ -8,12 +8,13 @@
 import Foundation
 
 extension Timeline {
-  struct Entry: Codable, Equatable, CustomStringConvertible {
+  struct Entry: Codable, Equatable, CustomStringConvertible, Identifiable {
     enum Special: String, Codable { case interruption, sleep, wake, powerOff }
     
     var isTabEntry: Bool { tabURLs != nil }
     var isAppEntry: Bool { bundleIDs != nil }
 
+		var id: Date { date }
     var date = Date()
     var bundleIDs: [String]?
     var tabURLs: [BrowserURL]?

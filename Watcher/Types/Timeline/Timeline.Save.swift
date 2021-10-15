@@ -9,20 +9,25 @@ import Foundation
 import Suite
 
 extension Timeline {
-  
+	static var sample: [Timeline.Entry] {
+		(try? load(from: Bundle.main.url(forResource: "sample_log", withExtension: "txt"))) ?? []
+	}
   var saveURL: URL {
     let dateString = Date().localTimeString(date: .abbr, time: .none).replacingOccurrences(of: "/", with: "-")
     let filename = dateString + ".txt"
     
     return directory.appendingPathComponent(filename)
   }
+	
+	static func load(from url: URL?) throws -> [Entry] {
+		guard let url = url else { return [] }
+		let data = try Data(contentsOf: url)
+		return try JSONDecoder().decode([Entry].self, from: data)
+	}
   
   func load() {
-    let url = saveURL
-    
     do {
-      let data = try Data(contentsOf: url)
-      timeline = try JSONDecoder().decode([Entry].self, from: data)
+			timeline = try Self.load(from: saveURL)
     } catch {
       logg(error: error, "Problem loading timeline")
     }
