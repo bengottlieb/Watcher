@@ -46,6 +46,7 @@ class OtherDevices {
 
 
 extension OtherDevices: NearbyMessageRouter {
+	var fileID: String { #fileID }
   func route(_ payload: NearbyMessagePayload, from device: NearbyDevice) -> NearbyMessage? {
 		if payload.modulelessClassName == String(describing: RequestStatusMessage.self), let message = try? payload.reconstitute(RequestStatusMessage.self) {
 			NearbyMonitorManager.instance.received(request: message, from: device)
