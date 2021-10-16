@@ -8,10 +8,15 @@
 import Foundation
 import Suite
 
-struct BrowserURL: Codable, Comparable, Equatable, CustomStringConvertible {
+struct BrowserURL: Codable, Comparable, Equatable, CustomStringConvertible, Hashable, Identifiable {
   let url: URL
   let browser: BrowserKind
+	var id: String { url.absoluteString + "\(browser.rawValue)" }
   
+	func hash(into hasher: inout Hasher) {
+		url.hash(into: &hasher)
+		browser.hash(into: &hasher)
+	}
   var host: String? { url.host }
   
   var description: String {

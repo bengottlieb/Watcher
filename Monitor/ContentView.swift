@@ -8,16 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
+	let testing = true
+	var body: some View {
+		if testing {
+			FilteredHistoryView(history: Timeline.sample)
+		} else {
 			ScrollView() {
 				HostListView()
-          .padding()
+					.padding()
 			}
-    }
+		}
+	}
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+	static var previews: some View {
+		ContentView()
+	}
 }

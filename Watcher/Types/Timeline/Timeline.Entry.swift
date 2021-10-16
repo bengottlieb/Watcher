@@ -8,17 +8,20 @@
 import Foundation
 
 extension Timeline {
-  struct Entry: Codable, Equatable, CustomStringConvertible, Identifiable {
+  struct Entry: Codable, CustomStringConvertible, Comparable, Identifiable {
+		enum DateLabel: String, Codable { case time, date }
     enum Special: String, Codable { case interruption, sleep, wake, powerOff }
     
     var isTabEntry: Bool { tabURLs != nil }
     var isAppEntry: Bool { bundleIDs != nil }
 
-		var id: Date { date }
+		var id: String { uuid }
+		var uuid: String! = UUID().uuidString
     var date = Date()
     var bundleIDs: [String]?
     var tabURLs: [BrowserURL]?
     var special: Special?
+		var dateLabel: DateLabel?
     
     var description: String {
       if let special = special { return special.rawValue }
@@ -36,22 +39,36 @@ extension Timeline {
     
     init(_ special: Special) {
       self.special = special
+			uuid = UUID().uuidString
     }
 
-    init(for applicationBundleID: String) {
+		init(for applicationBundleID: String, dateLabel: DateLabel? = nil) {
       bundleIDs = [applicationBundleID]
+			self.dateLabel = dateLabel
+			uuid = UUID().uuidString
     }
     
-    init(with urls: [BrowserURL]) {
+    init(with urls: [BrowserURL], dateLabel: DateLabel? = nil) {
       tabURLs = urls.sorted()
+			self.dateLabel = dateLabel
+			uuid = UUID().uuidString
     }
     
     init(date: Date = Date()) {
       self.date = date
+			uuid = UUID().uuidString
     }
     
-    static func ==(lhs: Entry, rhs: Entry) -> Bool {
-      lhs.bundleIDs == rhs.bundleIDs && lhs.tabURLs == rhs.tabURLs
+//    static func ==(lhs: Entry, rhs: Entry) -> Bool {
+//      lhs.bundleIDs == rhs.bundleIDs && lhs.tabURLs == rhs.tabURLs
+//    }
+    
+    func isSameContent(as other: Entry?) -> Bool {
+      bundleIDs == other?.bundleIDs && tabURLs == other?.tabURLs
+    }
+    
+    static func <(lhs: Entry, rhs: Entry) -> Bool {
+      lhs.date < rhs.date
     }
     
     static func +(lhs: Entry, rhs: Entry?) -> Entry {
@@ -73,5 +90,19 @@ extension Array where Element == Timeline.Entry {
 
   var mostRecentAppEntry: Element? {
     reversed().first { $0.isAppEntry }
+  }
+  
+  var startTime: Date? {
+    first?.date
+  }
+  
+  var endTime: Date? {
+    last?.date
+  }
+  
+  var duration: TimeInterval {
+    guard let start = startTime, let end = endTime else { return 0 }
+    
+    return end.timeIntervalSince(start)
   }
 }

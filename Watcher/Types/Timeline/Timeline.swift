@@ -52,8 +52,8 @@ class Timeline {
 	
 	func addEntry(_ entry: Entry) {
 		queue.async {
-      if entry.isTabEntry, entry == self.timeline.mostRecentTabsEntry { return }
-      if entry.isAppEntry, entry == self.timeline.mostRecentAppEntry { return }
+      if entry.isTabEntry, entry.isSameContent(as: self.timeline.mostRecentTabsEntry) { return }
+      if entry.isAppEntry, entry.isSameContent(as: self.timeline.mostRecentAppEntry) { return }
 			
 			self.timeline.append(entry)
       print(self.currentEntry ?? entry)

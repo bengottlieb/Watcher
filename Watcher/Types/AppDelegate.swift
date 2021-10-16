@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       do {
         let timeline = try [Timeline.Entry].loadJSON(file: url)
         DispatchQueue.main.async {
-          let window = HostingWindow(root: TimelineScreen(timeline: timeline))
+          let window = HostingWindow(root: TimelineScreen(timeline: timeline.sorted()), title: url.lastPathComponent)
           self.windows.append(window)
           window.makeKeyAndOrderFront(nil)
         }

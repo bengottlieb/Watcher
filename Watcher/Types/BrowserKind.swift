@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BrowserKind: Int, CaseIterable, Codable, Comparable { case safari, chrome, opera
+enum BrowserKind: Int, CaseIterable, Codable, Comparable, Hashable { case safari, chrome, opera
 	var bundleIdentifier: String {
 		switch self {
 		case .chrome: return "com.google.Chrome"
