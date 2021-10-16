@@ -18,7 +18,7 @@ class RemoteTimelineManager {
 		if let timeline = timelines[id] {
 			return timeline
 		} else {
-			let timeline = RemoteTimeline(deviceName: id)
+			let timeline = RemoteTimeline(device: device)
 			timelines[id] = timeline
 			return timeline
 		}

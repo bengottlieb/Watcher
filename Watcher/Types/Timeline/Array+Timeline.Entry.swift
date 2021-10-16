@@ -11,7 +11,13 @@ extension Array where Element == Timeline.Entry {
 	static func load(from url: URL?) throws -> [Element] {
 		guard let url = url else { return [] }
 		let data = try Data(contentsOf: url)
-		var items = try JSONDecoder().decode([Element].self, from: data)
+		let items = try JSONDecoder().decode([Element].self, from: data)
+		
+		return items.cleanup()
+	}
+	
+	func cleanup() -> [Timeline.Entry] {
+		var items = self
 		for index in items.indices {
 			if items[index].uuid == nil { items[index].uuid = UUID().uuidString }
 		}

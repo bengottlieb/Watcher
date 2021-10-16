@@ -6,26 +6,39 @@
 //
 
 import Foundation
+import Nearby
 
 class RemoteTimeline: ObservableObject {
-	let deviceName: String
+	let device: NearbyDevice
 	
 	var dates: [Date] = []
 	var entries: [Date: [Timeline.Entry]] = [:]
 	
-	init(deviceName: String) {
-		self.deviceName = deviceName
+	init(device: NearbyDevice) {
+		self.device = device
+	}
+	
+	func timeline(for date: Date) -> [Timeline.Entry] {
+		entries[date.noon] ?? []
+	}
+	
+	func refresh(_ date: Date) {
+		device.send(message: RequestDayMessage(date))
+	}
+	
+	func refreshDates() {
+		device.send(message: RequestAvailableDaysMessage())
 	}
 	
 	func setDates(_ dates: [Date]) {
-		objectWillChange.send()
+		objectWillChange.sendOnMain()
 		self.dates = dates
 	}
 	
 	func setTimeline(_ timeline: [Timeline.Entry]) {
 		guard let date = timeline.first?.date.noon else { return }
 		
-		objectWillChange.send()
-		entries[date] = timeline
+		objectWillChange.sendOnMain()
+		entries[date] = timeline.cleanup()
 	}
 }

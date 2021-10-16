@@ -32,7 +32,6 @@ struct FilteredHistoryView: View {
 			.pickerStyle(SegmentedPickerStyle())
 			.padding(.horizontal)
 			
-			Text("Count: \(contents.count)")
 			HistoryView(history: contents)
 		}
 	}

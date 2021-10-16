@@ -84,6 +84,7 @@
 		B5C57701271B3E1400FA65F6 /* RemoteTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C576FC271B1DE300FA65F6 /* RemoteTimeline.swift */; };
 		B5C57702271B3E1400FA65F6 /* RemoteTimelineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C576FE271B371C00FA65F6 /* RemoteTimelineManager.swift */; };
 		B5C57704271B3F8D00FA65F6 /* HostDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C57703271B3F8D00FA65F6 /* HostDetailScreen.swift */; };
+		B5C57706271B76D400FA65F6 /* HostDayDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C57705271B76D400FA65F6 /* HostDayDetailsScreen.swift */; };
 		B5EE6659271990CD0035BC47 /* sample_log.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5EE6658271990CD0035BC47 /* sample_log.txt */; };
 		B5EE665A271990CD0035BC47 /* sample_log.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5EE6658271990CD0035BC47 /* sample_log.txt */; };
 		B5EE665D2719910B0035BC47 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE665B2719910B0035BC47 /* HistoryView.swift */; };
@@ -146,6 +147,7 @@
 		B5C576FC271B1DE300FA65F6 /* RemoteTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTimeline.swift; sourceTree = "<group>"; };
 		B5C576FE271B371C00FA65F6 /* RemoteTimelineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTimelineManager.swift; sourceTree = "<group>"; };
 		B5C57703271B3F8D00FA65F6 /* HostDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostDetailScreen.swift; sourceTree = "<group>"; };
+		B5C57705271B76D400FA65F6 /* HostDayDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostDayDetailsScreen.swift; sourceTree = "<group>"; };
 		B5EE66572719872A0035BC47 /* Suite */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Suite; path = ../../Frameworks/Suite; sourceTree = "<group>"; };
 		B5EE6658271990CD0035BC47 /* sample_log.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample_log.txt; sourceTree = "<group>"; };
 		B5EE665B2719910B0035BC47 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				B5879F7827199C4900836D71 /* History View */,
 				B5585846264D307700A91281 /* HostListView.swift */,
 				B5C57703271B3F8D00FA65F6 /* HostDetailScreen.swift */,
+				B5C57705271B76D400FA65F6 /* HostDayDetailsScreen.swift */,
 				B59EB1F8264E98B600516CBB /* HostRow.swift */,
 				B5872BA4264C7F41001755F6 /* Assets.xcassets */,
 				B5872BA9264C7F41001755F6 /* LaunchScreen.storyboard */,
@@ -525,6 +528,7 @@
 				B5879F8D271A497200836D71 /* DateLine.swift in Sources */,
 				B558584A264D310C00A91281 /* NearbySession+Extension.swift in Sources */,
 				B5872BA1264C7F3F001755F6 /* SceneDelegate.swift in Sources */,
+				B5C57706271B76D400FA65F6 /* HostDayDetailsScreen.swift in Sources */,
 				B5872BC1264CBAED001755F6 /* NearbyDevice+Extensions.swift in Sources */,
 				B5585847264D307700A91281 /* HostListView.swift in Sources */,
 				B59EB1F2264D545300516CBB /* Timeline.Save.swift in Sources */,
