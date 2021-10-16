@@ -14,7 +14,9 @@ struct HostListView: View {
 	var body: some View {
 		VStack() {
 			ForEach(hosts.hosts) { host in
-        HostRow(host: host)
+				NavigationLink(destination: HostDetailScreen(host: host)) {
+					HostRow(host: host)
+				}
 			}
 		}
 	}

@@ -29,7 +29,7 @@ struct FilteredHistoryView: View {
 				Text("Tabs").tag(Visible.tabs)
 				Text("Raw").tag(Visible.raw)
 			}
-			.pickerStyle(.segmented)
+			.pickerStyle(SegmentedPickerStyle())
 			.padding(.horizontal)
 			
 			Text("Count: \(contents.count)")

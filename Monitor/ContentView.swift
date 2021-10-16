@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-	let testing = true
+	let testing = false
 	var body: some View {
-		if testing {
-			FilteredHistoryView(history: Timeline.sample)
-		} else {
-			ScrollView() {
-				HostListView()
-					.padding()
+		NavigationView() {
+			if testing {
+				FilteredHistoryView(history: Timeline.sample)
+			} else {
+				MonitoredDevicesScreen()
 			}
 		}
 	}

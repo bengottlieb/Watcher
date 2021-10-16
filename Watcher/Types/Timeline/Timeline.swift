@@ -5,7 +5,7 @@
 //  Created by Ben Gottlieb on 5/12/21.
 //
 
-import Foundation
+import Suite
 
 class Timeline {
 	static let instance = Timeline()
@@ -15,8 +15,10 @@ class Timeline {
 	var timeline: [Entry] = []
   var lastSaveURL: URL!
   let directory = FileManager.documentsDirectory.appendingPathComponent("timelines")
+	let formatter: DateFormatter
 	
   init() {
+		formatter = DateFormatter(format: "M-d-yy")
     lastSaveURL = saveURL
     try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
     load()
@@ -30,6 +32,32 @@ class Timeline {
     #endif
     Notifications.willTerminate.watch(self, message: #selector(save))
   }
+	
+	public var availableDays: [Date] {
+		do {
+			let contents = try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil, options: [])
+			
+			return contents.compactMap { url in
+				let name = url.deletingPathExtension().lastPathComponent
+				return formatter.date(from: name)
+			}
+		} catch {
+			logg(error: error, "Failed to list day files")
+			return []
+		}
+		
+	}
+
+	func timeline(for date: Date) -> [Entry] {
+		let filename = directory.appendingPathComponent(formatter.string(from: date) + ".txt")
+		do {
+			let data = try Data(contentsOf: filename)
+			return try JSONDecoder().decode([Entry].self, from: data)
+		} catch {
+			logg(error: error, "Failed to load in timeline from \(filename)")
+			return []
+		}
+	}
   
   public func record(special: Entry.Special) {
     timeline.append(Entry(special))

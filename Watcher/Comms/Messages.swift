@@ -36,7 +36,35 @@ class RequestTodayMessage: NearbyMessage {
 }
 
 class TerminateMessage: NearbyMessage {
-  var command = "Terminate"
+	var command = "Terminate"
+}
+
+class RequestAvailableDaysMessage: NearbyMessage {
+	var command = "RequestAvailableDays"
+}
+
+class RequestDayMessage: NearbyMessage {
+	var command = "RequestDay"
+	var date: Date
+	init(_ date: Date) {
+		self.date = date
+	}
+}
+
+class SendAvailableDaysMessage: NearbyMessage {
+	var command = "SendAvailableDays"
+	var dates: [Date]
+	init(_ dates: [Date]) {
+		self.dates = dates
+	}
+}
+
+class SendDayMessage: NearbyMessage {
+	var command = "SendDay"
+	var timeline: [Timeline.Entry]
+	init(_ timeline: [Timeline.Entry]) {
+		self.timeline = timeline
+	}
 }
 
 class RequestImageMessage: NearbyMessage {
