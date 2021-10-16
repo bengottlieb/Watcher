@@ -12,6 +12,7 @@ struct BrowserURL: Codable, Comparable, Equatable, CustomStringConvertible, Hash
   let url: URL
   let browser: BrowserKind
 	var id: String { url.absoluteString + "\(browser.rawValue)" }
+	static let ignoreThese: [String] = ["chrome://newtab/", "favorites://"] 
   
 	func hash(into hasher: inout Hasher) {
 		url.hash(into: &hasher)
@@ -41,5 +42,7 @@ struct BrowserURL: Codable, Comparable, Equatable, CustomStringConvertible, Hash
     }
     
     self.url = url
+		
+		if Self.ignoreThese.contains(url.absoluteString) { return nil }
   }
 }

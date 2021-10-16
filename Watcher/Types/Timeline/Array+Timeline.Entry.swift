@@ -28,7 +28,10 @@ extension Array where Element == Timeline.Entry {
 		if let last = lastApp { results.append(last) }
 		if let last = lastTab { results.append(last) }
 		var lastDate = Date.distantPast
-		if results.isNotEmpty { results[0].dateLabel = .date }
+		if results.isNotEmpty {
+			results[0].dateLabel = .date
+			lastDate = results[0].date
+		}
 		
 		for element in sorted {
 			if element.isAppEntry {
@@ -36,7 +39,7 @@ extension Array where Element == Timeline.Entry {
 
 				lastApp = element
 				let dateLabel = element.date.label(relativeTo: lastDate)
-				results.append(Timeline.Entry(for: newIDs[0], dateLabel: dateLabel))
+				results.append(Timeline.Entry(for: newIDs[0], date: element.date, dateLabel: dateLabel))
 				if dateLabel != nil { lastDate = element.date }
 				continue
 			} else if element.isTabEntry {
@@ -46,7 +49,7 @@ extension Array where Element == Timeline.Entry {
 				let new = diff.inserted
 				if new.isNotEmpty {
 					let dateLabel = element.date.label(relativeTo: lastDate)
-					results.append(Timeline.Entry(with: new, dateLabel: dateLabel))
+					results.append(Timeline.Entry(with: new, date: element.date, dateLabel: dateLabel))
 					if dateLabel != nil { lastDate = element.date }
 				}
 				continue
@@ -69,7 +72,7 @@ extension Array where Element == Timeline.Entry {
 
 extension Date {
 	func label(relativeTo: Date) -> Timeline.Entry.DateLabel? {
-		if abs(self.timeIntervalSinceReferenceDate - relativeTo.timeIntervalSinceReferenceDate) < 180 { return nil }
+		if abs(self.timeIntervalSinceReferenceDate - relativeTo.timeIntervalSinceReferenceDate) < 60 { return nil }
 		
 		if self.isSameDay(as: relativeTo) {
 			return .time

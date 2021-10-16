@@ -42,14 +42,16 @@ extension Timeline {
 			uuid = UUID().uuidString
     }
 
-		init(for applicationBundleID: String, dateLabel: DateLabel? = nil) {
+		init(for applicationBundleID: String, date: Date = Date(), dateLabel: DateLabel? = nil) {
       bundleIDs = [applicationBundleID]
+			self.date = date
 			self.dateLabel = dateLabel
 			uuid = UUID().uuidString
     }
     
-    init(with urls: [BrowserURL], dateLabel: DateLabel? = nil) {
+    init(with urls: [BrowserURL], date: Date = Date(), dateLabel: DateLabel? = nil) {
       tabURLs = urls.sorted()
+			self.date = date
 			self.dateLabel = dateLabel
 			uuid = UUID().uuidString
     }

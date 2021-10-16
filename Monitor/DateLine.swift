@@ -20,13 +20,11 @@ struct DateLine: View {
 				} else if type == .date {
 					Text(date.localTimeString())
 				}
-			} else if let date = date {
-				Text(date.localTimeString()).opacity(0.35)
+				Rectangle()
+					.fill(Color.gray)
+					.frame(height: 0.5)
 			}
 			
-			Rectangle()
-				.fill(Color.gray)
-				.frame(height: 0.5)
 		}
 		.font(.caption)
 	}
