@@ -18,20 +18,20 @@ struct HostDetailScreen: View {
 	
 	var body: some View {
 		VStack() {
-			Text(host.name)
 			ScrollView() {
 				VStack() {
 					ForEach(remoteTimeline.dates, id: \.self) { date in
 						NavigationLink(destination: HostDayDetailsScreen(host: host, date: date)) {
 							Text(date.localTimeString(date: .short, time: .none))
 								.frame(maxWidth: .infinity, alignment: .leading)
-								.padding()
+								.padding([.bottom, .horizontal])
 						}
 					}
 					Spacer()
 				}
 			}
 		}
+		.navigationTitle(host.name)
 		.onAppear() {
 			self.remoteTimeline.refreshDates()
 		}

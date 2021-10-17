@@ -23,6 +23,7 @@ struct HostDayDetailsScreen: View {
 			.onAppear {
 				remoteTimeline.refresh(date)
 			}
+			.navigationTitle(host.name + " - " + date.localTimeString(date: .medium, time: .none))
 	}
 }
 

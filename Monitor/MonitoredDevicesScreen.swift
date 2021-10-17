@@ -10,10 +10,7 @@ import SwiftUI
 struct MonitoredDevicesScreen: View {
 	var body: some View {
 		VStack() {
-			ScrollView() {
-				HostListView()
-					.padding()
-			}
+			HostListView()
 		}
 		.navigationTitle("Nearby Devices")
 	}

@@ -12,12 +12,15 @@ import Suite
 struct HostListView: View {
 	@ObservedObject var hosts = NearbyHostManager.instance
 	var body: some View {
-		VStack() {
+		List() {
 			ForEach(hosts.hosts) { host in
 				NavigationLink(destination: HostDetailScreen(host: host)) {
 					HostRow(host: host)
 				}
 			}
+		}
+		.refreshable {
+			NearbySession.instance.cycle()
 		}
 	}
 }

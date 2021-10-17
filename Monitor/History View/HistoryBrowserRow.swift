@@ -14,13 +14,15 @@ struct HistoryBrowserRow: View {
 				VStack(alignment: .leading) {
 					DateLine(date: entry.date, labelType: entry.dateLabel)
 					ForEach(urls) { browserURL in
-						if let title = browserURL.title {
-							Text(title)
+						NavigationLink(destination: SafariView(url: browserURL.url)) {
+							if let title = browserURL.title {
+								Text(title)
+							}
+							Text(browserURL.url.absoluteString)
+								.padding(5)
+								.overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.5))
+								.padding(2)
 						}
-						Text(browserURL.url.absoluteString)
-							.padding(5)
-							.overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.5))
-							.padding(2)
 					}
 				}
 				.frame(maxWidth: .infinity, alignment: .leading)

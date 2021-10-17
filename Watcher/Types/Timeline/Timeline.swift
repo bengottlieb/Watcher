@@ -40,7 +40,7 @@ class Timeline {
 			return contents.compactMap { url in
 				let name = url.deletingPathExtension().lastPathComponent
 				return formatter.date(from: name)
-			}
+			}.sorted()
 		} catch {
 			logg(error: error, "Failed to list day files")
 			return []
