@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-	let testing = false
+	var testing = false
 	var body: some View {
 		NavigationView() {
 			if testing {
@@ -22,6 +22,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
-		ContentView()
+		ContentView(testing: true)
 	}
 }

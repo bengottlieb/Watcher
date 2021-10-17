@@ -11,6 +11,7 @@ import Suite
 struct BrowserURL: Codable, Comparable, Equatable, CustomStringConvertible, Hashable, Identifiable {
   let url: URL
   let browser: BrowserKind
+	let title: String?
 	var id: String { url.absoluteString + "\(browser.rawValue)" }
 	static let ignoreThese: [String] = ["chrome://newtab/", "favorites://"] 
   
@@ -30,10 +31,18 @@ struct BrowserURL: Codable, Comparable, Equatable, CustomStringConvertible, Hash
   }
   
   init?(_ rawString: String, _ browser: BrowserKind) {
-    self.init(URL(string: rawString.trimmingCharacters(in: .whitespacesAndNewlines)), browser: browser)
+		if let url = URL(string: rawString.trimmingCharacters(in: .whitespacesAndNewlines)) {
+			self.init(url, browser: browser, title: nil)
+		}
+		
+		let chunks = rawString.components(separatedBy: ",")
+		guard let last = chunks.last, let url = URL(string: last.trimmingCharacters(in: .whitespacesAndNewlines)) else { return nil }
+		
+		let title = chunks.dropLast().joined(separator: ",")
+		self.init(url, browser: browser, title: title)
   }
   
-  init?(_ url: URL?, browser: BrowserKind) {
+	init?(_ url: URL?, browser: BrowserKind, title: String?) {
     self.browser = browser
 
     guard let url = url else {
@@ -41,6 +50,7 @@ struct BrowserURL: Codable, Comparable, Equatable, CustomStringConvertible, Hash
       return nil
     }
     
+		self.title = title?.isEmpty == false ? title : nil
     self.url = url
 		
 		if Self.ignoreThese.contains(url.absoluteString) { return nil }

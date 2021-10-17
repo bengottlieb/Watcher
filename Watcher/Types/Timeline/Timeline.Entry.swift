@@ -22,6 +22,7 @@ extension Timeline {
     var tabURLs: [BrowserURL]?
     var special: Special?
 		var dateLabel: DateLabel?
+		var title: String?
     
     var description: String {
       if let special = special { return special.rawValue }

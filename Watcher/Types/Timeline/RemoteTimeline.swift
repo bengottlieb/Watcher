@@ -22,7 +22,8 @@ class RemoteTimeline: ObservableObject {
 		entries[date.noon] ?? []
 	}
 	
-	func refresh(_ date: Date) {
+	func refresh(_ date: Date, noMatterWhat: Bool = false) {
+		if !noMatterWhat, entries[date.noon] != nil { return }
 		device.send(message: RequestDayMessage(date))
 	}
 	

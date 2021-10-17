@@ -24,13 +24,13 @@ extension ScriptRunner {
 			case .safariAllFrontWindowTabs: return "tell application \"Safari\" to get URL of current tab of every window"
 			case .safariAllCurrentTabs: return "tell application \"Safari\" to get URL of current tab of every window"
 
-			case .chromeCurrentTab: return "tell application \"Google Chrome\" to get URL of active tab of front window"
-			case .chromeAllFrontWindowTabs: return "tell application \"Google Chrome\" to get URL of every tab of front window"
-			case .chromeAllCurrentTabs: return "tell application \"Google Chrome\" to get URL of active tab of every window"
+			case .chromeCurrentTab: return "tell application \"Google Chrome\" to get (title, URL) of active tab of front window"
+			case .chromeAllFrontWindowTabs: return "tell application \"Google Chrome\" to get (title, URL) of every tab of front window"
+			case .chromeAllCurrentTabs: return "tell application \"Google Chrome\" to get (title, URL) of active tab of every window"
 
-			case .operaCurrentTab: return "tell application \"Opera\" to get URL of active tab of front window"
-			case .operaAllFrontWindowTabs: return "tell application \"Opera\" to get URL of every tab of front window"
-			case .operaAllCurrentTabs: return "tell application \"Opera\" to get URL of active tab of every window"
+			case .operaCurrentTab: return "tell application \"Opera\" to get (title, URL) of active tab of front window"
+			case .operaAllFrontWindowTabs: return "tell application \"Opera\" to get (title, URL) of every tab of front window"
+			case .operaAllCurrentTabs: return "tell application \"Opera\" to get (title, URL) of active tab of every window"
 			}
 		}
 		
