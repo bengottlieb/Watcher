@@ -14,7 +14,7 @@ class Timeline {
   var saveInterval = TimeInterval.minute { didSet { setupSaveTimer() }}
 	var timeline: [Entry] = []
   var lastSaveURL: URL!
-  let directory = FileManager.documentsDirectory.appendingPathComponent("timelines")
+  let directory = FileManager.documentsDirectory.appendingPathComponent(".timelines")
 	let formatter: DateFormatter
 	
   init() {
