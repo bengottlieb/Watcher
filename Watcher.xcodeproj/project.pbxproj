@@ -57,7 +57,6 @@
 		B5872BC4264CC20D001755F6 /* CrossPlatformKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5872BC3264CC20D001755F6 /* CrossPlatformKit */; };
 		B5879F7A27199C8900836D71 /* HistoryAppRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5879F7927199C8900836D71 /* HistoryAppRow.swift */; };
 		B5879F7B27199C8900836D71 /* HistoryAppRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5879F7927199C8900836D71 /* HistoryAppRow.swift */; };
-		B5879F7D27199CB600836D71 /* HistoryBrowserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5879F7C27199CB600836D71 /* HistoryBrowserRow.swift */; };
 		B5879F7E27199CB600836D71 /* HistoryBrowserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5879F7C27199CB600836D71 /* HistoryBrowserRow.swift */; };
 		B5879F8027199CEA00836D71 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5879F7F27199CEA00836D71 /* HistoryRow.swift */; };
 		B5879F8127199CEA00836D71 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5879F7F27199CEA00836D71 /* HistoryRow.swift */; };
@@ -492,7 +491,6 @@
 				B5872B89264A16FC001755F6 /* Process+Extensions.swift in Sources */,
 				B5879F8C271A497200836D71 /* DateLine.swift in Sources */,
 				B5872B78264A16E8001755F6 /* ContentView.swift in Sources */,
-				B5879F7D27199CB600836D71 /* HistoryBrowserRow.swift in Sources */,
 				B5879F8627199EDC00836D71 /* Array+Timeline.Entry.swift in Sources */,
 				B5872B76264A16E8001755F6 /* AppDelegate.swift in Sources */,
 				B5872B94264C0008001755F6 /* Timeline.Entry.swift in Sources */,
