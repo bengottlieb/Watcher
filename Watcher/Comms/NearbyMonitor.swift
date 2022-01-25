@@ -17,7 +17,7 @@ class NearbyMonitor: Identifiable, ObservableObject {
 	var name: String
 	var state: NearbyDevice.State
 	var id: String { deviceID }
-  var lastUpdatedAt: Date
+	var lastUpdatedAt: Date
 	
 	var connectedDevice: NearbyDevice? {
 		if let state = device?.state, state == .connected { return device }

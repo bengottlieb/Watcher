@@ -7,14 +7,20 @@
 
 import SwiftUI
 
+
+
 struct HistoryAppRow: View {
 	let entry: Timeline.Entry
 	
 	var body: some View {
-		VStack() {
-			DateLine(date: entry.date, labelType: entry.dateLabel)
-			Text(entry.bundleIDs?.joined(separator: ", ") ?? "--")
-				.frame(maxWidth: .infinity, alignment: .leading)
+		if entry.isLoginWindow {
+			EmptyView()
+		} else {
+			VStack() {
+				DateLine(date: entry.date, labelType: entry.dateLabel)
+				Text(entry.bundleIDs?.joined(separator: ", ") ?? "--")
+					.frame(maxWidth: .infinity, alignment: .leading)
+			}
 		}
 	}
 }

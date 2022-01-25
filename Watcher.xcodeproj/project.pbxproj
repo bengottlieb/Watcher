@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B534F774279F9C3B004F174C /* KnownApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534F773279F9C3B004F174C /* KnownApps.swift */; };
 		B5585832264A8D4100A91281 /* ScriptRunner.Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585831264A8D4100A91281 /* ScriptRunner.Command.swift */; };
 		B5585834264A8F5F00A91281 /* ScriptEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585833264A8F5F00A91281 /* ScriptEditor.swift */; };
 		B5585837264A991E00A91281 /* Nearby in Frameworks */ = {isa = PBXBuildFile; productRef = B5585836264A991E00A91281 /* Nearby */; };
@@ -91,6 +92,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B534F773279F9C3B004F174C /* KnownApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownApps.swift; sourceTree = "<group>"; };
 		B5585831264A8D4100A91281 /* ScriptRunner.Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptRunner.Command.swift; sourceTree = "<group>"; };
 		B5585833264A8F5F00A91281 /* ScriptEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptEditor.swift; sourceTree = "<group>"; };
 		B5585838264BDCFE00A91281 /* ApplicationMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationMonitor.swift; sourceTree = "<group>"; };
@@ -245,9 +247,9 @@
 				B5872B73264A16E8001755F6 /* Products */,
 				B5872BB0264C7F5A001755F6 /* Frameworks */,
 			);
-			indentWidth = 2;
+			indentWidth = 3;
 			sourceTree = "<group>";
-			tabWidth = 2;
+			tabWidth = 3;
 		};
 		B5872B73264A16E8001755F6 /* Products */ = {
 			isa = PBXGroup;
@@ -344,6 +346,7 @@
 			children = (
 				B5EE665B2719910B0035BC47 /* HistoryView.swift */,
 				B5879F7927199C8900836D71 /* HistoryAppRow.swift */,
+				B534F773279F9C3B004F174C /* KnownApps.swift */,
 				B5879F7F27199CEA00836D71 /* HistoryRow.swift */,
 				B5879F7C27199CB600836D71 /* HistoryBrowserRow.swift */,
 			);
@@ -528,6 +531,7 @@
 				B5879F7B27199C8900836D71 /* HistoryAppRow.swift in Sources */,
 				B5897CDC265B468600D8D981 /* IconImagesCache+iOS.swift in Sources */,
 				B5879F8D271A497200836D71 /* DateLine.swift in Sources */,
+				B534F774279F9C3B004F174C /* KnownApps.swift in Sources */,
 				B558584A264D310C00A91281 /* NearbySession+Extension.swift in Sources */,
 				B5872BA1264C7F3F001755F6 /* SceneDelegate.swift in Sources */,
 				B5C57706271B76D400FA65F6 /* HostDayDetailsScreen.swift in Sources */,

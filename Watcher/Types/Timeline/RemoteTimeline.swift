@@ -13,9 +13,19 @@ class RemoteTimeline: ObservableObject {
 	
 	var dates: [Date] = []
 	var entries: [Date: [Timeline.Entry]] = [:]
+	let cacheURL: URL
 	
 	init(device: NearbyDevice) {
 		self.device = device
+		cacheURL = RemoteTimelineManager.instance.url(for: device)
+		
+		let fileURLs = (try? FileManager.default.contentsOfDirectory(at: cacheURL, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])) ?? []
+		
+		for url in fileURLs {
+			guard let data = try? Data(contentsOf: url), let timeline = try? [Timeline.Entry].loadJSON(data: data), let date = timeline.first?.date else { continue }
+			
+			entries[date] = timeline.cleanup()
+		}
 	}
 	
 	func timeline(for date: Date) -> [Timeline.Entry] {
