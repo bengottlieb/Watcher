@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B534F774279F9C3B004F174C /* KnownApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534F773279F9C3B004F174C /* KnownApps.swift */; };
+		B534F7A327AB38B0004F174C /* KnownApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534F773279F9C3B004F174C /* KnownApps.swift */; };
 		B5585832264A8D4100A91281 /* ScriptRunner.Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585831264A8D4100A91281 /* ScriptRunner.Command.swift */; };
 		B5585834264A8F5F00A91281 /* ScriptEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585833264A8F5F00A91281 /* ScriptEditor.swift */; };
 		B5585837264A991E00A91281 /* Nearby in Frameworks */ = {isa = PBXBuildFile; productRef = B5585836264A991E00A91281 /* Nearby */; };
@@ -490,6 +491,7 @@
 				B5872B8E264A17AD001755F6 /* ScriptRunner.swift in Sources */,
 				B5879F7A27199C8900836D71 /* HistoryAppRow.swift in Sources */,
 				B5872BBC264CB808001755F6 /* Messages.swift in Sources */,
+				B534F7A327AB38B0004F174C /* KnownApps.swift in Sources */,
 				B5897CD9265B127800D8D981 /* IconImagesCache+Mac.swift in Sources */,
 				B5872B89264A16FC001755F6 /* Process+Extensions.swift in Sources */,
 				B5879F8C271A497200836D71 /* DateLine.swift in Sources */,

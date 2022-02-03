@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HistoryRow: View {
 	let entry: Timeline.Entry
+	let next: Timeline.Entry?
 	var body: some View {
 		HStack() {
 			if let event = entry.special {

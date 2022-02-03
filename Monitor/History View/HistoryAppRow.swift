@@ -11,6 +11,7 @@ import SwiftUI
 
 struct HistoryAppRow: View {
 	let entry: Timeline.Entry
+	let next: Timeline.Entry?
 	
 	var body: some View {
 		if entry.isLoginWindow {
@@ -20,6 +21,12 @@ struct HistoryAppRow: View {
 				DateLine(date: entry.date, labelType: entry.dateLabel)
 				Text(entry.bundleIDs?.joined(separator: ", ") ?? "--")
 					.frame(maxWidth: .infinity, alignment: .leading)
+				if let duration = entry.duration(until: next) {
+					Text(duration.durationString())
+						.font(.caption)
+						.padding(.leading)
+						.frame(maxWidth: .infinity, alignment: .leading)
+				}
 			}
 		}
 	}

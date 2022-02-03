@@ -13,14 +13,16 @@ struct HistoryView: View {
 		VStack() {
 			ScrollView() {
 				LazyVStack() {
-					ForEach(history) { entry in
+					ForEach(history.indices, id: \.self) { index in
+						let entry = history[index]
+						let next = index < (history.count - 1) ? history[index + 1] : nil
+						
 						if entry.isAppEntry {
-							HistoryAppRow(entry: entry)
+							HistoryAppRow(entry: entry, next: next)
 						} else if entry.isTabEntry {
-							HistoryBrowserRow(entry: entry)
+							HistoryBrowserRow(entry: entry, next: next)
 						} else {
-							HistoryRow(entry: entry)
-
+							HistoryRow(entry: entry, next: next)
 						}
 					}
 				}
