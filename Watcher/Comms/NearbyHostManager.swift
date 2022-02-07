@@ -10,8 +10,12 @@ import Nearby
 
 class NearbyHostManager: ObservableObject {
 	static let instance = NearbyHostManager()
-	var hosts: [NearbyHost] = []
+	var hosts: [NearbyHost] = [] { didSet { saveHosts() }}
 	var serializer = DispatchQueue(label: "NearbyHostManager", qos: .userInitiated, attributes: [])
+	
+	init() {
+		self.hosts = Settings.instance.nearbyHosts
+	}
 	
 	func record(timelineEntry: Timeline.Entry?, for device: NearbyDevice) {
 		host(matching: device).record(timelineEntry: timelineEntry)
@@ -23,8 +27,13 @@ class NearbyHostManager: ObservableObject {
 			
 			let newHost = NearbyHost(device: device)
 			hosts.append(newHost)
-      self.objectWillChange.sendOnMain()
+			self.objectWillChange.sendOnMain()
 			return newHost
 		}
+	}
+	
+	func saveHosts() {
+		
+		Settings.instance.nearbyHosts = hosts
 	}
 }

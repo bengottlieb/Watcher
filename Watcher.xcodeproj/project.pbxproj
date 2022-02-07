@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B534F774279F9C3B004F174C /* KnownApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534F773279F9C3B004F174C /* KnownApps.swift */; };
 		B534F7A327AB38B0004F174C /* KnownApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534F773279F9C3B004F174C /* KnownApps.swift */; };
+		B534F7A527ACA367004F174C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534F7A427ACA367004F174C /* Settings.swift */; };
+		B534F7A627ACCC8C004F174C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534F7A427ACA367004F174C /* Settings.swift */; };
 		B5585832264A8D4100A91281 /* ScriptRunner.Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585831264A8D4100A91281 /* ScriptRunner.Command.swift */; };
 		B5585834264A8F5F00A91281 /* ScriptEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585833264A8F5F00A91281 /* ScriptEditor.swift */; };
 		B5585837264A991E00A91281 /* Nearby in Frameworks */ = {isa = PBXBuildFile; productRef = B5585836264A991E00A91281 /* Nearby */; };
@@ -94,6 +96,7 @@
 
 /* Begin PBXFileReference section */
 		B534F773279F9C3B004F174C /* KnownApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownApps.swift; sourceTree = "<group>"; };
+		B534F7A427ACA367004F174C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B5585831264A8D4100A91281 /* ScriptRunner.Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptRunner.Command.swift; sourceTree = "<group>"; };
 		B5585833264A8F5F00A91281 /* ScriptEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptEditor.swift; sourceTree = "<group>"; };
 		B5585838264BDCFE00A91281 /* ApplicationMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationMonitor.swift; sourceTree = "<group>"; };
@@ -295,6 +298,7 @@
 				B5C576FA271B1AB000FA65F6 /* MonitoredDevicesScreen.swift */,
 				B5879F882719A7E200836D71 /* FilteredHistoryView.swift */,
 				B5879F8B271A497200836D71 /* DateLine.swift */,
+				B534F7A427ACA367004F174C /* Settings.swift */,
 				B5879F7827199C4900836D71 /* History View */,
 				B5585846264D307700A91281 /* HostListView.swift */,
 				B58E8D1E271BBB5500485B3D /* SafariView.swift */,
@@ -476,6 +480,7 @@
 				B558583B264BDE4400A91281 /* NSRunningApplication+Browsers.swift in Sources */,
 				B59EB1F1264D545300516CBB /* Timeline.Save.swift in Sources */,
 				B59EB1EE264D538700516CBB /* Notifications.swift in Sources */,
+				B534F7A627ACCC8C004F174C /* Settings.swift in Sources */,
 				B5585856264D3CD300A91281 /* NearbyMonitor.swift in Sources */,
 				B5C57701271B3E1400FA65F6 /* RemoteTimeline.swift in Sources */,
 				B5879F8027199CEA00836D71 /* HistoryRow.swift in Sources */,
@@ -519,6 +524,7 @@
 				B5879F8127199CEA00836D71 /* HistoryRow.swift in Sources */,
 				B5585854264D3C8700A91281 /* NearbyMonitorManager.swift in Sources */,
 				B5872B9F264C7F3F001755F6 /* AppDelegate.swift in Sources */,
+				B534F7A527ACA367004F174C /* Settings.swift in Sources */,
 				B5872BBD264CBA7C001755F6 /* Messages.swift in Sources */,
 				B5897C7E2655E7C200D8D981 /* IconImagesCache.swift in Sources */,
 				B5585851264D38B800A91281 /* NearbyHost.swift in Sources */,

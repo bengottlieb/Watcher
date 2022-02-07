@@ -15,7 +15,11 @@ struct HostDayDetailsScreen: View {
 	init(host: NearbyHost, date: Date) {
 		self.host = host
 		self.date = date
-		self.remoteTimeline = RemoteTimelineManager.instance.timeline(for: host.device!)
+		if let device = host.device {
+			self.remoteTimeline = RemoteTimelineManager.instance.timeline(for: device)
+		} else {
+			self.remoteTimeline = RemoteTimelineManager.instance.timeline(for: host.deviceID)
+		}
 	}
 	
 	var body: some View {

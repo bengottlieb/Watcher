@@ -12,9 +12,13 @@ class RemoteTimelineManager {
 	static let instance = RemoteTimelineManager()
 	var timelinesRootDirectory = URL.cache(named: "timelines")
 	let saveQueue = DispatchQueue(label: "RemoteTimelineManager")
+
+	func url(for deviceID: String) -> URL {
+		timelinesRootDirectory.appendingPathComponent(deviceID.idBasedFilename)
+	}
 	
 	func url(for device: NearbyDevice, date: Date? = nil) -> URL {
-		var url = timelinesRootDirectory.appendingPathComponent(device.filename)
+		var url = url(for: device.uniqueID)
 			
 		if let date = date {
 			let dateLabel = date.ymdString
@@ -27,8 +31,18 @@ class RemoteTimelineManager {
 	
 	var timelines: [String: RemoteTimeline] = [:]
 	
+	func timeline(for id: String) -> RemoteTimeline {
+		if let timeline = timelines[id] {
+			return timeline
+		} else {
+			let timeline = RemoteTimeline(deviceID: id)
+			timelines[id] = timeline
+			return timeline
+		}
+	}
+	
 	func timeline(for device: NearbyDevice) -> RemoteTimeline {
-		let id = device.name
+		let id = device.uniqueID
 		if let timeline = timelines[id] {
 			return timeline
 		} else {
@@ -60,7 +74,7 @@ class RemoteTimelineManager {
 }
 
 extension Date {
-	static let formatter = DateFormatter(format: "yyyy-MM-DD")
+	static let formatter = DateFormatter(format: "yyyy-MM-dd")
 	
 	var ymdString: String {
 		Self.formatter.string(from: self)
