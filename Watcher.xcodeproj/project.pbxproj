@@ -188,7 +188,6 @@
 			children = (
 				B5872B75264A16E8001755F6 /* AppDelegate.swift */,
 				B5585838264BDCFE00A91281 /* ApplicationMonitor.swift */,
-				B558584B264D371300A91281 /* Timeline */,
 				B5585842264BE5F000A91281 /* BrowserMonitor.swift */,
 				B5872B91264BF25F001755F6 /* BrowserURL.swift */,
 				B5585844264BE68E00A91281 /* BrowserKind.swift */,
@@ -258,7 +257,6 @@
 			children = (
 				B5872B9E264C7F3F001755F6 /* AppDelegate.swift */,
 				B5872BA0264C7F3F001755F6 /* SceneDelegate.swift */,
-				B534F7A427ACA367004F174C /* Settings.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -298,9 +296,20 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		B578F0062904151800C19E46 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B534F7A427ACA367004F174C /* Settings.swift */,
+				B558584B264D371300A91281 /* Timeline */,
+				B5872BBE264CBA91001755F6 /* Comms */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		B5872B69264A16E8001755F6 = {
 			isa = PBXGroup;
 			children = (
+				B578F0062904151800C19E46 /* Shared */,
 				B5EE66572719872A0035BC47 /* Suite */,
 				B5872B97264C1293001755F6 /* Nearby */,
 				B5872B74264A16E8001755F6 /* Watcher */,
@@ -325,7 +334,6 @@
 			isa = PBXGroup;
 			children = (
 				B558583C264BE00000A91281 /* Types */,
-				B5872BBE264CBA91001755F6 /* Comms */,
 				B558583E264BE00D00A91281 /* Screens */,
 				B558583D264BE00600A91281 /* Extensions */,
 				B578F0012904108800C19E46 /* Resources */,
