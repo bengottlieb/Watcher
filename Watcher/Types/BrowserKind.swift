@@ -15,16 +15,24 @@ enum BrowserKind: Int, CaseIterable, Codable, Comparable, Hashable { case safari
 		case .opera: return "com.operasoftware.Opera"
 		}
 	}
-  
-  static func <(lhs: BrowserKind, rhs: BrowserKind) -> Bool {
-    lhs.rawValue < rhs.rawValue
-  }
-  
-  var abbreviation: String {
-    switch self {
-    case .safari: return "S"
+	
+	static func <(lhs: BrowserKind, rhs: BrowserKind) -> Bool {
+		lhs.rawValue < rhs.rawValue
+	}
+	
+	var imageName: String {
+		switch self {
+		case .safari: return "safari_icon"
+		case .chrome: return "chrome_icon"
+		case .opera: return "none"
+		}
+	}
+	
+	var abbreviation: String {
+		switch self {
+		case .safari: return "S"
 		case .chrome: return "G"
 		case .opera: return "O"
-    }
-  }
+		}
+	}
 }

@@ -14,7 +14,13 @@ extension Timeline {
 		
 		var isTabEntry: Bool { tabURLs != nil }
 		var isAppEntry: Bool { bundleIDs != nil }
-		
+		var browserKind: BrowserKind? {
+			for kind in BrowserKind.allCases {
+				if bundleIDs?.contains(kind.bundleIdentifier) == true { return kind }
+			}
+			return nil
+		}
+
 		var id: String { uuid }
 		var uuid: String! = UUID().uuidString
 		var date = Date()
@@ -55,6 +61,18 @@ extension Timeline {
 			self.date = date
 			self.dateLabel = dateLabel
 			uuid = UUID().uuidString
+		}
+		
+		func time(until other: Timeline.Entry?) -> TimeInterval? {
+			guard let other else { return nil }
+			
+			return other.date.timeIntervalSince(date)
+		}
+		
+		var firstTabEntry: Timeline.Entry? {
+			guard let url = tabURLs?.first else { return nil }
+			
+			return Timeline.Entry(with: [url], date: self.date)
 		}
 		
 		init(date: Date = Date()) {

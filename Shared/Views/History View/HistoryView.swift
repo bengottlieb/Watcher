@@ -18,9 +18,13 @@ struct HistoryView: View {
 						let next = index < (history.count - 1) ? history[index + 1] : nil
 						
 						if entry.isAppEntry {
-							HistoryAppRow(entry: entry, next: next)
+							if let tabEntry = entry.firstTabEntry {
+								HistoryBrowserRow(entry: tabEntry, next: next, browserKind: entry.browserKind)
+							} else if entry.browserKind == nil {
+								HistoryAppRow(entry: entry, next: next)
+							}
 						} else if entry.isTabEntry {
-							HistoryBrowserRow(entry: entry, next: next)
+							HistoryBrowserRow(entry: entry, next: next, browserKind: history.browserKind(at: index))
 						} else {
 							HistoryRow(entry: entry, next: next)
 						}

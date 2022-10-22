@@ -12,12 +12,13 @@ class Timeline {
 	
 	private let queue = DispatchQueue(label: "timeline", qos: .userInitiated)
 	var saveInterval = TimeInterval.minute { didSet { setupSaveTimer() }}
-	var timeline: [Entry] = []
+	var timeline: [Timeline.Entry] = []
 	var lastSaveURL: URL!
-	let directory = FileManager.documentsDirectory.appendingPathComponent(".timelines")
+	var directory: URL
 	let formatter: DateFormatter
 	
-	init() {
+	init(directory: URL = FileManager.documentsDirectory.appendingPathComponent(".timelines")) {
+		self.directory = directory
 		formatter = DateFormatter(format: "M-d-yy")
 		lastSaveURL = saveURL
 		try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
@@ -28,9 +29,16 @@ class Timeline {
 		}
 		setupSaveTimer()
 #if os(macOS)
-		BrowserMonitor.instance.checkTabs()
+		if Constants.isObserving {
+			BrowserMonitor.instance.checkTabs()
+		}
 #endif
 		Notifications.willTerminate.watch(self, message: #selector(save))
+	}
+	
+	func rehome(to url: URL) {
+		directory = url
+		load()
 	}
 	
 	public var availableDays: [Date] {

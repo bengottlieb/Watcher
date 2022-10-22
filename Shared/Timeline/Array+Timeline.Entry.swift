@@ -16,6 +16,13 @@ extension Array where Element == Timeline.Entry {
 		return items.cleanup()
 	}
 	
+	func browserKind(at index: Int) -> BrowserKind? {
+		for i in stride(from: index, to: 0, by: -1) {
+			if let kind = self[i].browserKind { return kind }
+		}
+		return nil
+	}
+	
 	func cleanup() -> [Timeline.Entry] {
 		var items = self
 		for index in items.indices {
