@@ -11,27 +11,27 @@ class Timeline {
 	static let instance = Timeline()
 	
 	private let queue = DispatchQueue(label: "timeline", qos: .userInitiated)
-  var saveInterval = TimeInterval.minute { didSet { setupSaveTimer() }}
+	var saveInterval = TimeInterval.minute { didSet { setupSaveTimer() }}
 	var timeline: [Entry] = []
-  var lastSaveURL: URL!
-  let directory = FileManager.documentsDirectory.appendingPathComponent(".timelines")
+	var lastSaveURL: URL!
+	let directory = FileManager.documentsDirectory.appendingPathComponent(".timelines")
 	let formatter: DateFormatter
 	
-  init() {
+	init() {
 		formatter = DateFormatter(format: "M-d-yy")
-    lastSaveURL = saveURL
-    try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
-    load()
-    
-    if timeline.isNotEmpty {
-      record(special: .interruption)
-    }
-    setupSaveTimer()
-    #if os(macOS)
-      BrowserMonitor.instance.checkTabs()
-    #endif
-    Notifications.willTerminate.watch(self, message: #selector(save))
-  }
+		lastSaveURL = saveURL
+		try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+		load()
+		
+		if timeline.isNotEmpty {
+			record(special: .interruption)
+		}
+		setupSaveTimer()
+#if os(macOS)
+		BrowserMonitor.instance.checkTabs()
+#endif
+		Notifications.willTerminate.watch(self, message: #selector(save))
+	}
 	
 	public var availableDays: [Date] {
 		do {
@@ -47,7 +47,7 @@ class Timeline {
 		}
 		
 	}
-
+	
 	func timeline(for date: Date) -> [Entry] {
 		let filename = directory.appendingPathComponent(formatter.string(from: date) + ".txt")
 		do {
@@ -58,17 +58,17 @@ class Timeline {
 			return []
 		}
 	}
-  
-  public func record(special: Entry.Special) {
-    timeline.append(Entry(special))
-  }
-  
-  private var saveTimer: Timer?
-  func setupSaveTimer() {
-    saveTimer?.invalidate()
-    saveTimer = Timer.scheduledTimer(timeInterval: saveInterval, target: self, selector: #selector(save), userInfo: nil, repeats: true)
-  }
-  
+	
+	public func record(special: Entry.Special) {
+		timeline.append(Entry(special))
+	}
+	
+	private var saveTimer: Timer?
+	func setupSaveTimer() {
+		saveTimer?.invalidate()
+		saveTimer = Timer.scheduledTimer(timeInterval: saveInterval, target: self, selector: #selector(save), userInfo: nil, repeats: true)
+	}
+	
 	func switched(to applicationBundleID: String?) {
 		guard let id = applicationBundleID else { return }
 		addEntry(Entry(for: id))
@@ -80,11 +80,11 @@ class Timeline {
 	
 	func addEntry(_ entry: Entry) {
 		queue.async {
-      if entry.isTabEntry, entry.isSameContent(as: self.timeline.mostRecentTabsEntry) { return }
-      if entry.isAppEntry, entry.isSameContent(as: self.timeline.mostRecentAppEntry) { return }
+			if entry.isTabEntry, entry.isSameContent(as: self.timeline.mostRecentTabsEntry) { return }
+			if entry.isAppEntry, entry.isSameContent(as: self.timeline.mostRecentAppEntry) { return }
 			
 			self.timeline.append(entry)
-      print(self.currentEntry ?? entry)
+			print(self.currentEntry ?? entry)
 			NearbyMonitorManager.instance.sendStatusToAllMonitors()
 		}
 	}
@@ -92,7 +92,7 @@ class Timeline {
 	var currentEntry: Entry? {
 		guard let last = timeline.last else { return nil }
 		
-    return (timeline.mostRecentAppEntry ?? last) + (timeline.mostRecentTabsEntry ?? last)
+		return (timeline.mostRecentAppEntry ?? last) + (timeline.mostRecentTabsEntry ?? last)
 	}
 	
 }

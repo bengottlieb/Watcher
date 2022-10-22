@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ContentScreen.swift
 //  Monitor
 //
 //  Created by Ben Gottlieb on 5/12/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ContentScreen: View {
 	var testing = false
 	var body: some View {
 		NavigationView() {
@@ -22,6 +22,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
-		ContentView(testing: true)
+		ContentScreen(testing: true)
 	}
 }
