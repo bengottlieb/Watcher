@@ -13,7 +13,7 @@ struct DurationText: View {
 	let to: Timeline.Entry?
 	
 	var body: some View {
-		if let duration = from.time(until: to) {
+		if let duration = from.duration(until: to) {
 			Text(duration.durationString(style: .secondsNoHours, showLeadingZero: true))
 		}
 	}

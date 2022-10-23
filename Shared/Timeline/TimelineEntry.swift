@@ -63,12 +63,6 @@ extension Timeline {
 			uuid = UUID().uuidString
 		}
 		
-		func time(until other: Timeline.Entry?) -> TimeInterval? {
-			guard let other else { return nil }
-			
-			return other.date.timeIntervalSince(date)
-		}
-		
 		var firstTabEntry: Timeline.Entry? {
 			guard let url = tabURLs?.first else { return nil }
 			
@@ -105,6 +99,18 @@ extension Timeline {
 		func duration(until next: Timeline.Entry?) -> TimeInterval? {
 			guard let next = next else { return nil }
 			return next.date.timeIntervalSince(date)
+		}
+		
+		var isIgnored: Bool {
+			if special == .wake { return true }
+			if special == .sleep { return false }
+
+			guard let bundleIDs else { return false }
+			for identifier in bundleIDs {
+				if Constants.ignoredIdentifiers.contains(identifier) { return true }
+			}
+			
+			return false
 		}
 	}
 }

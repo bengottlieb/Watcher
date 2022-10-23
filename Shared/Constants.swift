@@ -9,4 +9,9 @@ import Foundation
 
 struct Constants {
 	static var isObserving: Bool { Bundle.main.infoDictionary?["IS_OBSERVING"] as? Bool ?? false }
+	
+	static var ignoredIdentifiers: [String] = [
+		"com.apple.UserNotificationCenter",
+		"com.apple.loginwindow",
+	]
 }

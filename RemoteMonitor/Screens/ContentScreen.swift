@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ContentScreen: View {
-	var testing = false
+	var testing = true
 	var body: some View {
 		NavigationView() {
 			if testing {
-				FilteredHistoryView(history: Timeline.sample)
+				SummaryView(history: Timeline.sample.diffs())
+					.padding()
+//				FilteredHistoryView(history: Timeline.sample)
 			} else {
 				MonitoredDevicesScreen()
 			}

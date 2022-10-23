@@ -71,7 +71,7 @@ extension Array where Element == Timeline.Entry {
 			results.append(element)
 		}
 		
-		return results
+		return results.sorted()
 	}
 	
 	var appsOnly: [Timeline.Entry] {
