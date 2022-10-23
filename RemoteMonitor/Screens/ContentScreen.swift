@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ContentScreen: View {
+	@State var selectedIdentifier: String?
 	var testing = true
 	var body: some View {
 		NavigationView() {
 			if testing {
-				SummaryView(history: Timeline.sample.diffs())
+				SummaryView(summaries: Timeline.sample.diffs().summary, selectedIdentifier: $selectedIdentifier)
 					.padding()
 //				FilteredHistoryView(history: Timeline.sample)
 			} else {

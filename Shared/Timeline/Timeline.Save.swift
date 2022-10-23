@@ -16,7 +16,7 @@ extension Timeline {
     let dateString = Date().localTimeString(date: .abbr, time: .none).replacingOccurrences(of: "/", with: "-")
     let filename = dateString + ".txt"
     
-    return directory.appendingPathComponent(filename)
+    return Constants.timelineDirectory.appendingPathComponent(filename)
   }
 	
   func load() {

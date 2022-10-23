@@ -10,20 +10,32 @@ import Suite
 
 struct SummaryView: View {
 	let summaries: [Timeline.Summary]
-	
-	init(history: [Timeline.Entry]) {
-		summaries = history.summary
-	}
-	
+	@Binding var selectedIdentifier: String?
+
 	var body: some View {
-		VStack() {
+		VStack(spacing: 0) {
 			ForEach(summaries) { summary in
-				HStack() {
-					Text(summary.displayTitle)
-					Spacer()
-					Text(summary.totalTime.durationString(style: .secondsNoHours, showLeadingZero: true))
+				Button(action: { selectedIdentifier = summary.identifier }) {
+					Row(summary: summary, selected: selectedIdentifier == summary.identifier)
 				}
 			}
+		}
+	}
+	
+	struct Row: View {
+		let summary: Timeline.Summary
+		let selected: Bool
+		
+		var body: some View {
+			HStack() {
+				if summary.isWebsite { Image(systemName: "globe").resizable().frame(width: 15, height: 15).opacity(0.25) }
+				Text(summary.displayTitle)
+				Spacer()
+				Text(summary.totalTime.durationString(style: .secondsNoHours, showLeadingZero: true))
+			}
+			.frame(height: 20)
+			.foregroundColor(selected ? .white : .black)
+			.background(selected ? Color.blue : Color.white)
 		}
 	}
 }
@@ -31,6 +43,6 @@ struct SummaryView: View {
 
 struct SummaryView_Previews: PreviewProvider {
 	static var previews: some View {
-		SummaryView(history: Timeline.sample.diffs())
+		SummaryView(summaries: Timeline.sample.diffs().summary, selectedIdentifier: .constant(nil))
 	}
 }

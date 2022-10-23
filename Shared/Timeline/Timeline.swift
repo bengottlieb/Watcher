@@ -14,14 +14,12 @@ class Timeline {
 	var saveInterval = TimeInterval.minute { didSet { setupSaveTimer() }}
 	var timeline: [Timeline.Entry] = []
 	var lastSaveURL: URL!
-	var directory: URL
 	let formatter: DateFormatter
 	
-	init(directory: URL = FileManager.documentsDirectory.appendingPathComponent(".timelines")) {
-		self.directory = directory
+	init() {
 		formatter = DateFormatter(format: "M-d-yy")
 		lastSaveURL = saveURL
-		try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+		try? FileManager.default.createDirectory(at: Constants.timelineDirectory, withIntermediateDirectories: true, attributes: nil)
 		load()
 		
 		if timeline.isNotEmpty {
@@ -35,15 +33,10 @@ class Timeline {
 #endif
 		Notifications.willTerminate.watch(self, message: #selector(save))
 	}
-	
-	func rehome(to url: URL) {
-		directory = url
-		load()
-	}
-	
+		
 	public var availableDays: [Date] {
 		do {
-			let contents = try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil, options: [])
+			let contents = try FileManager.default.contentsOfDirectory(at: Constants.timelineDirectory, includingPropertiesForKeys: nil, options: [])
 			
 			return contents.compactMap { url in
 				let name = url.deletingPathExtension().lastPathComponent
@@ -57,7 +50,7 @@ class Timeline {
 	}
 	
 	func timeline(for date: Date) -> [Entry] {
-		let filename = directory.appendingPathComponent(formatter.string(from: date) + ".txt")
+		let filename = Constants.timelineDirectory.appendingPathComponent(formatter.string(from: date) + ".txt")
 		do {
 			let data = try Data(contentsOf: filename)
 			return try JSONDecoder().decode([Entry].self, from: data)
