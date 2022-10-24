@@ -17,6 +17,7 @@ class Timeline {
 	let formatter: DateFormatter
 	
 	init() {
+		saveInterval = .saveInterval
 		formatter = DateFormatter(format: "M-d-yy")
 		lastSaveURL = saveURL
 		try? FileManager.default.createDirectory(at: Constants.timelineDirectory, withIntermediateDirectories: true, attributes: nil)
