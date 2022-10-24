@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  LocalWatcher
+//  LocalMonitor
 //
 //  Created by Ben Gottlieb on 10/22/22.
 //
