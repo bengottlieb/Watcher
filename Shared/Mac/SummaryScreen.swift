@@ -15,11 +15,13 @@ struct SummaryScreen: View {
 	
 	var body: some View {
 		VStack() {
+			Text("Today")
 			SummaryView(summaries: timeline.summary, selectedIdentifier: $selectedIdentifier)
 		}
 		.onAppear {
 			updateDate()
 		}
+		.frame(minWidth: 300, minHeight: 300)
 	}
 	
 	func updateDate() {

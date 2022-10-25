@@ -13,7 +13,7 @@ class SummaryWindowController: NSWindowController {
 	
 	var date: Date = Date()
 	
-	convenience init(date: Date = Date()) {
+	convenience init(date: Date) {
 		self.init(windowNibName: "SummaryWindow")
 		
 		self.date = date

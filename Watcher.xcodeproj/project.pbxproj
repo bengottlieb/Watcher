@@ -129,7 +129,6 @@
 		B5C9493429058C8F00AD6883 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5C9493329058C8E00AD6883 /* Preview Assets.xcassets */; };
 		B5C9493629058D0A00AD6883 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C9493529058D0A00AD6883 /* MenuItem.swift */; };
 		B5E59FEE2906A02E00ABD6A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E59FED2906A02E00ABD6A1 /* AppDelegate.swift */; };
-		B5E59FF12906A0D500ABD6A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5872B7E264A16E9001755F6 /* Main.storyboard */; };
 		B5E59FF42906A14D00ABD6A1 /* NSApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E59FF32906A14D00ABD6A1 /* NSApplication.swift */; };
 		B5E59FF52906A1E600ABD6A1 /* TimelineWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5897CF12666579600D8D981 /* TimelineWindow.swift */; };
 		B5E59FF62906A1E600ABD6A1 /* TimelineScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5897CEF2666575000D8D981 /* TimelineScreen.swift */; };
@@ -153,6 +152,11 @@
 		B5E92ABE29060B1000F303B5 /* ScriptRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872B8D264A17AD001755F6 /* ScriptRunner.swift */; };
 		B5E92ABF29060B1F00F303B5 /* ScriptRunner.Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585831264A8D4100A91281 /* ScriptRunner.Command.swift */; };
 		B5E92AC029060B3100F303B5 /* Process+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872B88264A16FC001755F6 /* Process+Extensions.swift */; };
+		B5E92AC12906B75500F303B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5E59FEF2906A0AC00ABD6A1 /* Main.storyboard */; };
+		B5E92AC22906B75A00F303B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5872B7E264A16E9001755F6 /* Main.storyboard */; };
+		B5E92AC32906B79500F303B5 /* SummaryWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E59FFD2906A20D00ABD6A1 /* SummaryWindow.swift */; };
+		B5E92AC42906B79500F303B5 /* SummaryWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E59FFF2906A24700ABD6A1 /* SummaryWindow.xib */; };
+		B5E92AC52906B79800F303B5 /* SummaryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E5A0012906A25800ABD6A1 /* SummaryScreen.swift */; };
 		B5EE6659271990CD0035BC47 /* sample_log.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5EE6658271990CD0035BC47 /* sample_log.txt */; };
 		B5EE665A271990CD0035BC47 /* sample_log.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5EE6658271990CD0035BC47 /* sample_log.txt */; };
 /* End PBXBuildFile section */
@@ -677,12 +681,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5E92AC12906B75500F303B5 /* Main.storyboard in Resources */,
 				B5E59FF82906A1F500ABD6A1 /* TimelineWindow.xib in Resources */,
 				B578F012290417E900C19E46 /* Assets.xcassets in Resources */,
 				B5E5A0002906A24700ABD6A1 /* SummaryWindow.xib in Resources */,
 				B5C9493429058C8F00AD6883 /* Preview Assets.xcassets in Resources */,
 				B578F03329041D9E00C19E46 /* Shared.xcassets in Resources */,
-				B5E59FF12906A0D500ABD6A1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,8 +697,10 @@
 				B5897CF4266671E100D8D981 /* TimelineWindow.xib in Resources */,
 				B578F03129041D9E00C19E46 /* Shared.xcassets in Resources */,
 				B5EE6659271990CD0035BC47 /* sample_log.txt in Resources */,
+				B5E92AC22906B75A00F303B5 /* Main.storyboard in Resources */,
 				B5872B7D264A16E9001755F6 /* Preview Assets.xcassets in Resources */,
 				B5872B7A264A16E9001755F6 /* Assets.xcassets in Resources */,
+				B5E92AC42906B79500F303B5 /* SummaryWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,9 +770,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5E92AC32906B79500F303B5 /* SummaryWindow.swift in Sources */,
 				B523A4DE2904B382005C530B /* Timeline.Summary.swift in Sources */,
 				B5111EBD2905878E00999B7A /* LocalTimelineManager.swift in Sources */,
 				B5585832264A8D4100A91281 /* ScriptRunner.Command.swift in Sources */,
+				B5E92AC52906B79800F303B5 /* SummaryScreen.swift in Sources */,
 				B558583B264BDE4400A91281 /* NSRunningApplication+Browsers.swift in Sources */,
 				B59EB1F1264D545300516CBB /* Timeline.Save.swift in Sources */,
 				B59EB1EE264D538700516CBB /* Notifications.swift in Sources */,
