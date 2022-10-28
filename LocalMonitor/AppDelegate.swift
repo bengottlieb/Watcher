@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		// Create the SwiftUI view that provides the window contents.
 		MenuItem.instance.setup()
 	//	NSApplication.toggleDockIcon(showIcon: false)
-		showSummary()
+	//	showSummary()
 	}
 	
 	func setupWindow() {

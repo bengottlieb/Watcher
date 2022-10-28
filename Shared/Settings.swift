@@ -7,10 +7,11 @@
 
 import Suite
 
-class Settings: DefaultsBasedPreferences {
+class Settings: DefaultsBasedPreferences, ObservableObject {
 	static let instance = Settings()
 	
 	@objc public dynamic var nearbyHostData: Data?
+	@objc public dynamic var menuBarIdentifier: String? { didSet { objectWillChange.send() }}
 	
 	var nearbyHosts: [NearbyHost] {
 		get {

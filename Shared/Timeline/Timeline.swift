@@ -7,17 +7,18 @@
 
 import Suite
 
-class Timeline {
+class Timeline: ObservableObject {
 	static let instance = Timeline()
 	
 	private let queue = DispatchQueue(label: "timeline", qos: .userInitiated)
-	var saveInterval = TimeInterval.minute { didSet { setupSaveTimer() }}
-	var timeline: [Timeline.Entry] = []
+	var timeline: [Timeline.Entry] = [] { didSet {
+		objectWillChange.send();
+		queueSave()
+	}}
 	var lastSaveURL: URL!
 	let formatter: DateFormatter
 	
 	init() {
-		saveInterval = .saveInterval
 		formatter = DateFormatter(format: "M-d-yy")
 		lastSaveURL = saveURL
 		try? FileManager.default.createDirectory(at: Constants.timelineDirectory, withIntermediateDirectories: true, attributes: nil)
@@ -26,7 +27,6 @@ class Timeline {
 		if timeline.isNotEmpty {
 			record(special: .interruption)
 		}
-		setupSaveTimer()
 #if os(macOS)
 		if Constants.isObserving {
 			BrowserMonitor.instance.checkTabs()
@@ -65,10 +65,14 @@ class Timeline {
 		timeline.append(Entry(special))
 	}
 	
+	func queueSave() {
+		setupSaveTimer(interval: 5)
+	}
+	
 	private var saveTimer: Timer?
-	func setupSaveTimer() {
+	func setupSaveTimer(interval: TimeInterval) {
 		saveTimer?.invalidate()
-		saveTimer = Timer.scheduledTimer(timeInterval: saveInterval, target: self, selector: #selector(save), userInfo: nil, repeats: true)
+		saveTimer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(save), userInfo: nil, repeats: false)
 	}
 	
 	func switched(to applicationBundleID: String?) {

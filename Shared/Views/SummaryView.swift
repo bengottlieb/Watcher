@@ -12,14 +12,26 @@ struct SummaryView: View {
 	let summaries: [Timeline.Summary]
 	@Binding var selectedIdentifier: String?
 
+	func toggle(_ id: String) {
+		if selectedIdentifier == id {
+			selectedIdentifier = nil
+		} else {
+			selectedIdentifier = id
+		}
+	}
+	
 	var body: some View {
 		VStack(spacing: 0) {
 			ForEach(summaries) { summary in
-				Button(action: { selectedIdentifier = summary.identifier }) {
+				Button(action: { toggle(summary.identifier) }) {
 					Row(summary: summary, selected: selectedIdentifier == summary.identifier)
 				}
+				.padding(.horizontal, 14)
+				.padding(2)
+				.background(Color.white)
 			}
 		}
+		.buttonStyle(.plain)
 	}
 	
 	struct Row: View {
@@ -32,8 +44,10 @@ struct SummaryView: View {
 				Text(summary.displayTitle)
 				Spacer()
 				Text(summary.totalTime.durationString(style: .secondsNoHours, showLeadingZero: true))
+					.monospacedDigit()
 			}
 			.frame(height: 20)
+			.padding(.horizontal)
 			.foregroundColor(selected ? .white : .black)
 			.background(selected ? Color.blue : Color.white)
 		}

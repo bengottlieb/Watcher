@@ -11,12 +11,12 @@ struct SummaryScreen: View {
 	@State var date = Date()
 	
 	@State var timeline: [Timeline.Entry] = []
-	@State var selectedIdentifier: String?
+	@ObservedObject var settings = Settings.instance
 	
 	var body: some View {
 		VStack() {
 			Text("Today")
-			SummaryView(summaries: timeline.summary, selectedIdentifier: $selectedIdentifier)
+			SortedSummaryView(timeline: timeline, selectedIdentifier: $settings.menuBarIdentifier)
 		}
 		.onAppear {
 			updateDate()

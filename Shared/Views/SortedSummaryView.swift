@@ -11,7 +11,7 @@ struct SortedSummaryView: View {
 	let timeline: [Timeline.Entry]
 	@Binding var selectedIdentifier: String?
 	
-	@State private var summaries: [Timeline.Summary]
+	private let summaries: [Timeline.Summary]
 	@State private var sortOrder = Sort.duration
 	
 	enum Sort: String, Identifiable, CaseIterable { case chronologically, duration, alpha
@@ -27,7 +27,7 @@ struct SortedSummaryView: View {
 	
 	init(timeline: [Timeline.Entry], selectedIdentifier: Binding<String?>?) {
 		self.timeline = timeline
-		_summaries = State(initialValue: timeline.summary)
+		summaries = timeline.summary
 		_selectedIdentifier = selectedIdentifier ?? .constant(nil)
 	}
 	
@@ -57,6 +57,12 @@ extension Array where Element == Timeline.Summary {
 			case .chronologically: return s1.firstUse < s2.firstUse
 			}
 		}
+	}
+	
+	func time(for id: String) -> TimeInterval? {
+		guard let item = first(where: { $0.identifier == id }) else { return nil }
+		
+		return item.totalTime
 	}
 }
 

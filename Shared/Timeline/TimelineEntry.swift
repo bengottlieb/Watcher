@@ -29,6 +29,16 @@ extension Timeline {
 		var special: Special?
 		var dateLabel: DateLabel?
 		var title: String?
+		var displayTitle: String {
+			if let title { return title }
+			if let bundle = bundleIDs?.first {
+				let components = bundle.components(separatedBy: ".")
+				if components.count > 2 { return components.dropFirst(2).joined() }
+				return bundle
+			}
+			if let host = tabURLs?.first?.host { return host }
+			return "--"
+		}
 		
 		var description: String {
 			if let special = special { return special.rawValue }

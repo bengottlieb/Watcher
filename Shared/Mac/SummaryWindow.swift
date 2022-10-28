@@ -23,6 +23,6 @@ class SummaryWindowController: NSWindowController {
 	
 	override func windowDidLoad() {
 		super.windowDidLoad()
-		self.window?.contentViewController = NSHostingController(rootView: SummaryScreen(date: date))
+		self.window?.contentViewController = NSHostingController(rootView: SummaryScreen(date: date).padding())
 	}
 }
