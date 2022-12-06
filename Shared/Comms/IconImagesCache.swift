@@ -10,25 +10,32 @@ import Combine
 import CrossPlatformKit
 import Suite
 
-public class IconImagesCache {
-  static let instance = IconImagesCache()
-  
-  enum ImageError: Error { case noImageAvailable }
-  var pendingRequests: [String: (Result<UXImage, Error>) -> Void] = [:]
-  
-  func store(image: UXImage, for identifier: String) {
-    ImageCache.instance.store(image, for: identifier.identifierImageURL)
-    
-    if let request = pendingRequests[identifier] {
-      request(.success(image))
-      pendingRequests.removeValue(forKey: identifier)
-    }
-  }
-
+public actor IconImagesCache {
+	static let instance = IconImagesCache()
+	
+	enum ImageError: Error { case noImageAvailable }
+	var pendingRequests: [String: [(Result<UXImage, Error>) -> Void]] = [:]
+	
+	func store(image: UXImage?, for identifier: String) {
+		var result: Result<UXImage, Error>
+		
+		if let image {
+			ImageCache.instance.store(image, for: identifier.identifierImageURL)
+			result = .success(image)
+		} else {
+			result = .failure(ImageError.noImageAvailable)
+		}
+		
+		if let requests = pendingRequests[identifier] {
+			requests.forEach { request in request(result) }
+			pendingRequests.removeValue(forKey: identifier)
+		}
+	}
+	
 }
 
 extension String {
-  var identifierImageURL: URL {
-    URL(string: "image://\(self)")!
-  }
+	var identifierImageURL: URL {
+		URL(string: "image://\(self)")!
+	}
 }

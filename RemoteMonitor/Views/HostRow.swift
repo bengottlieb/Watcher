@@ -51,15 +51,15 @@ struct HostRow: View {
       
     }
     .addSwipeActions(trailing: killButton, id: host.deviceID)
-    .onReceive(host.objectWillChange, perform: { _ in
-      if let ident = host.frontmostAppIdentifier, let device = host.device {
-        print("Fetching image for \(ident)")
-        IconImagesCache.instance.fetchImage(for: ident, from: device)
-          .onSuccess { image in
-            self.frontAppImage = image
-          }
-      }
-    })
+	 .task {
+		 do {
+			 if let ident = host.frontmostAppIdentifier, let device = host.device {
+				 frontAppImage = try await IconImagesCache.instance.fetchImage(for: ident, from: device)
+			 }
+		 } catch {
+			 
+		 }
+	 }
   }
   
   func refresh() {

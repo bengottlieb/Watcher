@@ -11,14 +11,15 @@ import CrossPlatformKit
 import Nearby
 
 extension IconImagesCache {
-  func fetchImage(for identifier: String, from device: NearbyDevice) -> AnyPublisher<UXImage, Error> {
+  func fetchImage(for identifier: String, from device: NearbyDevice) async throws -> UXImage {
     if let current = NSRunningApplication.runningApplications(withBundleIdentifier: identifier).first {
       
       if let image = current.icon {
-        return Just(image).setFailureType(to: Error.self).eraseToAnyPublisher()
+        return image
       }
     }
-    return Fail(outputType: UXImage.self, failure: ImageError.noImageAvailable).eraseToAnyPublisher()
+	  
+    throw ImageError.noImageAvailable
   }
 }
 

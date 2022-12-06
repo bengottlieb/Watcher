@@ -83,9 +83,19 @@ class SendImageMessage: NearbyMessage {
   var imageData: Data?
   
   init(image: UXImage, identifier: String) {
-    imageData = image.pngData()
-    self.identifier = identifier
+	 imageData = image.pngData()
+	 self.identifier = identifier
   }
   
   var image: UXImage? { imageData == nil ? nil : UXImage(data: imageData!) }
+}
+
+
+class NoImageMessage: NearbyMessage {
+  var command = "NoImage"
+  var identifier: String
+  
+  init(identifier: String) {
+	 self.identifier = identifier
+  }
 }
