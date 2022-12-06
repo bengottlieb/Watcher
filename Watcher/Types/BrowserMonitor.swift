@@ -18,47 +18,55 @@ class BrowserMonitor: NSObject {
 	
 	func setup() {
 		checkTimer?.invalidate()
+		checkTimer = Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true, block: { [weak self] _ in
+			guard let self else { return }
+			Task { await self.checkTabs() }
+		})
+		Task { await checkTabs() }
+	}
+	
+	@objc func checkTabs() async {
+		async let safari = safariFrontTabs
+		async let chrome = chromeFrontTabs
+		async let opera = operaFrontTabs
 		
-		checkTimer = Timer.scheduledTimer(timeInterval: checkInterval, target: self, selector: #selector(checkTabs), userInfo: nil, repeats: true)
-		checkTabs()
+		let tabs = await safari + chrome + opera
+		Timeline.instance.logCurrent(urls: tabs.compactMap { $0 })
 	}
 	
-	@objc func checkTabs() {
-		Publishers.Merge3(safariFrontTabs, chromeFrontTabs, operaFrontTabs)
-			.collect()
-			.sink { tabs in
-				Timeline.instance.logCurrent(urls: tabs.flatMap { $0 })
+	var safariFrontTabs: [BrowserURL] {
+		get async {
+			guard NSRunningApplication.isRunning(browser: .safari) else { return [] }
+			do {
+				let string = try await ScriptRunner.instance.run(command: .safariAllCurrentTabs)
+				return string.components(separatedBy: ",").compactMap { BrowserURL($0, .safari) }
+			} catch {
+				return []
 			}
-			.store(in: &cancellables)
-	}
-	
-	var safariFrontTabs: AnyPublisher<[BrowserURL], Never> {
-		guard NSRunningApplication.isRunning(browser: .safari) else { return Just([]).eraseToAnyPublisher() }
-		return ScriptRunner.instance.run(command: .safariAllCurrentTabs)
-			.replaceError(with: "")
-			.map { string in
-        string.components(separatedBy: ",").compactMap { BrowserURL($0, .safari) }
-			}
-			.eraseToAnyPublisher()
+		}
 	}
 
-	var chromeFrontTabs: AnyPublisher<[BrowserURL], Never> {
-		guard NSRunningApplication.isRunning(browser: .chrome) else { return Just([]).eraseToAnyPublisher() }
-		return ScriptRunner.instance.run(command: .chromeAllCurrentTabs)
-			.replaceError(with: "")
-			.map { string in
-				string.components(separatedBy: ",").compactMap { BrowserURL($0, .chrome) }
+	var chromeFrontTabs: [BrowserURL] {
+		get async {
+			guard NSRunningApplication.isRunning(browser: .chrome) else { return [] }
+			do {
+				let string = try await ScriptRunner.instance.run(command: .chromeAllCurrentTabs)
+				return string.components(separatedBy: ",").compactMap { BrowserURL($0, .safari) }
+			} catch {
+				return []
 			}
-			.eraseToAnyPublisher()
+		}
 	}
 
-	var operaFrontTabs: AnyPublisher<[BrowserURL], Never> {
-		guard NSRunningApplication.isRunning(browser: .opera) else { return Just([]).eraseToAnyPublisher() }
-		return ScriptRunner.instance.run(command: .operaAllCurrentTabs)
-			.replaceError(with: "")
-			.map { string in
-				string.components(separatedBy: ",").compactMap { BrowserURL($0, .opera) }
+	var operaFrontTabs: [BrowserURL] {
+		get async {
+			guard NSRunningApplication.isRunning(browser: .opera) else { return [] }
+			do {
+				let string = try await ScriptRunner.instance.run(command: .operaAllCurrentTabs)
+				return string.components(separatedBy: ",").compactMap { BrowserURL($0, .safari) }
+			} catch {
+				return []
 			}
-			.eraseToAnyPublisher()
+		}
 	}
 }

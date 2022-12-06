@@ -10,7 +10,7 @@ import Suite
 import Combine
 
 @available(macOS 11.0, *)
-struct ScriptEditor: View {
+@MainActor struct ScriptEditor: View {
 	@State var cancellables = Set<AnyCancellable>()
 	@State var scriptCancellable: AnyCancellable?
 	@State var script = ScriptRunner.Command.chromeCurrentTab.script
@@ -20,33 +20,26 @@ struct ScriptEditor: View {
 	@State var isRunning = false
 	@State var runTime: TimeInterval?
 	
-	func run() {
+	func run() async {
 		error = nil
 		result = ""
 		isRunning = true
 		let startedAt = Date()
 		
-		scriptCancellable = ScriptRunner.instance.run(script: script)
-			.sink { completion in
-				isRunning = false
-				runTime = abs(startedAt.timeIntervalSinceNow)
-				switch completion {
-				case .failure(let err):
-					self.error = err
-				default:
-					break
-				}
-			} receiveValue: { result in
-				self.result = result
-			}
-
+		do {
+			result = try await ScriptRunner.instance.run(script: script)
+		} catch {
+			self.error = error
+		}
+		isRunning = false
+		runTime = abs(startedAt.timeIntervalSinceNow)
 	}
 
 	var body: some View {
 		VStack() {
 			Picker("Command", selection: $command.onChange { command in
 				script = command.script
-				run()
+				Task { await run() }
 			}) {
 				ForEach(ScriptRunner.Command.allCases) { command in
 					Text(command.title).tag(command)
@@ -57,7 +50,7 @@ struct ScriptEditor: View {
 				Text(runTime.durationString(style: .milliseconds))
 					.font(.caption)
 			}
-			Button(action: run) {
+			AsyncButton(action: run) {
 				Text("Run")
 			}
 			Text("Result")

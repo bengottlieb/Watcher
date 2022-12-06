@@ -29,7 +29,7 @@ class Timeline: ObservableObject {
 		}
 #if os(macOS)
 		if Constants.isObserving {
-			BrowserMonitor.instance.checkTabs()
+			Task { await BrowserMonitor.instance.checkTabs() }
 		}
 #endif
 		Notifications.willTerminate.watch(self, message: #selector(save))

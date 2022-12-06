@@ -14,41 +14,35 @@ class ScriptRunner {
 	
 	var cancellables = Set<AnyCancellable>()
 	init() {
-		Process.which("osascript")
-			.sink { completion in
-				switch completion {
-				case .failure(let err):
-					print(err)
-				default: break
-				}
-			} receiveValue: { path in
-				print("Found osascript: \(path)")
-				self.osascriptPath.send(path)
-			}
-			.store(in: &cancellables)
+	}
+	
+	func loadOSAScript() async throws -> String {
+		if let osascriptPath { return osascriptPath }
+		do {
+			let path = try await Process.which("osascript")
+
+			print("Found OSAScript: \(path)")
+			self.osascriptPath = path
+			return path
+		} catch {
+			throw ScriptError.noOSAScriptFound
+		}
 	}
 	
 	func setup() {
 		
 	}
-	var osascriptPath = CurrentValueSubject<String, Never>("")
+	var osascriptPath: String?
 	
-	func runForData(script: String) -> AnyPublisher<Data, Error> {
-		guard osascriptPath.value != "" else { return Fail(outputType: Data.self, failure: ScriptError.noOSAScriptFound).eraseToAnyPublisher() }
-		
-		return Process(path: osascriptPath.value, arguments: ["-e", "\(script)"])
-			.publisher()
-			.eraseToAnyPublisher()
+	func runForData(script: String) async throws -> Data {
+		try await Process(path: loadOSAScript(), arguments: ["-e", "\(script)"]).run()
 	}
 	
-	func run(script: String) -> AnyPublisher<String, Error> {
-		runForData(script: script)
-			.tryMap { data in
-				if let string = String(data: data, encoding: .utf8) { return string }
-				throw ScriptError.unableToDecodeString
-			}
-			.eraseToAnyPublisher()
+	func run(script: String) async throws -> String {
+		let data = try await runForData(script: script)
+		if let string = String(data: data, encoding: .utf8) { return string }
+		throw ScriptError.unableToDecodeString
 	}
 	
-	func run(command: Command) -> AnyPublisher<String, Error> { run(script: command.script) }
+	func run(command: Command) async throws -> String { try await run(script: command.script) }
 }

@@ -17,13 +17,9 @@ extension Process {
 			}
 		}
 	}
-	class func which(_ name: String) -> AnyPublisher<String, Error> {
-		Process(path: "/usr/bin/which", arguments: [name])
-			.publisher()
-			.map { data in
-				String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-			}
-			.eraseToAnyPublisher()
+	class func which(_ name: String) async throws -> String {
+		let data = try await Process(path: "/usr/bin/which", arguments: [name]).run()
+		return String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
 	}
 	
 	convenience init(path: String, arguments args: [String]) {
@@ -34,36 +30,34 @@ extension Process {
 	
 	var launchURL: URL { URL(fileURLWithPath: self.launchPath ?? "") }
 	
-	func publisher() -> AnyPublisher<Data, Error> {
-		return Future { promise in
-			DispatchQueue.global(qos: .userInitiated).async {
-				let outputPipe = Pipe()
-				let errorPipe = Pipe()
+	func run() async throws -> Data {
+		let data: Data = try await withCheckedThrowingContinuation { continuation in
+			let outputPipe = Pipe()
+			let errorPipe = Pipe()
+			
+			self.standardOutput = outputPipe
+			self.standardError = errorPipe
+			
+			do {
+				try self.run()
+				self.waitUntilExit()
 				
-				self.standardOutput = outputPipe
-				self.standardError = errorPipe
+				let outputData = outputPipe.fileHandleForReading.readDataToEndOfFile()
+				let errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()
 				
-				do {
-					try self.run()
-					self.waitUntilExit()
-					
-					let outputData = outputPipe.fileHandleForReading.readDataToEndOfFile()
-					let errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()
-					
-					if !outputData.isEmpty {
-						promise(.success(outputData))
-					} else if !errorData.isEmpty {
-						let errorString = String(data: errorData, encoding: .utf8) ?? "Error when running \(self.launchURL.lastPathComponent)"
-						logg("Process failed: \(self.launchPath ?? "unknown command"), \(errorString)")
-						promise(.failure(ProcessError.systemResult(errorString)))
-					} else {
-						promise(.success(outputData))
-					}
-				} catch {
-					promise(.failure(error))
+				if !outputData.isEmpty {
+					continuation.resume(returning: outputData)
+				} else if !errorData.isEmpty {
+					let errorString = String(data: errorData, encoding: .utf8) ?? "Error when running \(self.launchURL.lastPathComponent)"
+					logg("Process failed: \(self.launchPath ?? "unknown command"), \(errorString)")
+					continuation.resume(throwing: ProcessError.systemResult(errorString))
+				} else {
+					continuation.resume(returning: outputData)
 				}
+			} catch {
+				continuation.resume(throwing: error)
 			}
 		}
-		.eraseToAnyPublisher()
+		return data
 	}
 }
