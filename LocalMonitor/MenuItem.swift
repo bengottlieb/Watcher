@@ -59,7 +59,7 @@ class MenuItem: NSObject {
 		} else {
 			if let current = timeline.last?.displayTitle {
 				statusItem.button?.title = current
-				print("Switched to \(current)")
+				logg("Switched to \(current)")
 			}
 		}
 	}

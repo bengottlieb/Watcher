@@ -90,7 +90,7 @@ class Timeline: ObservableObject {
 			if entry.isAppEntry, entry.isSameContent(as: self.timeline.mostRecentAppEntry) { return }
 			
 			self.timeline.append(entry)
-			print(self.currentEntry ?? entry)
+			logg("\(self.currentEntry ?? entry)")
 			NearbyMonitorManager.instance.sendStatusToAllMonitors()
 		}
 	}

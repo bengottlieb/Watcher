@@ -28,7 +28,7 @@ extension Timeline {
 	}
 	
 	@objc func save() {
-		print("Saving at \(Date())")
+		logg("Saving at \(Date())")
 		let url = saveURL
 		try? FileManager.default.removeItem(at: url)
 		

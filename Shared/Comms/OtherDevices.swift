@@ -36,7 +36,7 @@ class OtherDevices {
 	
 	@objc func discoveredDevice(note: Notification) {
 		if let device = note.object as? NearbyDevice {
-			print("Discovered: \(device)")
+			logg("Discovered: \(device)")
 			if device.role == .host, role == .monitor {
 				device.send(message: RequestStatusMessage())
 			}
@@ -80,8 +80,10 @@ extension OtherDevices: NearbyMessageRouter {
 		if payload.modulelessClassName == String(describing: RequestImageMessage.self), let message = try? payload.reconstitute(RequestImageMessage.self) {
 			Task {
 				do {
-					let image = try await IconImagesCache.instance.fetchImage(for: message.identifier, from: device)
-					device.send(message: SendImageMessage(image: image, identifier: message.identifier))
+					#if os(macOS)
+						let image = try await IconImagesCache.instance.fetchLocalImage(for: message.identifier, from: device)
+						device.send(message: SendImageMessage(image: image, identifier: message.identifier))
+					#endif
 				} catch {
 					device.send(message: NoImageMessage(identifier: message.identifier))
 				}
@@ -123,7 +125,7 @@ extension OtherDevices: NearbyMessageRouter {
 	}
 	
 	func received(dictionary: [String : String], from device: NearbyDevice) {
-		print("Received \(dictionary)")
+		logg("Received \(dictionary)")
 	}
 	
 	

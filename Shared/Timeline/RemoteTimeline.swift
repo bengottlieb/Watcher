@@ -7,6 +7,7 @@
 
 import Foundation
 import Nearby
+import Suite
 
 class RemoteTimeline: ObservableObject {
 	var device: NearbyDevice?
@@ -43,7 +44,7 @@ class RemoteTimeline: ObservableObject {
 					dates.sort()
 				}
 			} catch {
-				print("Failed to construct timeline: \(error)")
+				logg("Failed to construct timeline: \(error)")
 			}
 		}
 	}

@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		// Create the SwiftUI view that provides the window contents.
+		Logger.instance.prefix = "𐃂"
 		MenuItem.instance.setup()
 	//	NSApplication.toggleDockIcon(showIcon: false)
 	//	showSummary()
@@ -61,7 +62,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //			 window.makeKeyAndOrderFront(nil)
 //		  }
 //		} catch {
-//		  print("Problem opening \(url.path): \(error)")
+//		  logg("Problem opening \(url.path): \(error)")
 //		}
 //	 }
 //  }

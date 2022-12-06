@@ -11,7 +11,7 @@ import CrossPlatformKit
 import Nearby
 
 extension IconImagesCache {
-  func fetchImage(for identifier: String, from device: NearbyDevice) async throws -> UXImage {
+  func fetchLocalImage(for identifier: String, from device: NearbyDevice) async throws -> UXImage {
     if let current = NSRunningApplication.runningApplications(withBundleIdentifier: identifier).first {
       
       if let image = current.icon {

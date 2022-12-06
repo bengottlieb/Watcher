@@ -12,6 +12,7 @@ import Suite
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 	override init() {
+		Logger.instance.prefix = "𐃂"
 		ScriptRunner.instance.setup()
 		ApplicationMonitor.instance.setup()
 		BrowserMonitor.instance.setup()
@@ -59,7 +60,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           window.makeKeyAndOrderFront(nil)
         }
       } catch {
-        print("Problem opening \(url.path): \(error)")
+			logg("Problem opening \(url.path): \(error)")
       }
     }
   }

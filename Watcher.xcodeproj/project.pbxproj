@@ -113,6 +113,7 @@
 		B5A0FEFC2904CFDC0005FA3D /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A0FEFB2904CFDC0005FA3D /* SummaryView.swift */; };
 		B5A0FEFD2904CFDC0005FA3D /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A0FEFB2904CFDC0005FA3D /* SummaryView.swift */; };
 		B5A0FEFE2904CFDC0005FA3D /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A0FEFB2904CFDC0005FA3D /* SummaryView.swift */; };
+		B5A5EA36293F72DE007AC6D5 /* IconImagesCache+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5897CDA265B465100D8D981 /* IconImagesCache+iOS.swift */; };
 		B5B666A3290420B7008FFA42 /* TimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B666A2290420B7008FFA42 /* TimelineEntry.swift */; };
 		B5B666A4290420B7008FFA42 /* TimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B666A2290420B7008FFA42 /* TimelineEntry.swift */; };
 		B5B666A5290420B7008FFA42 /* TimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B666A2290420B7008FFA42 /* TimelineEntry.swift */; };
@@ -776,6 +777,7 @@
 				B5E92AC32906B79500F303B5 /* SummaryWindow.swift in Sources */,
 				B523A4DE2904B382005C530B /* Timeline.Summary.swift in Sources */,
 				B5111EBD2905878E00999B7A /* LocalTimelineManager.swift in Sources */,
+				B5A5EA36293F72DE007AC6D5 /* IconImagesCache+iOS.swift in Sources */,
 				B5585832264A8D4100A91281 /* ScriptRunner.Command.swift in Sources */,
 				B5E92AC52906B79800F303B5 /* SummaryScreen.swift in Sources */,
 				B558583B264BDE4400A91281 /* NSRunningApplication+Browsers.swift in Sources */,

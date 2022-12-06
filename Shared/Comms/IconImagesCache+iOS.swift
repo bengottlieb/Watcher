@@ -11,8 +11,8 @@ import Suite
 import Nearby
 
 extension IconImagesCache {
-	func fetchImage(for identifier: String, from device: NearbyDevice) async throws -> UXImage {
-		print("REQUESTING \(identifier) from \(device.name)")
+	func fetchRemoteImage(for identifier: String, from device: NearbyDevice) async throws -> UXImage {
+		logg("🖼️ Requesting Image \(identifier) from \(device.name)")
 		if let image = ImageCache.instance.cachedValue(for: identifier.identifierImageURL) {
 			return image
 		}
@@ -32,7 +32,7 @@ extension IconImagesCache {
 			Task {
 				pendingRequests[identifier] = [
 					{ result in
-						print("Fetched image for \(identifier)")
+						logg("🖼️ Fetched image for \(identifier)")
 						continuation.resume(with: result)
 					}
 				]

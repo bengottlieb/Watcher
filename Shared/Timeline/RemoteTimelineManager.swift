@@ -7,6 +7,7 @@
 
 import Foundation
 import Nearby
+import Suite
 
 class RemoteTimelineManager {
 	static let instance = RemoteTimelineManager()
@@ -65,7 +66,7 @@ class RemoteTimelineManager {
 					try FileManager.default.removeItem(at: url)
 					try data.write(to: url)
 				} catch {
-					print("Failed to save timeline entries: \(error)")
+					logg("Failed to save timeline entries: \(error)")
 				}
 			}
 		}

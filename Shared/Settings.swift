@@ -19,7 +19,7 @@ class Settings: DefaultsBasedPreferences, ObservableObject {
 			do {
 				return try [NearbyHost].loadJSON(data: data)
 			} catch {
-				print("Failed to load hosts: \(error)")
+				logg("Failed to load hosts: \(error)")
 				return []
 			}
 		}

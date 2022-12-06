@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Suite
 
 class ScriptRunner {	
 	static let instance = ScriptRunner()
@@ -21,7 +22,7 @@ class ScriptRunner {
 		do {
 			let path = try await Process.which("osascript")
 
-			print("Found OSAScript: \(path)")
+			Suite.logg("Found OSAScript: \(path)")
 			self.osascriptPath = path
 			return path
 		} catch {
