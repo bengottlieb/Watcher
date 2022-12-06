@@ -39,11 +39,12 @@ extension Array where Element == Timeline.Entry {
 		guard count > 1 else { return [] }
 		var results: [Timeline.Summary] = []
 		let count = count
+		let sorted = Array(self.sorted().reversed())
 		
 		for index in 1..<count {
-			let entry = self[index]
+			let entry = sorted[index]
 			guard !entry.isIgnored, let identifier = entry.summaryIdentifier else { continue }
-			let duration = index < (count - 1) ? entry.duration(until: self[index + 1]) : nil
+			let duration = index < (count - 1) ? entry.duration(until: sorted[index + 1]) : nil
 			if let summaryIndex = results.firstIndex(where: { $0.identifier == identifier }) {
 				results[summaryIndex].totalTime += duration ?? 0
 			} else {

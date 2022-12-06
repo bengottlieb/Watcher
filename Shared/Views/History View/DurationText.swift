@@ -14,7 +14,7 @@ struct DurationText: View {
 	
 	var body: some View {
 		if let duration = from.duration(until: to) {
-			Text(duration.durationString(style: .secondsNoHours, showLeadingZero: true))
+			Text(duration.durationString(style: .seconds, showLeadingZero: true))
 		}
 	}
 }

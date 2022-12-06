@@ -43,7 +43,7 @@ struct SummaryView: View {
 				if summary.isWebsite { Image(systemName: "globe").resizable().frame(width: 15, height: 15).opacity(0.25) }
 				Text(summary.displayTitle)
 				Spacer()
-				Text(summary.totalTime.durationString(style: .secondsNoHours, showLeadingZero: true))
+				Text(summary.totalTime.durationString(style: .seconds, showLeadingZero: true))
 					.monospacedDigit()
 			}
 			.frame(height: 20)

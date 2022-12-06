@@ -104,6 +104,7 @@
 		B5897CDC265B468600D8D981 /* IconImagesCache+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5897CDA265B465100D8D981 /* IconImagesCache+iOS.swift */; };
 		B5897CF4266671E100D8D981 /* TimelineWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5897CF3266671E100D8D981 /* TimelineWindow.xib */; };
 		B58E8D1F271BBB5500485B3D /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58E8D1E271BBB5500485B3D /* SafariView.swift */; };
+		B599012B293ED134009DA6A7 /* HostTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599012A293ED134009DA6A7 /* HostTimelineView.swift */; };
 		B59EB1EE264D538700516CBB /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1ED264D538700516CBB /* Notifications.swift */; };
 		B59EB1EF264D538700516CBB /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1ED264D538700516CBB /* Notifications.swift */; };
 		B59EB1F1264D545300516CBB /* Timeline.Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EB1F0264D545300516CBB /* Timeline.Save.swift */; };
@@ -222,6 +223,7 @@
 		B5897CF12666579600D8D981 /* TimelineWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWindow.swift; sourceTree = "<group>"; };
 		B5897CF3266671E100D8D981 /* TimelineWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimelineWindow.xib; sourceTree = "<group>"; };
 		B58E8D1E271BBB5500485B3D /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		B599012A293ED134009DA6A7 /* HostTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostTimelineView.swift; sourceTree = "<group>"; };
 		B59EB1ED264D538700516CBB /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		B59EB1F0264D545300516CBB /* Timeline.Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.Save.swift; sourceTree = "<group>"; };
 		B59EB1F8264E98B600516CBB /* HostRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRow.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 				B5872BA2264C7F3F001755F6 /* ContentScreen.swift */,
 				B5C576FA271B1AB000FA65F6 /* MonitoredDevicesScreen.swift */,
 				B5C57703271B3F8D00FA65F6 /* HostDetailScreen.swift */,
+				B599012A293ED134009DA6A7 /* HostTimelineView.swift */,
 				B5C57705271B76D400FA65F6 /* HostDayDetailsScreen.swift */,
 			);
 			path = Screens;
@@ -860,6 +863,7 @@
 				B59EB1EF264D538700516CBB /* Notifications.swift in Sources */,
 				B5872BB5264C7FD9001755F6 /* Timeline.swift in Sources */,
 				B5872BB8264C7FE2001755F6 /* BrowserKind.swift in Sources */,
+				B599012B293ED134009DA6A7 /* HostTimelineView.swift in Sources */,
 				B578F01C2904195700C19E46 /* Constants.swift in Sources */,
 				B5872BA3264C7F3F001755F6 /* ContentScreen.swift in Sources */,
 				B5111EBA29057CB300999B7A /* SortedSummaryView.swift in Sources */,

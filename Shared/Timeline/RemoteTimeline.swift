@@ -63,7 +63,7 @@ class RemoteTimeline: ObservableObject {
 	
 	func setDates(_ dates: [Date]) {
 		objectWillChange.sendOnMain()
-		self.dates = dates
+		self.dates = dates.sorted().reversed()
 	}
 	
 	func setTimeline(_ timeline: [Timeline.Entry]) {

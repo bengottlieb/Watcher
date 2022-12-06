@@ -93,7 +93,7 @@ extension Timeline {
 		}
 		
 		static func <(lhs: Entry, rhs: Entry) -> Bool {
-			lhs.date < rhs.date
+			lhs.date > rhs.date
 		}
 		
 		static func +(lhs: Entry, rhs: Entry?) -> Entry {
