@@ -44,7 +44,7 @@ struct SummaryView: View {
 				Text(summary.displayTitle)
 				Spacer()
 				Text(summary.totalTime.durationString(style: .seconds, showLeadingZero: true))
-					.monospacedDigit()
+					.digitFont()
 			}
 			.frame(height: 20)
 			.padding(.horizontal)
@@ -58,5 +58,15 @@ struct SummaryView: View {
 struct SummaryView_Previews: PreviewProvider {
 	static var previews: some View {
 		SummaryView(summaries: Timeline.sample.diffs().summary, selectedIdentifier: .constant(nil))
+	}
+}
+
+extension View {
+	@ViewBuilder func digitFont() -> some View {
+		if #available(iOS 15, macOS 12, *) {
+			self.monospacedDigit()
+		} else {
+			self
+		}
 	}
 }

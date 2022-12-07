@@ -16,6 +16,14 @@ class RemoteTimeline: ObservableObject {
 	var entries: [Date: [Timeline.Entry]] = [:]
 	let cacheURL: URL
 	
+	enum State: String { case idle, requestingToday, requestingAvailable, requestingDate
+		var title: String {
+			rawValue
+		}
+	}
+	
+	@Published var state = State.idle
+	
 	init(deviceID: String) {
 		cacheURL = RemoteTimelineManager.instance.url(for: deviceID)
 		loadCache()
@@ -53,12 +61,14 @@ class RemoteTimeline: ObservableObject {
 		entries[date.noon] ?? []
 	}
 	
-	func refresh(_ date: Date, noMatterWhat: Bool = false) {
+	@MainActor func refresh(_ date: Date, noMatterWhat: Bool = false) {
+		state = .requestingDate
 		if !noMatterWhat, entries[date.noon] != nil { return }
 		device?.send(message: RequestDayMessage(date))
 	}
 	
-	func refreshDates() {
+	@MainActor func refreshDates() {
+		state = .requestingAvailable
 		device?.send(message: RequestAvailableDaysMessage())
 	}
 	

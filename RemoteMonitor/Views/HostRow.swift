@@ -48,6 +48,7 @@ struct HostRow: View {
 					Image(.arrow_clockwise)
 						.padding()
 				}
+				.buttonStyle(.plain)
 			}
 			
 		}
@@ -59,7 +60,6 @@ struct HostRow: View {
 	}
 	
 	func updateImage() {
-		logg("new ident: \(host.frontmostAppIdentifier), device: \(host.device?.id)")
 		if let ident = host.frontmostAppIdentifier, let device = host.device, (ident != lastFetchedImageIdentity || device.id != lastFetchedDeviceID) {
 			Task {
 				do {

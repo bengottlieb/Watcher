@@ -20,6 +20,7 @@ class OtherDevices {
 	static let instance = OtherDevices()
 	
 	var role: NearbyDevice.Role = .host
+	var seenDevices: [String] = []
 	
 	func setup(mode: NearbyDevice.Role) {
 		self.role = mode
@@ -36,7 +37,10 @@ class OtherDevices {
 	
 	@objc func discoveredDevice(note: Notification) {
 		if let device = note.object as? NearbyDevice {
-			logg("Discovered: \(device)")
+			if !seenDevices.contains(device.id) {
+				logg("Discovered: \(device)")
+				seenDevices.append(device.id)
+			}
 			if device.role == .host, role == .monitor {
 				device.send(message: RequestStatusMessage())
 			}

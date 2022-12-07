@@ -12,7 +12,6 @@ import Nearby
 
 extension IconImagesCache {
 	func fetchRemoteImage(for identifier: String, from device: NearbyDevice) async throws -> UXImage {
-		logg("🖼️ Requesting Image \(identifier) from \(device.name)")
 		if let image = ImageCache.instance.cachedValue(for: identifier.identifierImageURL) {
 			return image
 		}
@@ -27,6 +26,7 @@ extension IconImagesCache {
 			return image
 		}
 		
+		logg("🖼️ Requesting Image \(identifier) from \(device.name)")
 		let image = try await withCheckedThrowingContinuation { continuation in
 			device.send(message: RequestImageMessage(identifier))
 			Task {

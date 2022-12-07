@@ -23,11 +23,16 @@ struct HostDayDetailsScreen: View {
 	}
 	
 	var body: some View {
-		FilteredHistoryView(history: remoteTimeline.timeline(for: date))
-			.onAppear {
-				remoteTimeline.refresh(date)
+		VStack() {
+			if remoteTimeline.state != .idle {
+				Text(remoteTimeline.state.title)
 			}
-			.navigationTitle(host.name + " - " + date.localTimeString(date: .medium, time: .none))
+			FilteredHistoryView(history: remoteTimeline.timeline(for: date))
+				.onAppear {
+					remoteTimeline.refresh(date)
+				}
+				.navigationTitle(host.name + " - " + date.localTimeString(date: .medium, time: .none))
+		}
 	}
 }
 
