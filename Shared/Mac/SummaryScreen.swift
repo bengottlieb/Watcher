@@ -15,12 +15,15 @@ struct SummaryScreen: View {
 	
 	var body: some View {
 		VStack() {
-			Text("Today")
+			DatePicker("Date", selection: $date, displayedComponents: [.date])
 			SortedSummaryView(timeline: timeline, selectedIdentifier: $settings.menuBarIdentifier)
 		}
 		.onAppear {
 			updateDate()
 		}
+		.onChange(of: date, perform: { newValue in
+			timeline = Timeline.instance.timeline(for: date)
+		})
 		.frame(minWidth: 300, minHeight: 300)
 	}
 	

@@ -54,6 +54,16 @@ struct SummaryView: View {
 	}
 }
 
+extension View {
+	@ViewBuilder func monoDigits() -> some View {
+		if #available(macOS 12.0, *) {
+			self
+				.monospacedDigit()
+		} else {
+			self
+		}
+	}
+}
 
 struct SummaryView_Previews: PreviewProvider {
 	static var previews: some View {

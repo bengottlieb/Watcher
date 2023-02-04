@@ -56,6 +56,9 @@ class MenuItem: NSObject {
 			if let time = timeline.summary.time(for: id) {
 				statusItem.button?.title = time.durationString(style: .minutes, showLeadingZero: true, roundUp: true)
 			}
+			if statusItem.button?.title.isEmpty == false {
+				statusItem.button?.image = nil
+			}
 		} else {
 			if let current = timeline.last?.displayTitle {
 				statusItem.button?.title = current
