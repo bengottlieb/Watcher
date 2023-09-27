@@ -22,7 +22,7 @@ class RemoteTimeline: ObservableObject {
 		}
 	}
 	
-	@Published var state = State.idle
+	var state = State.idle { didSet { objectWillChange.sendOnMain() }}
 	
 	init(deviceID: String) {
 		cacheURL = RemoteTimelineManager.instance.url(for: deviceID)
@@ -68,16 +68,19 @@ class RemoteTimeline: ObservableObject {
 	}
 	
 	@MainActor func refreshDates() {
+		guard let device else { return }
 		state = .requestingAvailable
-		device?.send(message: RequestAvailableDaysMessage())
+		device.send(message: RequestAvailableDaysMessage())
 	}
 	
 	func setDates(_ dates: [Date]) {
+		if state == .requestingAvailable { state = .idle }
 		objectWillChange.sendOnMain()
 		self.dates = dates.sorted().reversed()
 	}
 	
 	func setTimeline(_ timeline: [Timeline.Entry]) {
+		if state == .requestingDate { state = .idle }
 		guard let date = timeline.first?.date.noon else { return }
 		
 		objectWillChange.sendOnMain()

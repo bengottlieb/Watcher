@@ -25,7 +25,7 @@ struct HostDayDetailsScreen: View {
 	var body: some View {
 		VStack() {
 			if remoteTimeline.state != .idle {
-				Text(remoteTimeline.state.title)
+				Text("State: \(remoteTimeline.state.title)")
 			}
 			FilteredHistoryView(history: remoteTimeline.timeline(for: date))
 				.onAppear {

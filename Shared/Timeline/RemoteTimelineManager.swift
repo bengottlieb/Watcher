@@ -54,7 +54,8 @@ class RemoteTimelineManager {
 	}
 	
 	func setAvailableDays(_ days: [Date], for device: NearbyDevice) {
-		timeline(for: device).setDates(days)
+		let timeline = timeline(for: device)
+		timeline.setDates(days)
 	}
 	
 	func setTimeline(_ entries: [Timeline.Entry], for device: NearbyDevice) {
