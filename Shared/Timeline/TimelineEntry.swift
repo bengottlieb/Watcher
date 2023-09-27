@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import Suite
 
 extension Timeline {
 	struct Entry: Codable, CustomStringConvertible, Comparable, Identifiable {
-		enum DateLabel: String, Codable { case time, date }
-		enum Special: String, Codable { case interruption, sleep, wake, powerOff }
+		enum DateLabel: String, RawCodable { case time, date }
+		enum Special: String, RawCodable { case interruption, sleep, wake, powerOff }
 		
 		var isTabEntry: Bool { tabURLs != nil }
 		var isAppEntry: Bool { bundleIDs != nil }
