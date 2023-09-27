@@ -19,14 +19,32 @@ class NearbyHost: NearbyMonitor {
 	var timeline: [Timeline.Entry] = []
 	var currentTimelineEntry: Timeline.Entry? { timeline.last }
 	var frontmostAppIdentifier: String? { currentTimelineEntry?.bundleIDs?.first }
+	weak var reconnectTimer: Timer?
+	var canRefresh: Bool { device != nil }
+	
+	override func deviceChanged() {
+		if device?.state == .provisioned, reconnectTimer != nil {
+			self.reconnectTimer?.invalidate()
+			self.isRefreshing = false
+		}
+		super.deviceChanged()
+	}
 	
 	func refresh() {
 		guard let device = device, !isRefreshing else { return }
 		
 		isRefreshing = true
 		
-		device.send(message: RequestStatusMessage()) {
-			self.isRefreshing = false
+		if device.state == .provisioned {
+			device.send(message: RequestStatusMessage()) {
+				self.isRefreshing = false
+			}
+		} else {
+			device.requestInfo()
+			reconnectTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
+				self.reconnectTimer = nil
+				self.isRefreshing = false
+			}
 		}
 	}
 	

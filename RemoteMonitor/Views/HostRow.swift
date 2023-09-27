@@ -27,8 +27,12 @@ struct HostRow: View {
 			VStack(alignment: .leading) {
 				Text(host.name)
 					.font(.title)
+				Text(host.machineName ?? "")
+					.font(.caption2)
+
 				Text(host.state.description)
-					.font(.body)
+					.font(.caption)
+					.opacity(0.5)
 				if let current = host.currentTimelineEntry {
 					Text(current.description)
 						.multilineTextAlignment(.leading)
@@ -41,14 +45,16 @@ struct HostRow: View {
 			
 			Spacer()
 			
-			if host.isRefreshing {
-				ProgressView()
-			} else {
-				Button(action: refresh) {
-					Image(.arrow_clockwise)
-						.padding()
+			if host.canRefresh {
+				if host.isRefreshing {
+					ProgressView()
+				} else {
+					Button(action: refresh) {
+						Image(.arrow_clockwise)
+							.padding()
+					}
+					.buttonStyle(.plain)
 				}
-				.buttonStyle(.plain)
 			}
 			
 		}

@@ -7,6 +7,7 @@
 
 import Foundation
 import Nearby
+import Combine
 
 class NearbyMonitor: Identifiable, ObservableObject, Codable {
 	enum CodingKeys: String, CodingKey { case deviceID, name, id, lastUpdatedAt }
@@ -19,6 +20,8 @@ class NearbyMonitor: Identifiable, ObservableObject, Codable {
 	var state: NearbyDevice.State = .disconnected
 	var id: String { deviceID }
 	var lastUpdatedAt: Date
+	var deviceUpdateCancellable: AnyCancellable?
+	var machineName: String? { device?.displayName }
 	
 	var connectedDevice: NearbyDevice? {
 		if let state = device?.state, state == .connected { return device }
@@ -31,6 +34,14 @@ class NearbyMonitor: Identifiable, ObservableObject, Codable {
 		deviceID = try container.decode(String.self, forKey: .deviceID)
 		name = try container.decode(String.self, forKey: .name)
 		lastUpdatedAt = try container.decode(Date.self, forKey: .lastUpdatedAt)
+		deviceUpdateCancellable = device?.objectWillChange
+			.sink { [weak self] _ in
+				self?.deviceChanged()
+			}
+	}
+	
+	func deviceChanged() {
+		objectWillChange.sendOnMain()
 	}
 	
 	func encode(to encoder: Encoder) throws {
