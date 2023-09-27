@@ -45,9 +45,19 @@ class OtherDevices {
 
 
 extension OtherDevices: NearbyMessageRouter {
-	func didDiscover(device: Nearby.NearbyDevice) {
+	func didProvision(device: Nearby.NearbyDevice) {
+		logg("Provisioned: \(device), \(device.role)")
 		if !seenDevices.contains(device.id) {
-			logg("Discovered: \(device), \(device.role)")
+			seenDevices.append(device.id)
+		}
+		if device.role == .host, role == .monitor {
+			device.send(message: RequestStatusMessage())
+		}
+	}
+	
+	func didDiscover(device: Nearby.NearbyDevice) {
+		logg("Discovered: \(device), \(device.role)")
+		if !seenDevices.contains(device.id) {
 			seenDevices.append(device.id)
 		}
 		if device.role == .host, role == .monitor {
