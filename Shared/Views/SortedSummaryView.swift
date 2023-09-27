@@ -54,7 +54,7 @@ extension Array where Element == Timeline.Summary {
 			switch order {
 			case .alpha: return s1.displayTitle < s2.displayTitle
 			case .duration: return s1.totalTime > s2.totalTime
-			case .chronologically: return s1.firstUse < s2.firstUse
+			case .chronologically: return s1.firstUse > s2.firstUse
 			}
 		}
 	}

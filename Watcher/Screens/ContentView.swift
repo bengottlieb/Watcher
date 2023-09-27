@@ -11,7 +11,7 @@ import Combine
 struct ContentView: View {
 	
 	var body: some View {
-		if #available(macOS 11.0, *) {
+		if #available(macOS 12.0, *) {
 			ScriptEditor()
 				.padding()
 		} else {

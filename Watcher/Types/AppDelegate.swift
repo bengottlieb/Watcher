@@ -12,7 +12,7 @@ import Suite
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 	override init() {
-		Logger.instance.prefix = "𐃂"
+		SuiteLogger.instance.prefix = "𐃂"
 		ScriptRunner.instance.setup()
 		ApplicationMonitor.instance.setup()
 		BrowserMonitor.instance.setup()

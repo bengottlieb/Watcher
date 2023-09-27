@@ -25,6 +25,9 @@ struct SummaryScreen: View {
 			timeline = Timeline.instance.timeline(for: date)
 		})
 		.frame(minWidth: 300, minHeight: 300)
+		.onReceive(Notifications.requestReload) { _ in
+			updateDate()
+		}
 	}
 	
 	func updateDate() {

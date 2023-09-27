@@ -10,6 +10,14 @@ import Combine
 import Suite
 import Nearby
 
+#if os(iOS)
+extension UIImage: @unchecked Sendable { }
+#endif
+
+#if os(macOS)
+extension NSImage: @unchecked Sendable { }
+#endif
+
 struct Keys {
 	static let deviceName = "name"
 	static let userName = "user"
@@ -24,8 +32,7 @@ class OtherDevices {
 	
 	func setup(mode: NearbyDevice.Role) {
 		self.role = mode
-		NotificationCenter.default.addObserver(self, selector: #selector(discoveredDevice), name: NearbyDevice.Notifications.deviceConnectedWithInfo, object: nil)
-		
+
 		NearbySession.instance.serviceType = "WatchSAI"
 		NearbySession.instance.localDeviceInfo = [
 			Keys.userName: NSUserName(),
@@ -34,22 +41,20 @@ class OtherDevices {
 		]
 		NearbySession.instance.startup(withRouter: self, application: .app)
 	}
-	
-	@objc func discoveredDevice(note: Notification) {
-		if let device = note.object as? NearbyDevice {
-			if !seenDevices.contains(device.id) {
-				logg("Discovered: \(device)")
-				seenDevices.append(device.id)
-			}
-			if device.role == .host, role == .monitor {
-				device.send(message: RequestStatusMessage())
-			}
-		}
-	}
 }
 
 
 extension OtherDevices: NearbyMessageRouter {
+	func didDiscover(device: Nearby.NearbyDevice) {
+		if !seenDevices.contains(device.id) {
+			logg("Discovered: \(device), \(device.role)")
+			seenDevices.append(device.id)
+		}
+		if device.role == .host, role == .monitor {
+			device.send(message: RequestStatusMessage())
+		}
+	}
+	
 	var fileID: String { #fileID }
 	func route(_ payload: NearbyMessagePayload, from device: NearbyDevice) -> NearbyMessage? {
 		if payload.modulelessClassName == String(describing: RequestStatusMessage.self), let message = try? payload.reconstitute(RequestStatusMessage.self) {
@@ -69,7 +74,7 @@ extension OtherDevices: NearbyMessageRouter {
 		
 		if payload.modulelessClassName == String(describing: TerminateMessage.self), let message = try? payload.reconstitute(TerminateMessage.self) {
 			
-			NearbySession.instance.shutdown()
+			Task { await NearbySession.instance.shutdown() }
 			
 			DispatchQueue.main.async() {
 				Notifications.willTerminate.notify()

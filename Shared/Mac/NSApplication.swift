@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import AppKit
 
 extension NSApplication {
 	@discardableResult public class func toggleDockIcon(showIcon: Bool) -> Bool {

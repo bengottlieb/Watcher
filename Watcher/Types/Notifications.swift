@@ -8,5 +8,6 @@
 import Foundation
 
 struct Notifications {
-  static let willTerminate = Notification.Name("Notifications.willTerminate")
+	static let willTerminate = Notification.Name("Notifications.willTerminate")
+	static let requestReload = Notification.Name("Timeline.requestReload")
 }

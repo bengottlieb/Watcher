@@ -10,10 +10,14 @@ import Nearby
 
 extension NearbySession {
 	var nearbyHosts: [NearbyDevice] {
-		connectedDevices.filter { $0.role == .host }
+		get async {
+			await connectedDevices.devices.filter { $0.role == .host }
+		}
 	}
 
 	var nearbyMonitors: [NearbyDevice] {
-		connectedDevices.filter { $0.role == .monitor }
+		get async {
+			await connectedDevices.devices.filter { $0.role == .monitor }
+		}
 	}
 }

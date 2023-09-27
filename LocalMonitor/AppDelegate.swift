@@ -19,13 +19,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	func showSummary() {
 		if summaryWindow == nil { summaryWindow = SummaryWindowController(date: Date()) }
-		
+
+		NSApp.activate(ignoringOtherApps: true)
 		summaryWindow?.showWindow(nil)
+		summaryWindow?.window?.makeKeyAndOrderFront(nil)
+		summaryWindow?.window?.orderFrontRegardless()
+		Notifications.requestReload.notify()
 	}
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		// Create the SwiftUI view that provides the window contents.
-		Logger.instance.prefix = "𐃂"
+		SuiteLogger.instance.prefix = "𐃂"
 		MenuItem.instance.setup()
 	//	NSApplication.toggleDockIcon(showIcon: false)
 	//	showSummary()

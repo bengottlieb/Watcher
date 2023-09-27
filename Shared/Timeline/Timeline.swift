@@ -54,7 +54,9 @@ class Timeline: ObservableObject {
 		let filename = Constants.timelineDirectory.appendingPathComponent(formatter.string(from: date) + ".txt")
 		do {
 			let data = try Data(contentsOf: filename)
-			return try JSONDecoder().decode([Entry].self, from: data)
+			let entries = try JSONDecoder().decode([Entry].self, from: data)
+			print("Loaded \(entries.count)")
+			return entries
 		} catch {
 			logg(error: error, "Failed to load in timeline from \(filename)")
 			return []

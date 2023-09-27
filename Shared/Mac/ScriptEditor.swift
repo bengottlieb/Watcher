@@ -9,7 +9,7 @@ import SwiftUI
 import Suite
 import Combine
 
-@available(macOS 11.0, *)
+@available(macOS 12.0, *)
 @MainActor struct ScriptEditor: View {
 	@State var cancellables = Set<AnyCancellable>()
 	@State var scriptCancellable: AnyCancellable?
@@ -64,7 +64,7 @@ import Combine
 	}
 }
 
-@available(macOS 11.0, *)
+@available(macOS 12.0, *)
 struct ScriptEditor_Previews: PreviewProvider {
     static var previews: some View {
         ScriptEditor()
