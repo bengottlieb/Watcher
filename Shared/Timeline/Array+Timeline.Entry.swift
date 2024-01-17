@@ -10,10 +10,13 @@ import Foundation
 extension Array where Element == Timeline.Entry {
 	static func load(from url: URL?) throws -> [Element] {
 		guard let url = url else { return [] }
-		let data = try Data(contentsOf: url)
-		let items = try JSONDecoder().decode([Element].self, from: data)
-		
-		return items.cleanup()
+		if let data = try? Data(contentsOf: url) {
+			let items = try JSONDecoder().decode([Element].self, from: data)
+			
+			return items.cleanup()
+		} else {
+			return []
+		}
 	}
 	
 	func browserKind(at index: Int) -> BrowserKind? {

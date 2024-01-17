@@ -51,7 +51,7 @@ class BrowserMonitor: NSObject {
 			guard NSRunningApplication.isRunning(browser: .chrome) else { return [] }
 			do {
 				let string = try await ScriptRunner.instance.run(command: .chromeAllCurrentTabs)
-				return string.components(separatedBy: ",").compactMap { BrowserURL($0, .safari) }
+				return string.components(separatedBy: ",").compactMap { BrowserURL($0, .chrome) }
 			} catch {
 				return []
 			}
