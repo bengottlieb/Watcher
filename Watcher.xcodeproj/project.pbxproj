@@ -20,6 +20,9 @@
 		B534F7A327AB38B0004F174C /* KnownApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534F773279F9C3B004F174C /* KnownApps.swift */; };
 		B534F7A527ACA367004F174C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534F7A427ACA367004F174C /* Settings.swift */; };
 		B534F7A627ACCC8C004F174C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534F7A427ACA367004F174C /* Settings.swift */; };
+		B55221B12C19C11E0073BB9B /* Convey in Frameworks */ = {isa = PBXBuildFile; productRef = B55221B02C19C11E0073BB9B /* Convey */; };
+		B55221B32C19C1310073BB9B /* Convey in Frameworks */ = {isa = PBXBuildFile; productRef = B55221B22C19C1310073BB9B /* Convey */; };
+		B55221B52C1A09F30073BB9B /* Convey in Frameworks */ = {isa = PBXBuildFile; productRef = B55221B42C1A09F30073BB9B /* Convey */; };
 		B5585832264A8D4100A91281 /* ScriptRunner.Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585831264A8D4100A91281 /* ScriptRunner.Command.swift */; };
 		B5585837264A991E00A91281 /* Nearby in Frameworks */ = {isa = PBXBuildFile; productRef = B5585836264A991E00A91281 /* Nearby */; };
 		B5585839264BDCFE00A91281 /* ApplicationMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585838264BDCFE00A91281 /* ApplicationMonitor.swift */; };
@@ -257,6 +260,7 @@
 			files = (
 				B5E92AB229060A2000F303B5 /* Suite in Frameworks */,
 				B5E92AB429060A3700F303B5 /* Nearby in Frameworks */,
+				B55221B52C1A09F30073BB9B /* Convey in Frameworks */,
 				B5E92AB629060A5300F303B5 /* CrossPlatformKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +271,7 @@
 			files = (
 				B5872B8C264A1717001755F6 /* Suite in Frameworks */,
 				B5585837264A991E00A91281 /* Nearby in Frameworks */,
+				B55221B12C19C11E0073BB9B /* Convey in Frameworks */,
 				B5872BC4264CC20D001755F6 /* CrossPlatformKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +280,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B55221B32C19C1310073BB9B /* Convey in Frameworks */,
 				B5872BB2264C7F5A001755F6 /* Suite in Frameworks */,
 				B5872BB4264C7F62001755F6 /* Nearby in Frameworks */,
 			);
@@ -587,6 +593,7 @@
 				B5E92AB129060A2000F303B5 /* Suite */,
 				B5E92AB329060A3700F303B5 /* Nearby */,
 				B5E92AB529060A5300F303B5 /* CrossPlatformKit */,
+				B55221B42C1A09F30073BB9B /* Convey */,
 			);
 			productName = LocalWatcher;
 			productReference = B578F00B290417E800C19E46 /* LocalMonitor.app */;
@@ -609,6 +616,7 @@
 				B5872B8B264A1717001755F6 /* Suite */,
 				B5585836264A991E00A91281 /* Nearby */,
 				B5872BC3264CC20D001755F6 /* CrossPlatformKit */,
+				B55221B02C19C11E0073BB9B /* Convey */,
 			);
 			productName = Watcher;
 			productReference = B5872B72264A16E8001755F6 /* spuD.app */;
@@ -630,6 +638,7 @@
 			packageProductDependencies = (
 				B5872BB1264C7F5A001755F6 /* Suite */,
 				B5872BB3264C7F62001755F6 /* Nearby */,
+				B55221B22C19C1310073BB9B /* Convey */,
 			);
 			productName = Monitor;
 			productReference = B5872B9C264C7F3F001755F6 /* RemoteMonitor.app */;
@@ -668,6 +677,7 @@
 				B5872B8A264A1717001755F6 /* XCRemoteSwiftPackageReference "suite" */,
 				B5585835264A991E00A91281 /* XCRemoteSwiftPackageReference "nearby" */,
 				B5872BC2264CC20D001755F6 /* XCRemoteSwiftPackageReference "CrossPlatformKit" */,
+				B55221AF2C19C11E0073BB9B /* XCRemoteSwiftPackageReference "convey" */,
 			);
 			productRefGroup = B5872B73264A16E8001755F6 /* Products */;
 			projectDirPath = "";
@@ -1234,9 +1244,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B55221AF2C19C11E0073BB9B /* XCRemoteSwiftPackageReference "convey" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bengottlieb/convey";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.30;
+			};
+		};
 		B5585835264A991E00A91281 /* XCRemoteSwiftPackageReference "nearby" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/bengottlieb/nearby";
+			repositoryURL = "https://github.com/ios-tooling/nearby";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.9.7;
@@ -1244,7 +1262,7 @@
 		};
 		B5872B8A264A1717001755F6 /* XCRemoteSwiftPackageReference "suite" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/bengottlieb/suite";
+			repositoryURL = "https://github.com/ios-tooling/suite";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.8;
@@ -1252,7 +1270,7 @@
 		};
 		B5872BC2264CC20D001755F6 /* XCRemoteSwiftPackageReference "CrossPlatformKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/bengottlieb/CrossPlatformKit";
+			repositoryURL = "https://github.com/ios-tooling/CrossPlatformKit";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.9;
@@ -1261,6 +1279,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B55221B02C19C11E0073BB9B /* Convey */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B55221AF2C19C11E0073BB9B /* XCRemoteSwiftPackageReference "convey" */;
+			productName = Convey;
+		};
+		B55221B22C19C1310073BB9B /* Convey */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B55221AF2C19C11E0073BB9B /* XCRemoteSwiftPackageReference "convey" */;
+			productName = Convey;
+		};
+		B55221B42C1A09F30073BB9B /* Convey */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B55221AF2C19C11E0073BB9B /* XCRemoteSwiftPackageReference "convey" */;
+			productName = Convey;
+		};
 		B5585836264A991E00A91281 /* Nearby */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B5585835264A991E00A91281 /* XCRemoteSwiftPackageReference "nearby" */;

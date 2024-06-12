@@ -9,10 +9,11 @@ import Combine
 import CrossPlatformKit
 import Suite
 import Nearby
+import Convey
 
 extension IconImagesCache {
 	func fetchRemoteImage(for identifier: String, from device: NearbyDevice) async throws -> UXImage {
-		if let image = ImageCache.instance.cachedValue(for: identifier.identifierImageURL) {
+		if let image = ImageCache.instance.fetchLocalImage(for: identifier.identifierImageURL) {
 			return image
 		}
 		

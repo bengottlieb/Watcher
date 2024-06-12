@@ -12,7 +12,7 @@ import Suite
 class NearbyHost: NearbyMonitor {
 	var isRefreshing = false { didSet {
 		if isRefreshing == oldValue { return }
-		Suite.logg("\(isRefreshing ? "Currently" : "Finished") refreshing \(device?.name ?? "--")")
+		Suite.logg("\(self.isRefreshing ? "Currently" : "Finished") refreshing \(self.device?.name ?? "--")")
 		self.objectWillChange.sendOnMain()
 	}}
 	

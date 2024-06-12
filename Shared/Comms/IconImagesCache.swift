@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import CrossPlatformKit
 import Suite
+import Convey
 
 public actor IconImagesCache {
 	static let instance = IconImagesCache()
@@ -16,11 +17,11 @@ public actor IconImagesCache {
 	enum ImageError: Error { case noImageAvailable }
 	var pendingRequests: [String: [(Result<UXImage, Error>) -> Void]] = [:]
 	
-	func store(image: UXImage?, for identifier: String) {
+	func store(image: UXImage?, for identifier: String) async {
 		var result: Result<UXImage, Error>
 		
 		if let image {
-			ImageCache.instance.store(image, for: identifier.identifierImageURL)
+			await ImageCache.instance.store(image: image, for: identifier.identifierImageURL)
 			result = .success(image)
 		} else {
 			result = .failure(ImageError.noImageAvailable)
