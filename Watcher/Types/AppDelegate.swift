@@ -8,14 +8,17 @@
 import Cocoa
 import SwiftUI
 import Suite
+import Survey
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 	override init() {
 		SuiteLogger.instance.prefix = "𐃂"
-		ScriptRunner.instance.setup()
-		ApplicationMonitor.instance.setup()
-		BrowserMonitor.instance.setup()
+		
+		Task {
+			await Surveyor.instance.setup()
+		}
+		
 		OtherDevices.instance.setup(mode: .host)
 	}
 	

@@ -31,7 +31,7 @@ class BrowserMonitor: NSObject {
 		async let opera = operaFrontTabs
 		
 		let tabs = await safari + chrome + opera
-		Timeline.instance.logCurrent(urls: tabs.compactMap { $0 })
+		//Timeline.instance.logCurrent(urls: tabs.compactMap { $0 })
 	}
 	
 	var safariFrontTabs: [BrowserURL] {

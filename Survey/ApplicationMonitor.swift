@@ -21,7 +21,7 @@ class ApplicationMonitor: NSObject {
 	}
 	
 	func process(application: NSRunningApplication?) {
-		Timeline.instance.switched(to: application?.bundleIdentifier)
+		//Timeline.instance.switched(to: application?.bundleIdentifier)
 	}
 	
 	@objc func didActivateApplication(_ note: Notification) {
@@ -33,15 +33,15 @@ class ApplicationMonitor: NSObject {
 	}
 	
 	@objc func didWake(_ note: Notification) {
-    Timeline.instance.record(special: .wake)
+    //Timeline.instance.record(special: .wake)
 	}
 	
 	@objc func willSleep(_ note: Notification) {
-    Timeline.instance.record(special: .sleep)
+    //Timeline.instance.record(special: .sleep)
 	}
 	
 	@objc func willPowerOff(_ note: Notification) {
-    Timeline.instance.record(special: .powerOff)
+    //Timeline.instance.record(special: .powerOff)
 	}
 
 	
