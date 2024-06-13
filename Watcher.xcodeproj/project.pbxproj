@@ -23,7 +23,6 @@
 		B55221B12C19C11E0073BB9B /* Convey in Frameworks */ = {isa = PBXBuildFile; productRef = B55221B02C19C11E0073BB9B /* Convey */; };
 		B55221B32C19C1310073BB9B /* Convey in Frameworks */ = {isa = PBXBuildFile; productRef = B55221B22C19C1310073BB9B /* Convey */; };
 		B55221B52C1A09F30073BB9B /* Convey in Frameworks */ = {isa = PBXBuildFile; productRef = B55221B42C1A09F30073BB9B /* Convey */; };
-		B55221BE2C1B144C0073BB9B /* Survey.h in Headers */ = {isa = PBXBuildFile; fileRef = B55221BD2C1B144C0073BB9B /* Survey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B55221C12C1B144C0073BB9B /* Survey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55221BB2C1B144C0073BB9B /* Survey.framework */; };
 		B55221C22C1B144C0073BB9B /* Survey.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B55221BB2C1B144C0073BB9B /* Survey.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B55221C72C1B146C0073BB9B /* BrowserKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585844264BE68E00A91281 /* BrowserKind.swift */; };
@@ -36,6 +35,7 @@
 		B55221D02C1B14FA0073BB9B /* Suite in Frameworks */ = {isa = PBXBuildFile; productRef = B55221CF2C1B14FA0073BB9B /* Suite */; };
 		B55221D12C1B166E0073BB9B /* Process+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5872B88264A16FC001755F6 /* Process+Extensions.swift */; };
 		B55221D22C1B166E0073BB9B /* NSRunningApplication+Browsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558583A264BDE4400A91281 /* NSRunningApplication+Browsers.swift */; };
+		B55221D62C1B26C30073BB9B /* SurveyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55221D52C1B26C30073BB9B /* SurveyEvent.swift */; };
 		B5585837264A991E00A91281 /* Nearby in Frameworks */ = {isa = PBXBuildFile; productRef = B5585836264A991E00A91281 /* Nearby */; };
 		B5585841264BE03900A91281 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585840264BE03900A91281 /* Timeline.swift */; };
 		B5585847264D307700A91281 /* HostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585846264D307700A91281 /* HostListView.swift */; };
@@ -193,8 +193,8 @@
 		B534F773279F9C3B004F174C /* KnownApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownApps.swift; sourceTree = "<group>"; };
 		B534F7A427ACA367004F174C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B55221BB2C1B144C0073BB9B /* Survey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Survey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B55221BD2C1B144C0073BB9B /* Survey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Survey.h; sourceTree = "<group>"; };
 		B55221CB2C1B14900073BB9B /* Surveyor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Surveyor.swift; sourceTree = "<group>"; };
+		B55221D52C1B26C30073BB9B /* SurveyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyEvent.swift; sourceTree = "<group>"; };
 		B5585831264A8D4100A91281 /* ScriptRunner.Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptRunner.Command.swift; sourceTree = "<group>"; };
 		B5585833264A8F5F00A91281 /* ScriptEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptEditor.swift; sourceTree = "<group>"; };
 		B5585838264BDCFE00A91281 /* ApplicationMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationMonitor.swift; sourceTree = "<group>"; };
@@ -336,17 +336,33 @@
 		B55221BC2C1B144C0073BB9B /* Survey */ = {
 			isa = PBXGroup;
 			children = (
-				B558583F264BE01600A91281 /* Script Runner */,
-				B5585838264BDCFE00A91281 /* ApplicationMonitor.swift */,
 				B55221CB2C1B14900073BB9B /* Surveyor.swift */,
+				B55221D52C1B26C30073BB9B /* SurveyEvent.swift */,
+				B558583F264BE01600A91281 /* Script Runner */,
+				B55221D32C1B1EEA0073BB9B /* Monitors */,
+				B55221D42C1B1EF50073BB9B /* Extensions */,
+			);
+			path = Survey;
+			sourceTree = "<group>";
+		};
+		B55221D32C1B1EEA0073BB9B /* Monitors */ = {
+			isa = PBXGroup;
+			children = (
+				B5585838264BDCFE00A91281 /* ApplicationMonitor.swift */,
 				B5585842264BE5F000A91281 /* BrowserMonitor.swift */,
 				B5872B91264BF25F001755F6 /* BrowserURL.swift */,
 				B5585844264BE68E00A91281 /* BrowserKind.swift */,
+			);
+			path = Monitors;
+			sourceTree = "<group>";
+		};
+		B55221D42C1B1EF50073BB9B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
 				B558583A264BDE4400A91281 /* NSRunningApplication+Browsers.swift */,
 				B5872B88264A16FC001755F6 /* Process+Extensions.swift */,
-				B55221BD2C1B144C0073BB9B /* Survey.h */,
 			);
-			path = Survey;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		B558583C264BE00000A91281 /* Types */ = {
@@ -623,7 +639,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B55221BE2C1B144C0073BB9B /* Survey.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -828,6 +843,7 @@
 			files = (
 				B55221CE2C1B14D40073BB9B /* ScriptRunner.Command.swift in Sources */,
 				B55221CD2C1B14CF0073BB9B /* ScriptRunner.swift in Sources */,
+				B55221D62C1B26C30073BB9B /* SurveyEvent.swift in Sources */,
 				B55221C72C1B146C0073BB9B /* BrowserKind.swift in Sources */,
 				B55221C82C1B146C0073BB9B /* ApplicationMonitor.swift in Sources */,
 				B55221C92C1B146C0073BB9B /* BrowserURL.swift in Sources */,
