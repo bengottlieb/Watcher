@@ -41,7 +41,7 @@ struct SortedSummaryView: View {
 			.pickerStyle(.segmented)
 			.padding()
 			ScrollView() {
-				SummaryView(summaries: summaries.sorted(by: sortOrder), selectedIdentifier: $selectedIdentifier)
+				SummaryView(timeline: timeline, summaries: summaries.sorted(by: sortOrder), selectedIdentifier: $selectedIdentifier)
 					.padding(.horizontal)
 			}
 		}

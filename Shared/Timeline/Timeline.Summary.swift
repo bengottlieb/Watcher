@@ -35,6 +35,16 @@ extension Timeline.Entry {
 
 
 extension Array where Element == Timeline.Entry {
+	var allURLs: [URL] {
+		let all = flatMap { $0.tabURLs?.map { $0.url } ?? [] }
+		return all.removingDuplicates()
+	}
+	
+	var allRootURLs: [URL] {
+		let all = flatMap { $0.tabURLs?.compactMap { $0.url.hostOnlyURL } ?? [] }
+		return all.removingDuplicates()
+	}
+	
 	var summary: [Timeline.Summary] {
 		guard count > 1 else { return [] }
 		var results: [Timeline.Summary] = []
@@ -53,5 +63,17 @@ extension Array where Element == Timeline.Entry {
 		}
 		
 		return results
+	}
+}
+
+extension URL {
+	var hostOnlyURL: URL {
+		let components = URLComponents(url: self, resolvingAgainstBaseURL: true)
+		
+		if let host = components?.host, let scheme = components?.scheme {
+			return URL(string: scheme + "://" + host) ?? self
+		}
+		
+		return self
 	}
 }
