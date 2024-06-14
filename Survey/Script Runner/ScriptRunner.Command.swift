@@ -16,7 +16,6 @@ extension ScriptRunner {
 		case chromeCurrentTab = "Current Tab for Chrome", chromeAllFrontWindowTabs = "All Front Tabs for Chrome", chromeAllCurrentTabs = "All Visible Tabs for Chrome", chromeAllTabs = "All Tabs for Chrome"
 
 		case operaCurrentTab = "Current Tab for Opera", operaAllFrontWindowTabs = "All Tabs for Opera", operaAllCurrentTabs = "All Visible Tabs for Opera"
-
 		
 		public var script: String {
 			switch self {

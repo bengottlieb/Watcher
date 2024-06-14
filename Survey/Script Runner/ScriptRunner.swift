@@ -36,7 +36,7 @@ public class ScriptRunner {
 	public var osascriptPath: String?
 	
 	public func runForData(script: String) async throws -> Data {
-		try await Process(path: loadOSAScript(), arguments: ["-e", "\(script)"]).run()
+		try await Process(path: loadOSAScript(), arguments: ["-e", "\(script)", "-ss"]).run()
 	}
 	
 	public func run(script: String) async throws -> String {

@@ -49,6 +49,7 @@
 		B5585854264D3C8700A91281 /* NearbyMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585852264D3C8700A91281 /* NearbyMonitorManager.swift */; };
 		B5585856264D3CD300A91281 /* NearbyMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585855264D3CD300A91281 /* NearbyMonitor.swift */; };
 		B5585857264D3CD300A91281 /* NearbyMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5585855264D3CD300A91281 /* NearbyMonitor.swift */; };
+		B55FB2772C1C81AB00B9BAB6 /* BrowserTabInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55FB2762C1C81AB00B9BAB6 /* BrowserTabInformation.swift */; };
 		B578F010290417E800C19E46 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578F00F290417E800C19E46 /* ContentView.swift */; };
 		B578F012290417E900C19E46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B578F011290417E900C19E46 /* Assets.xcassets */; };
 		B578F01B2904195700C19E46 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578F01A2904195700C19E46 /* Constants.swift */; };
@@ -208,6 +209,7 @@
 		B558584F264D38B800A91281 /* NearbyHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyHost.swift; sourceTree = "<group>"; };
 		B5585852264D3C8700A91281 /* NearbyMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyMonitorManager.swift; sourceTree = "<group>"; };
 		B5585855264D3CD300A91281 /* NearbyMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyMonitor.swift; sourceTree = "<group>"; };
+		B55FB2762C1C81AB00B9BAB6 /* BrowserTabInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserTabInformation.swift; sourceTree = "<group>"; };
 		B578F00B290417E800C19E46 /* LocalMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B578F00F290417E800C19E46 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B578F011290417E900C19E46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 			children = (
 				B55221CB2C1B14900073BB9B /* Surveyor.swift */,
 				B55221D52C1B26C30073BB9B /* SurveyEvent.swift */,
+				B55FB2762C1C81AB00B9BAB6 /* BrowserTabInformation.swift */,
 				B558583F264BE01600A91281 /* Script Runner */,
 				B55221D32C1B1EEA0073BB9B /* Monitors */,
 				B55221D42C1B1EF50073BB9B /* Extensions */,
@@ -849,6 +852,7 @@
 				B55221C92C1B146C0073BB9B /* BrowserURL.swift in Sources */,
 				B55221D12C1B166E0073BB9B /* Process+Extensions.swift in Sources */,
 				B55221CA2C1B146C0073BB9B /* BrowserMonitor.swift in Sources */,
+				B55FB2772C1C81AB00B9BAB6 /* BrowserTabInformation.swift in Sources */,
 				B55221D22C1B166E0073BB9B /* NSRunningApplication+Browsers.swift in Sources */,
 				B55221CC2C1B14900073BB9B /* Surveyor.swift in Sources */,
 			);
