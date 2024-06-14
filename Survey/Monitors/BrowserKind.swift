@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum BrowserKind: Int, CaseIterable, Codable, Comparable, Hashable { case safari, chrome, opera
-	var bundleIdentifier: String {
+public enum BrowserKind: Int, CaseIterable, Codable, Comparable, Hashable { case safari, chrome, opera
+	public var bundleIdentifier: String {
 		switch self {
 		case .chrome: return "com.google.Chrome"
 		case .safari: return "com.apple.Safari"
@@ -16,11 +16,11 @@ enum BrowserKind: Int, CaseIterable, Codable, Comparable, Hashable { case safari
 		}
 	}
 	
-	static func <(lhs: BrowserKind, rhs: BrowserKind) -> Bool {
+	public static func <(lhs: BrowserKind, rhs: BrowserKind) -> Bool {
 		lhs.rawValue < rhs.rawValue
 	}
 	
-	var imageName: String {
+	public var imageName: String {
 		switch self {
 		case .safari: return "safari_icon"
 		case .chrome: return "chrome_icon"
@@ -28,7 +28,7 @@ enum BrowserKind: Int, CaseIterable, Codable, Comparable, Hashable { case safari
 		}
 	}
 	
-	var abbreviation: String {
+	public var abbreviation: String {
 		switch self {
 		case .safari: return "S"
 		case .chrome: return "G"

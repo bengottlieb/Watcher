@@ -8,6 +8,7 @@
 import SwiftUI
 import Suite
 import Combine
+import Survey
 
 @available(macOS 12.0, *)
 @MainActor struct ScriptEditor: View {

@@ -8,24 +8,24 @@
 import Foundation
 import Suite
 
-struct BrowserURL: Codable, Comparable, Equatable, CustomStringConvertible, Hashable, Identifiable {
-  let url: URL
-  let browser: BrowserKind
-	let title: String?
-	var id: String { url.absoluteString + "\(browser.rawValue)" }
-	static let ignoreThese: [String] = ["chrome://newtab/", "favorites://"] 
+public struct BrowserURL: Codable, Comparable, Equatable, CustomStringConvertible, Hashable, Identifiable {
+	public let url: URL
+	public let browser: BrowserKind
+	public let title: String?
+	public var id: String { url.absoluteString + "\(browser.rawValue)" }
+	public static let ignoreThese: [String] = ["chrome://newtab/", "favorites://"]
   
-	func hash(into hasher: inout Hasher) {
+	public func hash(into hasher: inout Hasher) {
 		url.hash(into: &hasher)
 		browser.hash(into: &hasher)
 	}
-  var host: String? { url.host }
+	public var host: String? { url.host }
   
-  var description: String {
+	public var description: String {
     "\(browser.abbreviation): \(host ?? url.absoluteString)"
   }
 
-  static func <(lhs: BrowserURL, rhs: BrowserURL) -> Bool {
+	public static func <(lhs: BrowserURL, rhs: BrowserURL) -> Bool {
     if lhs.browser != rhs.browser { return lhs.browser < rhs.browser }
     return lhs.url.absoluteString < rhs.url.absoluteString
   }

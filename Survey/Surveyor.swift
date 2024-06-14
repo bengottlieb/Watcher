@@ -15,5 +15,8 @@ public actor Surveyor {
 		ApplicationMonitor.instance.setup()
 		BrowserMonitor.instance.setup()
 	}
-	
+
+	nonisolated public func updateBrowserTabs() {
+		
+	}
 }

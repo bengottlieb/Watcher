@@ -6,6 +6,7 @@
 //
 
 import Suite
+import Survey
 
 class Timeline: ObservableObject {
 	static let instance = Timeline()
@@ -29,7 +30,7 @@ class Timeline: ObservableObject {
 		}
 #if os(macOS)
 		if Constants.isObserving {
-			Task { await BrowserMonitor.instance.checkTabs() }
+			Task { await Surveyor.instance.updateBrowserTabs() }
 		}
 #endif
 		Notifications.willTerminate.watch(self, message: #selector(save))
@@ -82,9 +83,9 @@ class Timeline: ObservableObject {
 		addEntry(Entry(for: id))
 	}
 	
-	func logCurrent(urls: [BrowserURL]) {
-		addEntry(Entry(with: urls))
-	}
+//	func logCurrent(urls: [BrowserURL]) {
+//		addEntry(Entry(with: urls))
+//	}
 	
 	func addEntry(_ entry: Entry) {
 		queue.async {

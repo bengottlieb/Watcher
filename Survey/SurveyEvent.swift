@@ -7,12 +7,22 @@
 
 import Foundation
 
+public struct ApplicationInformation: Codable {
+	public let identifier: String
+}
+
+public struct BrowserTabInformation: Codable {
+	public let url: URL
+	public let title: String?
+}
+
 public enum SurveyEvent {
-	case appLaunched(String)
-	case appBroughtToFront(String)
-	case appQuit(String)
+	case activeApps([ApplicationInformation])
+	case appLaunched(ApplicationInformation)
+	case appBroughtToFront(ApplicationInformation)
+	case appQuit(ApplicationInformation)
 	
-	case browserTabOpened(URL, String?)
-	case browserTabBroughtToFront(URL)
-	case browserTabClosed(URL)
+	case browserTabOpened(BrowserTabInformation)
+	case browserTabBroughtToFront(BrowserTabInformation)
+	case browserTabClosed(BrowserTabInformation)
 }

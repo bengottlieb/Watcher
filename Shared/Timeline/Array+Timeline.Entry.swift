@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Survey
 
 extension Array where Element == Timeline.Entry {
 	static func load(from url: URL?) throws -> [Element] {

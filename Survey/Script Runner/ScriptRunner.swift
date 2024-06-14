@@ -9,15 +9,15 @@ import Foundation
 import Combine
 import Suite
 
-class ScriptRunner {	
-	static let instance = ScriptRunner()
+public class ScriptRunner {
+	public static let instance = ScriptRunner()
 	enum ScriptError: Error { case noOSAScriptFound, unableToDecodeString }
 	
 	var cancellables = Set<AnyCancellable>()
 	init() {
 	}
 	
-	func loadOSAScript() async throws -> String {
+	public func loadOSAScript() async throws -> String {
 		if let osascriptPath { return osascriptPath }
 		do {
 			let path = try await Process.which("osascript")
@@ -30,18 +30,20 @@ class ScriptRunner {
 		}
 	}
 	
-	func setup() {
+	public func setup() {
 		
 	}
-	var osascriptPath: String?
+	public var osascriptPath: String?
 	
-	func runForData(script: String) async throws -> Data {
+	public func runForData(script: String) async throws -> Data {
 		try await Process(path: loadOSAScript(), arguments: ["-e", "\(script)"]).run()
 	}
 	
-	func run(script: String) async throws -> String {
+	public func run(script: String) async throws -> String {
 		let data = try await runForData(script: script)
-		if let string = String(data: data, encoding: .utf8) { return string }
+		if let string = String(data: data, encoding: .utf8) { 
+			return string
+		}
 		throw ScriptError.unableToDecodeString
 	}
 	

@@ -7,6 +7,7 @@
 
 import Foundation
 import Suite
+import Survey
 
 extension Timeline {
 	struct Entry: Codable, CustomStringConvertible, Comparable, Identifiable {
