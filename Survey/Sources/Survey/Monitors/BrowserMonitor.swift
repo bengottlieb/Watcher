@@ -14,7 +14,7 @@ class BrowserMonitor: NSObject {
 	var initialState: BrowserState?
 	var lastState: BrowserState?
 	
-	@MainActor var checkInterval: TimeInterval = 5 { didSet { setup() }}
+	@MainActor var checkInterval: TimeInterval = 1 { didSet { setup() }}
 	private weak var checkTimer: Timer?
 	private var cancellables = Set<AnyCancellable>()
 	
@@ -29,16 +29,18 @@ class BrowserMonitor: NSObject {
 	
 	var currentState: BrowserState {
 		get async throws {
+			let start = Date()
 			async let safariAll = try ScriptRunner.instance.fetchTabs(for: .safariAllTabs)
-//			async let chromeAll = try ScriptRunner.instance.fetchTabs(for: .chromeAllTabs)
-//			async let operaAll = try ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
+			async let chromeAll = try ScriptRunner.instance.fetchTabs(for: .chromeAllTabs)
+			async let operaAll = try ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
 
 			async let safariVisible = try ScriptRunner.instance.fetchTabs(for: .safariAllVisibleTabs)
-//			async let chromeVisible = try ScriptRunner.instance.fetchTabs(for: .chromeAllVisibleTabs)
-//			async let operaVisible = try ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
+			async let chromeVisible = try ScriptRunner.instance.fetchTabs(for: .chromeAllVisibleTabs)
+			async let operaVisible = try ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
 
-			let all = try await safariAll// + chrome + opera
-			let visible = try await safariVisible// + chrome + opera
+			let (all, visible) = (try await (safariAll + chromeAll + operaAll), try await safariVisible + chromeVisible + operaVisible)
+		//	let visible = try await safariVisible// + chrome + opera
+			print("Took \(abs(start.timeIntervalSinceNow)) sec")
 			return BrowserState(all: all, visible: visible)
 		}
 	}

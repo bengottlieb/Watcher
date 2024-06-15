@@ -30,6 +30,12 @@ public struct BrowserTabCollection: Codable {
 		
 		return .init(opened: opened, closed: closed)
 	}
+	
+	public static func +(lhs: Self, rhs: Self) -> Self {
+		BrowserTabCollection(tabs: lhs.tabs.union(rhs.tabs))
+	}
+	
+	public static let empty = BrowserTabCollection(tabs: [])
 }
 
 
