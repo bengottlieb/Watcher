@@ -8,16 +8,21 @@
 import Foundation
 import Cocoa
 
+
 @MainActor class RunningApplicationMonitor: NSObject {
 	static let instance = RunningApplicationMonitor()
 	
 	var initialState: RunningApplicationState!
 	var lastState: RunningApplicationState!
+	weak var delegate: RecordedEventDelegate!
 	
 	// NSWorkspace.shared.frontmostApplication?.localizedName
-	func setup() {
+	func setup(delegate: RecordedEventDelegate) {
 		initialState = .current
 		lastState = .current
+		
+		self.delegate = delegate
+		delegate.receivedEvents([.applicationEvent(.initialState(.current), Date())])
 		
 		NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(didActivateApplication), name: NSWorkspace.didActivateApplicationNotification, object: nil)
 		NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(didLaunchApplication), name: NSWorkspace.didLaunchApplicationNotification, object: nil)
@@ -33,6 +38,7 @@ import Cocoa
 		let diff = newState.diffs(since: lastState)
 		if !diff.isEmpty {
 			self.lastState = newState
+			delegate.receivedEvents(diff.events)
 		}
 
 	}

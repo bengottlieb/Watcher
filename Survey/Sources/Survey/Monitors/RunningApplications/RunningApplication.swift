@@ -8,9 +8,10 @@
 import Foundation
 import Cocoa
 
-public struct RunningApplication: Codable, Hashable {
-	let identifier: String
-	let name: String
+public struct RunningApplication: Codable, Hashable, Identifiable {
+	public var id: String { identifier }
+	public let identifier: String
+	public let name: String
 }
 
 extension RunningApplication {

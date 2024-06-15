@@ -30,7 +30,7 @@ class Timeline: ObservableObject {
 		}
 #if os(macOS)
 		if Constants.isObserving {
-			Task { Surveyor.instance.updateBrowserTabs() }
+//			Task { Surveyor.instance.updateBrowserTabs() }
 		}
 #endif
 		Notifications.willTerminate.watch(self, message: #selector(save))

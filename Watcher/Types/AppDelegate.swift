@@ -17,6 +17,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		Task {
 			await Surveyor.instance.setup()
+
+			var sequence = await Surveyor.instance.recordedEvents().makeAsyncIterator()
+			while let event = await sequence.next() {
+				
+				print(event.description)
+			}
 		}
 		
 		if !CommandLine.bool(for: "disableNearby") {

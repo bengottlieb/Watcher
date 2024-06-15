@@ -14,17 +14,27 @@ class BrowserMonitor: NSObject {
 	var initialState: BrowserState?
 	var lastState: BrowserState?
 	
-	@MainActor var checkInterval: TimeInterval = 1 { didSet { Task { await setup() }}}
+	@MainActor var checkInterval: TimeInterval = 1 { didSet { Task { setupTimer() }}}
 	private weak var checkTimer: Timer?
 	private var cancellables = Set<AnyCancellable>()
+	weak var delegate: RecordedEventDelegate!
 	
-	@MainActor func setup() async {
+	@MainActor func setup(delegate: RecordedEventDelegate) async {
+		setupTimer()
+		await update()
+		self.delegate = delegate
+
+		if let initialState {
+			delegate.receivedEvents([.browserEvent(.initialState(initialState), Date())])
+		}
+	}
+	
+	@MainActor func setupTimer() {
 		checkTimer?.invalidate()
 		checkTimer = Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true, block: { [weak self] _ in
 			guard let self else { return }
 			Task { await self.update() }
 		})
-		await update()
 	}
 	
 	var currentState: BrowserState {
@@ -54,7 +64,7 @@ class BrowserMonitor: NSObject {
 			let diff = newState.diffs(since: lastState)
 			if !diff.isEmpty {
 				self.lastState = newState
-				print(diff)
+				delegate.receivedEvents(diff.events)
 			}
 		} catch {
 			print("Tab fetching failed: \(error)")
