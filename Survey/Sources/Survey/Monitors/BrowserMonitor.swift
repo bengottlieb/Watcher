@@ -26,56 +26,70 @@ class BrowserMonitor: NSObject {
 	}
 	
 	@objc func checkTabs() async {
-		async let safari = safariFrontTabs
-		async let chrome = chromeFrontTabs
-		async let opera = operaFrontTabs
-		
-		let tabs = await safari// + chrome + opera
-		//print(tabs)
-		//Timeline.instance.logCurrent(urls: tabs.compactMap { $0 })
+		do {
+			async let safari = try ScriptRunner.instance.fetchTabs(for: .safariAllTabs)
+			async let chrome = try ScriptRunner.instance.fetchTabs(for: .chromeAllTabs)
+			async let opera = try ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
+			
+			await logScriptResults([.safariAllFrontWindowTabs])
+			
+			let tabs = try await safari// + chrome + opera
+			//		print(tabs)
+			//Timeline.instance.logCurrent(urls: tabs.compactMap { $0 })
+		} catch {
+			print("Tab fetching failed: \(error)")
+		}
 	}
 	
-	var safariFrontTabs: [BrowserTabInformation] {
-		get async {
-			guard NSRunningApplication.isRunning(browser: .safari) else { return [] }
-			do {
-				let string = try await ScriptRunner.instance.run(command: .safariAllCurrentTabs)
-				return try [BrowserTabInformation](currentSafariTabs: string)
-			} catch {
-				print("Failed to fetch Safari Tabs: \(error)")
-				return []
-			}
-		}
-	}
+//	var safariFrontTabs: [BrowserTabInformation] {
+//		get async {
+//			guard NSRunningApplication.isRunning(browser: .safari) else { return [] }
+//			do {
+//				let string = try await ScriptRunner.instance.fetchTabs(for: .safariAllVisibleTabs)
+//				return try [BrowserTabInformation](currentSafariTabs: string)
+//			} catch {
+//				print("Failed to fetch Safari Tabs: \(error)")
+//				return []
+//			}
+//		}
+//	}
+//
+//	var chromeFrontTabs: [BrowserURL] {
+//		get async {
+//			guard NSRunningApplication.isRunning(browser: .chrome) else { return [] }
+//			do {
+//				let string = try await ScriptRunner.instance.fetchTabs(for: .chromeAllVisibleTabs)
+//				return string.components(separatedBy: ",").compactMap { BrowserURL($0, .chrome) }
+//			} catch {
+//				return []
+//			}
+//		}
+//	}
+//
+//	var operaFrontTabs: [BrowserURL] {
+//		get async {
+//			guard NSRunningApplication.isRunning(browser: .opera) else { return [] }
+//			do {
+//				let string = try await ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
+//				return string.components(separatedBy: ",").compactMap { BrowserURL($0, .safari) }
+//			} catch {
+//				return []
+//			}
+//		}
+//	}
+}
 
-	var chromeFrontTabs: [BrowserURL] {
-		get async {
-			let scripts: [ScriptRunner.Command] = [.chromeAllTabs, .chromeCurrentTab, .chromeAllCurrentTabs, .chromeAllFrontWindowTabs]
-			for script in scripts {
+extension BrowserMonitor {
+	func logScriptResults(_ scripts: [AppleScript.TabFetcher]) async {
+//		let scripts: [AppleScript.TabFetcher] = [.chromeAllTabs, .chromeFrontmostTab, .chromeAllVisibleTabs, .chromeAllFrontWindowTabs]
+		for script in scripts {
+			do {
 				print("SCRIPT: \(script.rawValue) \(script.script)")
-				print(try! await ScriptRunner.instance.run(command: .safariAllCurrentTabs))
+				print(try await ScriptRunner.instance.fetchTabs(for: script))
 				print("SCRIPT END -----------------------------")
-			}
-			
-
-			guard NSRunningApplication.isRunning(browser: .chrome) else { return [] }
-			do {
-				let string = try await ScriptRunner.instance.run(command: .chromeAllCurrentTabs)
-				return string.components(separatedBy: ",").compactMap { BrowserURL($0, .chrome) }
+				
 			} catch {
-				return []
-			}
-		}
-	}
-
-	var operaFrontTabs: [BrowserURL] {
-		get async {
-			guard NSRunningApplication.isRunning(browser: .opera) else { return [] }
-			do {
-				let string = try await ScriptRunner.instance.run(command: .operaAllCurrentTabs)
-				return string.components(separatedBy: ",").compactMap { BrowserURL($0, .safari) }
-			} catch {
-				return []
+				print("Failed to log \(script.title) \(error)")
 			}
 		}
 	}

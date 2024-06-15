@@ -37,21 +37,22 @@ final class ChromeTabExtractionTests: XCTestCase {
 
 /*			Samples
  
- SCRIPT: All Tabs for Chrome
- {{"Neural engineering - Wikipedia", "osascript Man Page - macOS - SS64.com", "The Most Mind Blowing Chat GPT Prompts | by Antonis Iliakis | Generative AI"}, {"https://en.wikipedia.org/wiki/Neural_engineering", "https://ss64.com/mac/osascript.html", "https://generativeai.pub/the-most-mind-blowing-chat-gpt-prompts-de991ea5dd4d"}}
+ 
+ SCRIPT: All Tabs for Chrome tell application "Google Chrome" to get (title, URL) of every tab of every window
+ {{{"cnn - Google Search", "New Tab", "", "Page not found"}, {"The New York Times - Breaking News, US News, World News and Videos"}}, {{"https://www.google.com/search?q=cnn&oq=cnn&gs_lcrp=EgZjaHJvbWUqBwgAEAAYjwIyBwgAEAAYjwIyEwgBEC4YgwEYxwEYsQMY0QMYgAQyCggCEAAYsQMYgAQyCggDEAAYsQMYgAQyBwgEEAAYgAQyDQgFEAAYgwEYsQMYgAQyDQgGEAAYgwEYsQMYgAQyDQgHEAAYgwEYsQMYgAQyBwgIEAAYgATSAQc5ODRqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8", "chrome://newtab/", "https://macnn.com/", "https://www.teledyne-ml.com/Pages/PageNotFoundError.aspx?requestUrl=https://www.teledyne-ml.com/opacity.asp"}, {"https://www.nytimes.com/"}}}
 
  SCRIPT END -----------------------------
- SCRIPT: Current Tab for Chrome
- Peer [athenas-arm-macbook-pro.local,0F4CD8E4] error in connectedHandler [Unable to connect].
- {{"Neural engineering - Wikipedia", "osascript Man Page - macOS - SS64.com", "The Most Mind Blowing Chat GPT Prompts | by Antonis Iliakis | Generative AI"}, {"https://en.wikipedia.org/wiki/Neural_engineering", "https://ss64.com/mac/osascript.html", "https://generativeai.pub/the-most-mind-blowing-chat-gpt-prompts-de991ea5dd4d"}}
+ SCRIPT: Frontmost Tab for Chrome tell application "Google Chrome" to get (title, URL) of active tab of front window
+ {"Page not found", "https://www.teledyne-ml.com/Pages/PageNotFoundError.aspx?requestUrl=https://www.teledyne-ml.com/opacity.asp"}
 
  SCRIPT END -----------------------------
- SCRIPT: All Visible Tabs for Chrome
- {{"Neural engineering - Wikipedia", "osascript Man Page - macOS - SS64.com", "The Most Mind Blowing Chat GPT Prompts | by Antonis Iliakis | Generative AI"}, {"https://en.wikipedia.org/wiki/Neural_engineering", "https://ss64.com/mac/osascript.html", "https://generativeai.pub/the-most-mind-blowing-chat-gpt-prompts-de991ea5dd4d"}}
+ SCRIPT: All Visible Tabs for Chrome tell application "Google Chrome" to get (title, URL) of active tab of every window
+ {{"Page not found", "The New York Times - Breaking News, US News, World News and Videos"}, {"https://www.teledyne-ml.com/Pages/PageNotFoundError.aspx?requestUrl=https://www.teledyne-ml.com/opacity.asp", "https://www.nytimes.com/"}}
 
  SCRIPT END -----------------------------
- SCRIPT: All Front Tabs for Chrome
- {{"Neural engineering - Wikipedia", "osascript Man Page - macOS - SS64.com", "The Most Mind Blowing Chat GPT Prompts | by Antonis Iliakis | Generative AI"}, {"https://en.wikipedia.org/wiki/Neural_engineering", "https://ss64.com/mac/osascript.html", "https://generativeai.pub/the-most-mind-blowing-chat-gpt-prompts-de991ea5dd4d"}}
+ SCRIPT: All Front Tabs for Chrome tell application "Google Chrome" to get (title, URL) of every tab of front window
+ {{"cnn - Google Search", "New Tab", "", "Page not found"}, {"https://www.google.com/search?q=cnn&oq=cnn&gs_lcrp=EgZjaHJvbWUqBwgAEAAYjwIyBwgAEAAYjwIyEwgBEC4YgwEYxwEYsQMY0QMYgAQyCggCEAAYsQMYgAQyCggDEAAYsQMYgAQyBwgEEAAYgAQyDQgFEAAYgwEYsQMYgAQyDQgGEAAYgwEYsQMYgAQyDQgHEAAYgwEYsQMYgAQyBwgIEAAYgATSAQc5ODRqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8", "chrome://newtab/", "https://macnn.com/", "https://www.teledyne-ml.com/Pages/PageNotFoundError.aspx?requestUrl=https://www.teledyne-ml.com/opacity.asp"}}
 
  SCRIPT END -----------------------------
+
  */

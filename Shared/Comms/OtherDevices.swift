@@ -15,7 +15,7 @@ extension UIImage: @unchecked Sendable { }
 #endif
 
 #if os(macOS)
-extension NSImage: @unchecked Sendable { }
+extension NSImage: @unchecked @retroactive Sendable { }
 #endif
 
 struct Keys {

@@ -14,8 +14,8 @@ import Survey
 @MainActor struct ScriptEditor: View {
 	@State var cancellables = Set<AnyCancellable>()
 	@State var scriptCancellable: AnyCancellable?
-	@State var script = ScriptRunner.Command.chromeCurrentTab.script
-	@State var command = ScriptRunner.Command.chromeCurrentTab
+	@State var script = AppleScript.TabFetcher.chromeFrontmostTab.script
+	@State var command = AppleScript.TabFetcher.chromeFrontmostTab
 	@State var result = ""
 	@State var error: Error?
 	@State var isRunning = false
@@ -42,7 +42,7 @@ import Survey
 				script = command.script
 				Task { await run() }
 			}) {
-				ForEach(ScriptRunner.Command.allCases) { command in
+				ForEach(AppleScript.TabFetcher.allCases) { command in
 					Text(command.title).tag(command)
 				}
 			}

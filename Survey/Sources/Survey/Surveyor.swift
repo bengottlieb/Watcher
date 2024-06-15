@@ -10,8 +10,8 @@ import Foundation
 public actor Surveyor {
 	public static let instance = Surveyor()
 	
-	public func setup() {
-		ScriptRunner.instance.setup()
+	public func setup() async {
+		await ScriptRunner.instance.setup()
 		ApplicationMonitor.instance.setup()
 		BrowserMonitor.instance.setup()
 	}

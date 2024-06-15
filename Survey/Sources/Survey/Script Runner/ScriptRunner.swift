@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import Suite
 
-public class ScriptRunner {
+public actor ScriptRunner {
 	public static let instance = ScriptRunner()
 	enum ScriptError: Error { case noOSAScriptFound, unableToDecodeString }
 	
@@ -46,5 +46,9 @@ public class ScriptRunner {
 		throw ScriptError.unableToDecodeString
 	}
 	
-	func run(command: Command) async throws -> String { try await run(script: command.script) }
+	func run(command: RunnableScript) async throws -> String { try await run(script: command.script) }
+	
+	func fetchTabs(for script: AppleScript.TabFetcher) async throws -> String {
+		try await run(command: script)
+	}
 }
