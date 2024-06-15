@@ -9,4 +9,5 @@ import Foundation
 
 public enum RecordedEvent: Codable {
 	case browserEvent(BrowserEvent, Date)
+	case applicationEvent(ApplicationEvent, Date)
 }

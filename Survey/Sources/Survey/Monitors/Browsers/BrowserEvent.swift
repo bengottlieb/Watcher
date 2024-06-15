@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  BrowserEvent.swift
 //  
 //
 //  Created by Ben Gottlieb on 6/15/24.

@@ -21,6 +21,7 @@ import Cocoa
 		
 		NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(didActivateApplication), name: NSWorkspace.didActivateApplicationNotification, object: nil)
 		NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(didLaunchApplication), name: NSWorkspace.didLaunchApplicationNotification, object: nil)
+		NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(didTerminateApplication), name: NSWorkspace.didTerminateApplicationNotification, object: nil)
 		NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(didWake), name: NSWorkspace.didWakeNotification, object: nil)
 		NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(willSleep), name: NSWorkspace.willSleepNotification, object: nil)
 		NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(willPowerOff), name: NSWorkspace.willPowerOffNotification, object: nil)
@@ -46,6 +47,10 @@ import Cocoa
 	}
 	
 	@objc func didLaunchApplication(_ note: Notification) {
+		process(application: note.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication)
+	}
+	
+	@objc func didTerminateApplication(_ note: Notification) {
 		process(application: note.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication)
 	}
 	
