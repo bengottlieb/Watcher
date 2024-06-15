@@ -47,8 +47,8 @@ extension AppleScript {
 			}
 		}
 		
-		public func tabs(from string: String) throws -> [BrowserTabInformation] {
-			switch self {
+		public func tabs(from string: String) throws -> BrowserTabCollection {
+			let raw: [BrowserTabInformation] = switch self {
 			case .safariAllTabs: try [BrowserTabInformation](safariNamesAndURLsByWindow: string)
 			case .safariFrontmostTab: try [BrowserTabInformation](safariTabNameAndURL: string)
 			case .safariAllVisibleTabs: try [BrowserTabInformation](safariNamesAndURLs: string)
@@ -56,6 +56,8 @@ extension AppleScript {
 				
 			default: []
 			}
+			
+			return BrowserTabCollection(tabs: .init(raw))
 		}
 	}
 }

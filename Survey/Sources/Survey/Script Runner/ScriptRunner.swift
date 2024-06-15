@@ -47,8 +47,4 @@ public actor ScriptRunner {
 	}
 	
 	func run(command: RunnableScript) async throws -> String { try await run(script: command.script) }
-	
-	func fetchTabs(for script: AppleScript.TabFetcher) async throws -> String {
-		try await run(command: script)
-	}
 }

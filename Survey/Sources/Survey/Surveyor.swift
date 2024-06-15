@@ -13,7 +13,7 @@ public actor Surveyor {
 	public func setup() async {
 		await ScriptRunner.instance.setup()
 		ApplicationMonitor.instance.setup()
-		BrowserMonitor.instance.setup()
+		await BrowserMonitor.instance.setup()
 	}
 
 	nonisolated public func updateBrowserTabs() {

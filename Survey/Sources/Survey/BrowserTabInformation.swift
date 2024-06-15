@@ -8,7 +8,7 @@
 import Foundation
 import Suite
 
-public struct BrowserTabInformation: Codable {
+public struct BrowserTabInformation: Codable, Hashable, Equatable {
 	public let url: URL
 	public let title: String?
 	public let browser: BrowserKind
@@ -23,6 +23,10 @@ enum BrowserTabInformationError: Error {
 }
 
 extension [BrowserTabInformation] {
+	var names: String {
+		compactMap { $0.title }.joined(separator: ", ")
+	}
+	
 	init(safariNamesAndURLsByWindow raw: String) throws {
 		guard let arrays = raw.threeDArray else { throw BrowserTabInformationError.unableToExtract3DStringArray }
 		var tabs: [BrowserTabInformation] = []

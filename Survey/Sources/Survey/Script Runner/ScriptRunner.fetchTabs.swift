@@ -9,17 +9,9 @@ import Foundation
 import Cocoa
 
 extension ScriptRunner {
-	func fetchTabs(using script: AppleScript.TabFetcher) async throws -> [BrowserTabInformation] {
-		
-		guard NSRunningApplication.isRunning(browser: script.browser) else { return [] }
-		do {
-			let string = try await ScriptRunner.instance.fetchTabs(for: script)
-			return try script.tabs(from: string)
-		} catch {
-			print("Failed to fetch Safari Tabs: \(error)")
-			return []
-		}
-
-		
+	
+	func fetchTabs(for script: AppleScript.TabFetcher) async throws -> BrowserTabCollection {
+		let raw = try await run(command: script)
+		return try script.tabs(from: raw)
 	}
 }

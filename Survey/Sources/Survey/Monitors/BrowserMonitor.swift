@@ -11,12 +11,14 @@ import Combine
 
 class BrowserMonitor: NSObject {
 	static let instance = BrowserMonitor()
+	var initialState: BrowserState?
+	var lastState: BrowserState?
 	
-	var checkInterval: TimeInterval = 5 { didSet { setup() }}
+	@MainActor var checkInterval: TimeInterval = 5 { didSet { setup() }}
 	private weak var checkTimer: Timer?
 	private var cancellables = Set<AnyCancellable>()
 	
-	func setup() {
+	@MainActor func setup() {
 		checkTimer?.invalidate()
 		checkTimer = Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true, block: { [weak self] _ in
 			guard let self else { return }
@@ -25,17 +27,36 @@ class BrowserMonitor: NSObject {
 		Task { await checkTabs() }
 	}
 	
+	var currentState: BrowserState {
+		get async throws {
+			async let safariAll = try ScriptRunner.instance.fetchTabs(for: .safariAllTabs)
+//			async let chromeAll = try ScriptRunner.instance.fetchTabs(for: .chromeAllTabs)
+//			async let operaAll = try ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
+
+			async let safariVisible = try ScriptRunner.instance.fetchTabs(for: .safariAllVisibleTabs)
+//			async let chromeVisible = try ScriptRunner.instance.fetchTabs(for: .chromeAllVisibleTabs)
+//			async let operaVisible = try ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
+
+			let all = try await safariAll// + chrome + opera
+			let visible = try await safariVisible// + chrome + opera
+			return BrowserState(all: all, visible: visible)
+		}
+	}
+	
 	@objc func checkTabs() async {
 		do {
-			async let safari = try ScriptRunner.instance.fetchTabs(for: .safariAllTabs)
-			async let chrome = try ScriptRunner.instance.fetchTabs(for: .chromeAllTabs)
-			async let opera = try ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
+			let newState = try await currentState
+			guard let lastState else {
+				initialState = newState
+				lastState = newState
+				return
+			}
 			
-			await logScriptResults([.safariAllFrontWindowTabs])
-			
-			let tabs = try await safari// + chrome + opera
-			//		print(tabs)
-			//Timeline.instance.logCurrent(urls: tabs.compactMap { $0 })
+			let diff = newState.diffs(since: lastState)
+			if !diff.isEmpty {
+				self.lastState = newState
+				print(diff)
+			}
 		} catch {
 			print("Tab fetching failed: \(error)")
 		}
