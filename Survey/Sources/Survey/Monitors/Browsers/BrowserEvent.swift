@@ -10,15 +10,18 @@ import Foundation
 public enum BrowserEvent: Codable, CustomStringConvertible {
 	case initialState(BrowserState)
 	case openedTab(BrowserTabInformation)
-	case closedTab(BrowserTabInformation)
+	case closedTab(BrowserTabInformation, TimeInterval?)
 	case switchedToTab(BrowserTabInformation)
+	case switchedAwayFromTab(BrowserTabInformation, TimeInterval?)
 	
 	public var description: String {
 		switch self {
 		case .initialState(let state): "Starting tabs: \(state.all.count)"
 		case .openedTab(let tab): "Opened \(tab.title ?? "--")"
-		case .closedTab(let tab): "Closed \(tab.title ?? "--")"
+		case .closedTab(let tab, let duration): "Closed \(tab.title ?? "--") \(duration?.durationString() ?? "")"
 		case .switchedToTab(let tab): "Switched to \(tab.title ?? "--")"
+		case .switchedAwayFromTab(let tab, let duration):
+			"Switched away from \(tab.title ?? "") \(duration?.durationString() ?? "")"
 		}
 	}
 }

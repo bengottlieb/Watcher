@@ -50,5 +50,6 @@ public struct RunningApplicationState: Codable {
 				return all.description
 			}
 		}
+		
 	}
 }

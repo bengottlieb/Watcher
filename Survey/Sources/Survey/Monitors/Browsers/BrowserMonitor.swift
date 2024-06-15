@@ -13,6 +13,7 @@ class BrowserMonitor: NSObject {
 	static let instance = BrowserMonitor()
 	var initialState: BrowserState?
 	var lastState: BrowserState?
+	var history: [RecordedEvent] = []
 	
 	@MainActor var checkInterval: TimeInterval = 1 { didSet { Task { setupTimer() }}}
 	private weak var checkTimer: Timer?
@@ -64,7 +65,9 @@ class BrowserMonitor: NSObject {
 			let diff = newState.diffs(since: lastState)
 			if !diff.isEmpty {
 				self.lastState = newState
-				delegate.receivedEvents(diff.events)
+				let events = diff.events(basedOn: history)
+				history += events
+				delegate.receivedEvents(events)
 			}
 		} catch {
 			print("Tab fetching failed: \(error)")

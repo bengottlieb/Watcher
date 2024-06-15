@@ -69,11 +69,11 @@ public struct BrowserState: Codable {
 			}
 		}
 		
-		var events: [RecordedEvent] {
+		func events(basedOn history: [RecordedEvent]) -> [RecordedEvent] {
 			var results: [RecordedEvent] = []
 
 			for tab in all.opened { results.append(.browserEvent(.openedTab(tab), date)) }
-			for app in all.closed { results.append(.browserEvent(.closedTab(app), date)) }
+			for app in all.closed { results.append(.browserEvent(.closedTab(app, nil), date)) }
 
 			for tab in visible.opened { results.append(.browserEvent(.switchedToTab(tab), date)) }
 
