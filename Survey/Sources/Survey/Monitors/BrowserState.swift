@@ -54,7 +54,17 @@ public struct BrowserState: Codable {
 		var isEmpty: Bool { all.isEmpty && visible.isEmpty }
 		
 		var description: String {
-			"All: \(all), Visible: \(visible)"
+			if all.isEmpty {
+				if visible.opened.isEmpty{
+					"Visible: \(visible)"
+				} else {
+					"Switched to \(visible)"
+				}
+			} else if visible.isEmpty {
+				"All: \(all)"
+			} else {
+				"All: \(all), Visible: \(visible)"
+			}
 		}
 	}
 }

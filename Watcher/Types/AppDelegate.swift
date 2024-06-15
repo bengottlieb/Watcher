@@ -19,7 +19,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			await Surveyor.instance.setup()
 		}
 		
-		OtherDevices.instance.setup(mode: .host)
+		if !CommandLine.bool(for: "disableNearby") {
+			OtherDevices.instance.setup(mode: .host)
+		}
 	}
 	
 	var window: NSWindow!

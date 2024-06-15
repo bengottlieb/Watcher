@@ -9,11 +9,11 @@ import Foundation
 
 extension AppleScript {
 	public enum TabFetcher: String, CaseIterable, Identifiable, Hashable, RunnableScript {
-		case safariFrontmostTab = "Frontmost Tab for Safari", safariAllFrontWindowTabs = "All Front Tabs for Safari", safariAllVisibleTabs = "All Visible Tabs for Safari", safariAllTabs = "All Tabs for Safari"
+		case safariFrontmostTab = "Frontmost Tab for Safari", safariAllFrontWindowTabs = "All Front Window Tabs for Safari", safariAllVisibleTabs = "All Visible Tabs for Safari", safariAllTabs = "All Tabs for Safari"
 		
-		case chromeFrontmostTab = "Frontmost Tab for Chrome", chromeAllFrontWindowTabs = "All Front Tabs for Chrome", chromeAllVisibleTabs = "All Visible Tabs for Chrome", chromeAllTabs = "All Tabs for Chrome"
+		case chromeFrontmostTab = "Frontmost Tab for Chrome", chromeAllFrontWindowTabs = "All Front Window Tabs for Chrome", chromeAllVisibleTabs = "All Visible Tabs for Chrome", chromeAllTabs = "All Tabs for Chrome"
 
-		case operaFrontmostTab = "Frontmost Tab for Opera", operaAllFrontWindowTabs = "All Tabs for Opera", operaAllVisibleTabs = "All Visible Tabs for Opera"
+		case operaFrontmostTab = "Frontmost Tab for Opera", operaAllFrontWindowTabs = "All Front Window Tabs for Opera", operaAllVisibleTabs = "All Visible Tabs for Opera", operaAllTabs = "All Tabs for Opera"
 		
 		public var script: String {
 			switch self {
@@ -30,6 +30,7 @@ extension AppleScript {
 			case .operaFrontmostTab: return "tell application \"Opera\" to get (title, URL) of active tab of front window"
 			case .operaAllFrontWindowTabs: return "tell application \"Opera\" to get (title, URL) of every tab of front window"
 			case .operaAllVisibleTabs: return "tell application \"Opera\" to get (title, URL) of active tab of every window"
+			case .operaAllTabs: return "tell application \"Opera\" to get (title, URL) of every tab of every window"
 			}
 		}
 		
@@ -43,18 +44,26 @@ extension AppleScript {
 			switch self {
 			case .safariAllTabs, .safariFrontmostTab, .safariAllVisibleTabs, .safariAllFrontWindowTabs: .safari
 			case .chromeAllTabs, .chromeFrontmostTab, .chromeAllVisibleTabs, .chromeAllFrontWindowTabs: .chrome
-			case .operaFrontmostTab, .operaAllVisibleTabs, .operaAllFrontWindowTabs: .opera
+			case .operaFrontmostTab, .operaAllVisibleTabs, .operaAllFrontWindowTabs, .operaAllTabs: .opera
 			}
 		}
 		
 		public func tabs(from string: String) throws -> BrowserTabCollection {
 			let raw: [BrowserTabInformation] = switch self {
-			case .safariAllTabs: try [BrowserTabInformation](safariNamesAndURLsByWindow: string)
-			case .safariFrontmostTab: try [BrowserTabInformation](safariTabNameAndURL: string)
-			case .safariAllVisibleTabs: try [BrowserTabInformation](safariNamesAndURLs: string)
-			case .safariAllFrontWindowTabs: try [BrowserTabInformation](safariNamesAndURLs: string)
-				
-			default: []
+			case .safariAllTabs: try [BrowserTabInformation](namesAndURLsByWindow: string, browser: .safari)
+			case .safariFrontmostTab: try [BrowserTabInformation](tabNameAndURL: string, browser: .safari)
+			case .safariAllVisibleTabs: try [BrowserTabInformation](namesAndURLs: string, browser: .safari)
+			case .safariAllFrontWindowTabs: try [BrowserTabInformation](namesAndURLs: string, browser: .safari)
+
+			case .chromeAllTabs: try [BrowserTabInformation](namesAndURLsByWindow: string, browser: .chrome)
+			case .chromeFrontmostTab: try [BrowserTabInformation](tabNameAndURL: string, browser: .chrome)
+			case .chromeAllVisibleTabs: try [BrowserTabInformation](namesAndURLs: string, browser: .chrome)
+			case .chromeAllFrontWindowTabs: try [BrowserTabInformation](namesAndURLs: string, browser: .chrome)
+
+			case .operaAllTabs: try [BrowserTabInformation](namesAndURLsByWindow: string, browser: .opera)
+			case .operaFrontmostTab: try [BrowserTabInformation](tabNameAndURL: string, browser: .opera)
+			case .operaAllVisibleTabs: try [BrowserTabInformation](namesAndURLs: string, browser: .opera)
+			case .operaAllFrontWindowTabs: try [BrowserTabInformation](namesAndURLs: string, browser: .opera)
 			}
 			
 			return BrowserTabCollection(tabs: .init(raw))
@@ -65,5 +74,5 @@ extension AppleScript {
 extension [AppleScript.TabFetcher] {
 	public static var allSafariScripts: [AppleScript.TabFetcher] { [ .safariFrontmostTab, .safariAllFrontWindowTabs, .safariAllVisibleTabs, .safariAllTabs ] }
 	public static var allChromeScripts: [AppleScript.TabFetcher] { [ .chromeFrontmostTab, .chromeAllFrontWindowTabs, .chromeAllVisibleTabs, .chromeAllTabs ] }
-	public static var allOperaScripts: [AppleScript.TabFetcher] { [ .operaFrontmostTab, .operaAllFrontWindowTabs, .operaAllVisibleTabs ] }
+	public static var allOperaScripts: [AppleScript.TabFetcher] { [ .operaFrontmostTab, .operaAllFrontWindowTabs, .operaAllVisibleTabs, .operaAllTabs ] }
 }

@@ -29,18 +29,17 @@ class BrowserMonitor: NSObject {
 	
 	var currentState: BrowserState {
 		get async throws {
-			let start = Date()
-			async let safariAll = try ScriptRunner.instance.fetchTabs(for: .safariAllTabs)
-			async let chromeAll = try ScriptRunner.instance.fetchTabs(for: .chromeAllTabs)
-			async let operaAll = try ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
+			async let safariAll = ScriptRunner.instance.fetchTabs(for: .safariAllTabs)
+			async let chromeAll = ScriptRunner.instance.fetchTabs(for: .chromeAllTabs)
+			async let operaAll = ScriptRunner.instance.fetchTabs(for: .operaAllTabs)
 
-			async let safariVisible = try ScriptRunner.instance.fetchTabs(for: .safariAllVisibleTabs)
-			async let chromeVisible = try ScriptRunner.instance.fetchTabs(for: .chromeAllVisibleTabs)
-			async let operaVisible = try ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
+			async let safariVisible = ScriptRunner.instance.fetchTabs(for: .safariAllVisibleTabs)
+			async let chromeVisible = ScriptRunner.instance.fetchTabs(for: .chromeAllVisibleTabs)
+			async let operaVisible = ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
 
-			let (all, visible) = (try await (safariAll + chromeAll + operaAll), try await safariVisible + chromeVisible + operaVisible)
-		//	let visible = try await safariVisible// + chrome + opera
-			print("Took \(abs(start.timeIntervalSinceNow)) sec")
+			let (all, visible) = (await (safariAll + chromeAll + operaAll), await safariVisible + chromeVisible + operaVisible)
+//			let (all, visible) = (await (operaAll), await operaVisible)
+//			print(try! await ScriptRunner.instance.fetchTabs(for: .operaFrontmostTab))
 			return BrowserState(all: all, visible: visible)
 		}
 	}
