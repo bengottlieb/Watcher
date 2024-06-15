@@ -31,7 +31,7 @@ class BrowserMonitor: NSObject {
 		async let opera = operaFrontTabs
 		
 		let tabs = await safari// + chrome + opera
-		print(tabs)
+		//print(tabs)
 		//Timeline.instance.logCurrent(urls: tabs.compactMap { $0 })
 	}
 	
@@ -41,7 +41,6 @@ class BrowserMonitor: NSObject {
 			do {
 				let string = try await ScriptRunner.instance.run(command: .safariAllCurrentTabs)
 				return try [BrowserTabInformation](currentSafariTabs: string)
-				//return string.components(separatedBy: ",").compactMap { BrowserURL($0, .safari) }
 			} catch {
 				print("Failed to fetch Safari Tabs: \(error)")
 				return []
@@ -51,6 +50,14 @@ class BrowserMonitor: NSObject {
 
 	var chromeFrontTabs: [BrowserURL] {
 		get async {
+			let scripts: [ScriptRunner.Command] = [.chromeAllTabs, .chromeCurrentTab, .chromeAllCurrentTabs, .chromeAllFrontWindowTabs]
+			for script in scripts {
+				print("SCRIPT: \(script.rawValue) \(script.script)")
+				print(try! await ScriptRunner.instance.run(command: .safariAllCurrentTabs))
+				print("SCRIPT END -----------------------------")
+			}
+			
+
 			guard NSRunningApplication.isRunning(browser: .chrome) else { return [] }
 			do {
 				let string = try await ScriptRunner.instance.run(command: .chromeAllCurrentTabs)

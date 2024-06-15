@@ -22,7 +22,6 @@ public class ScriptRunner {
 		do {
 			let path = try await Process.which("osascript")
 
-			Suite.logg("Found OSAScript: \(path)")
 			self.osascriptPath = path
 			return path
 		} catch {
