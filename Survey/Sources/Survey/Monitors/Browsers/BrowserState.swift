@@ -8,11 +8,12 @@
 import Foundation
 
 public struct BrowserTabCollection: Codable {
-	let tabs: Set<BrowserTabInformation>
+	public let tabs: Set<BrowserTabInformation>
+	public var count: Int { tabs.count }
 	
 	public struct Diffs: Codable, CustomStringConvertible {
-		let opened: Set<BrowserTabInformation>
-		let closed: Set<BrowserTabInformation>
+		public let opened: Set<BrowserTabInformation>
+		public let closed: Set<BrowserTabInformation>
 
 		public var isEmpty: Bool { opened.isEmpty && closed.isEmpty }
 		public var description: String {
@@ -40,8 +41,8 @@ public struct BrowserTabCollection: Codable {
 
 
 public struct BrowserState: Codable {
-	let all: BrowserTabCollection
-	let visible: BrowserTabCollection
+	public let all: BrowserTabCollection
+	public let visible: BrowserTabCollection
 
 	func diffs(since origin: BrowserState) -> Diffs {
 		.init(all: all.diffs(since: origin.all), visible: visible.diffs(since: origin.visible))

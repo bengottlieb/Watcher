@@ -12,7 +12,7 @@ public actor Surveyor {
 	
 	public func setup() async {
 		await ScriptRunner.instance.setup()
-		ApplicationMonitor.instance.setup()
+		await RunningApplicationMonitor.instance.setup()
 		await BrowserMonitor.instance.setup()
 	}
 

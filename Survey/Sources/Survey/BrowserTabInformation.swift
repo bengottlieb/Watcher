@@ -36,7 +36,7 @@ extension [BrowserTabInformation] {
 		compactMap { $0.title }.joined(separator: ", ")
 	}
 	
-	init(namesAndURLsByWindow raw: String, browser: BrowserKind) throws {
+	init(namesAndURLsByWindow raw: String, browser: BrowserKind, ignoring: [URL] = BrowserTabInformation.ignoredURLs) throws {
 		guard let arrays = raw.threeDArray else { throw BrowserTabInformationError.unableToExtract3DStringArray }
 		var tabs: [BrowserTabInformation] = []
 		
@@ -52,7 +52,7 @@ extension [BrowserTabInformation] {
 		for (names, urls) in zip(allNames, allUrls) {
 			if names.count != urls.count { throw BrowserTabInformationError.urlNameCountMismatch }
 			tabs += zip(names, urls).compactMap { name, raw in
-				guard let url = URL(string: raw), !BrowserTabInformation.ignoredURLs.contains(url) else { return nil }
+				guard let url = URL(string: raw), !ignoring.contains(url) else { return nil }
 				return BrowserTabInformation(url: url, title: name, browser: browser)
 			}
 		}
@@ -60,7 +60,7 @@ extension [BrowserTabInformation] {
 		self = tabs
 	}
 	
-	init(namesAndURLs raw: String, browser: BrowserKind) throws {
+	init(namesAndURLs raw: String, browser: BrowserKind, ignoring: [URL] = BrowserTabInformation.ignoredURLs) throws {
 		guard let arrays = raw.twoDArray else { throw BrowserTabInformationError.unableToExtract3DStringArray }
 		let names = arrays[0]
 		let urls = arrays[1]
@@ -68,17 +68,17 @@ extension [BrowserTabInformation] {
 		if names.count != urls.count { throw BrowserTabInformationError.urlNameCountMismatch }
 		
 		self = zip(names, urls).compactMap { name, raw in
-			guard let url = URL(string: raw) else { return nil }
+			guard let url = URL(string: raw), !ignoring.contains(url) else { return nil }
 			return BrowserTabInformation(url: url, title: name, browser: browser)
 		}
 	}
 	
-	init(tabNameAndURL raw: String, browser: BrowserKind) throws {
+	init(tabNameAndURL raw: String, browser: BrowserKind, ignoring: [URL] = BrowserTabInformation.ignoredURLs) throws {
 		guard let parts = raw.oneDArray else { throw BrowserTabInformationError.incorrectDataFormat }
 		
 		if parts.count != 2 { throw BrowserTabInformationError.incorrectNumberOfTabComponents }
 		
-		if let url = URL(string: parts[0]) {
+		if let url = URL(string: parts[0]), !ignoring.contains(url) {
 			self = [BrowserTabInformation(url: url, title: parts[1], browser: browser)]
 		} else {
 			self = []

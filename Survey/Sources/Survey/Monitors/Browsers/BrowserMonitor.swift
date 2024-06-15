@@ -14,17 +14,17 @@ class BrowserMonitor: NSObject {
 	var initialState: BrowserState?
 	var lastState: BrowserState?
 	
-	@MainActor var checkInterval: TimeInterval = 1 { didSet { setup() }}
+	@MainActor var checkInterval: TimeInterval = 1 { didSet { Task { await setup() }}}
 	private weak var checkTimer: Timer?
 	private var cancellables = Set<AnyCancellable>()
 	
-	@MainActor func setup() {
+	@MainActor func setup() async {
 		checkTimer?.invalidate()
 		checkTimer = Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true, block: { [weak self] _ in
 			guard let self else { return }
-			Task { await self.checkTabs() }
+			Task { await self.update() }
 		})
-		Task { await checkTabs() }
+		await update()
 	}
 	
 	var currentState: BrowserState {
@@ -38,13 +38,11 @@ class BrowserMonitor: NSObject {
 			async let operaVisible = ScriptRunner.instance.fetchTabs(for: .operaAllVisibleTabs)
 
 			let (all, visible) = (await (safariAll + chromeAll + operaAll), await safariVisible + chromeVisible + operaVisible)
-//			let (all, visible) = (await (operaAll), await operaVisible)
-//			print(try! await ScriptRunner.instance.fetchTabs(for: .operaFrontmostTab))
 			return BrowserState(all: all, visible: visible)
 		}
 	}
 	
-	@objc func checkTabs() async {
+	@objc func update() async {
 		do {
 			let newState = try await currentState
 			guard let lastState else {
@@ -105,14 +103,9 @@ extension BrowserMonitor {
 	func logScriptResults(_ scripts: [AppleScript.TabFetcher]) async {
 //		let scripts: [AppleScript.TabFetcher] = [.chromeAllTabs, .chromeFrontmostTab, .chromeAllVisibleTabs, .chromeAllFrontWindowTabs]
 		for script in scripts {
-			do {
-				print("SCRIPT: \(script.rawValue) \(script.script)")
-				print(try await ScriptRunner.instance.fetchTabs(for: script))
-				print("SCRIPT END -----------------------------")
-				
-			} catch {
-				print("Failed to log \(script.title) \(error)")
-			}
+			print("SCRIPT: \(script.rawValue) \(script.script)")
+			print(await ScriptRunner.instance.fetchTabs(for: script))
+			print("SCRIPT END -----------------------------")
 		}
 	}
 }
