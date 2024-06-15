@@ -8,43 +8,6 @@
 import Foundation
 import Cocoa
 
-extension Set where Element == RunningApplication {
-	var description: String {
-		Array(self).map { $0.name }.joined(separator: ", a")
-	}
-}
-
-public struct RunningApplicationCollection: Codable, Equatable, Hashable, CustomStringConvertible {
-	let apps: Set<RunningApplication>
-	public var description: String {
-		apps.map { $0.name }.joined(separator: ", ")
-	}
-	
-	public struct Diffs: Codable, CustomStringConvertible {
-		public let opened: Set<RunningApplication>
-		public let closed: Set<RunningApplication>
-
-		public var isEmpty: Bool { opened.isEmpty && closed.isEmpty }
-		
-		public var description: String {
-			if opened.isEmpty, closed.isEmpty { return "" }
-			if opened.isEmpty { return "Quit \(closed.description)" }
-			return "Launched \(opened.description)"
-		}
-	}
-	
-	func diffs(since origin: RunningApplicationCollection) -> Diffs {
-		let opened = self.apps.subtracting(origin.apps)
-		let closed = origin.apps.subtracting(self.apps)
-		
-		return .init(opened: opened, closed: closed)
-	}
-	
-	static var current: RunningApplicationCollection {
-		.init(apps: .init(NSWorkspace.shared.runningApplications.compactMap { RunningApplication($0) }))
-	}
-}
-
 public struct RunningApplicationState: Codable {
 	public let all: RunningApplicationCollection
 	public let front: RunningApplication?
@@ -58,10 +21,21 @@ public struct RunningApplicationState: Codable {
 	}
 	
 	struct Diffs: Codable, CustomStringConvertible {
+		var date = Date()
 		let all: RunningApplicationCollection.Diffs
 		let front: RunningApplication?
 		
 		var isEmpty: Bool { all.isEmpty && front == nil }
+		
+		var events: [RecordedEvent] {
+			var results: [RecordedEvent] = []
+
+			if let front { results.append(.applicationEvent(.switchedToApp(front), date)) }
+			for app in all.opened { results.append(.applicationEvent(.openedApp(app), date)) }
+			for app in all.closed { results.append(.applicationEvent(.closedApp(app), date)) }
+
+			return results
+		}
 		
 		var description: String {
 			if all.isEmpty, front == nil {

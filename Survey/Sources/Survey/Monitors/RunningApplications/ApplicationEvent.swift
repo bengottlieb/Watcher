@@ -9,7 +9,7 @@ import Foundation
 
 public enum ApplicationEvent: Codable {
 	case initialState(RunningApplicationCollection)
-	case openedTab(RunningApplication)
-	case closedTab(RunningApplication)
-	case switchedToTab(RunningApplication)
+	case openedApp(RunningApplication)
+	case closedApp(RunningApplication)
+	case switchedToApp(RunningApplication)
 }

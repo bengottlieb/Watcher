@@ -33,7 +33,6 @@ import Cocoa
 		let diff = newState.diffs(since: lastState)
 		if !diff.isEmpty {
 			self.lastState = newState
-			print(diff)
 		}
 
 	}

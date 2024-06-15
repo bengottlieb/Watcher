@@ -49,6 +49,7 @@ public struct BrowserState: Codable {
 	}
 
 	struct Diffs: Codable, CustomStringConvertible {
+		var date = Date()
 		let all: BrowserTabCollection.Diffs
 		let visible: BrowserTabCollection.Diffs
 		
@@ -67,5 +68,17 @@ public struct BrowserState: Codable {
 				"All: \(all), Visible: \(visible)"
 			}
 		}
+		
+		var events: [RecordedEvent] {
+			var results: [RecordedEvent] = []
+
+			for tab in all.opened { results.append(.browserEvent(.openedTab(tab), date)) }
+			for app in all.closed { results.append(.browserEvent(.closedTab(app), date)) }
+
+			for tab in visible.opened { results.append(.browserEvent(.switchedToTab(tab), date)) }
+
+			return results
+		}
+
 	}
 }
