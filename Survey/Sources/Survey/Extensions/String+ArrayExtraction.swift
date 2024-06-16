@@ -13,7 +13,17 @@ extension String {
 	}
 	
 	var bracketize: String {
-		replacingOccurrences(of: "{", with: "[").replacingOccurrences(of: "}", with: "]")
+		var bracketed = replacingOccurrences(of: "{", with: "[").replacingOccurrences(of: "}", with: "]")
+		
+		let missingValue = "missing value"
+		if bracketed.contains(missingValue) {
+			print("Found missing value!")
+			guard let data = bracketed.data(using: .utf8) else { return "[]" }
+			if (try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)) == nil {
+				bracketed = bracketed.replacingOccurrences(of: missingValue, with: "about.blank")
+			}
+		}
+		return bracketed
 	}
 	
 	var twoDArray: [[String]]? {

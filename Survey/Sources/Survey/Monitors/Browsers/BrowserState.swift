@@ -7,39 +7,6 @@
 
 import Foundation
 
-public struct BrowserTabCollection: Codable {
-	public let tabs: Set<BrowserTabInformation>
-	public var count: Int { tabs.count }
-	
-	public struct Diffs: Codable, CustomStringConvertible {
-		public let opened: Set<BrowserTabInformation>
-		public let closed: Set<BrowserTabInformation>
-
-		public var isEmpty: Bool { opened.isEmpty && closed.isEmpty }
-		public var description: String {
-			var results = ""
-			if !opened.isEmpty { results += "Opened \(Array(opened).names)" }
-			if !opened.isEmpty, !closed.isEmpty { results += ", " }
-			if !closed.isEmpty { results += "Closed \(Array(closed).names)" }
-			return results
-		}
-	}
-	
-	func diffs(since origin: BrowserTabCollection) -> Diffs {
-		let opened = self.tabs.subtracting(origin.tabs)
-		let closed = origin.tabs.subtracting(self.tabs)
-		
-		return .init(opened: opened, closed: closed)
-	}
-	
-	public static func +(lhs: Self, rhs: Self) -> Self {
-		BrowserTabCollection(tabs: lhs.tabs.union(rhs.tabs))
-	}
-	
-	public static let empty = BrowserTabCollection(tabs: [])
-}
-
-
 public struct BrowserState: Codable {
 	public let all: BrowserTabCollection
 	public let visible: BrowserTabCollection
@@ -73,9 +40,10 @@ public struct BrowserState: Codable {
 			var results: [RecordedEvent] = []
 
 			for tab in all.opened { results.append(.browserEvent(.openedTab(tab), date)) }
-			for app in all.closed { results.append(.browserEvent(.closedTab(app, nil), date)) }
+			for tab in all.closed { results.append(.browserEvent(.closedTab(tab, history.mostRecentOpenTabEvent(for: tab)?.age), date)) }
 
 			for tab in visible.opened { results.append(.browserEvent(.switchedToTab(tab), date)) }
+			for tab in visible.closed { results.append(.browserEvent(.switchedAwayFromTab(tab, history.mostRecentOpenTabEvent(for: tab)?.age), date))}
 
 			return results
 		}

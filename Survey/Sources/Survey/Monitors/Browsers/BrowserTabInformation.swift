@@ -18,6 +18,7 @@ enum BrowserTabInformationError: Error {
 	case incorrectDataFormat
 	case missingNameOrURLComponents
 	case urlNameCountMismatch
+	case unableToExtract2DStringArray
 	case unableToExtract3DStringArray
 	case incorrectNumberOfTabComponents
 }
@@ -32,6 +33,10 @@ extension BrowserTabInformation {
 }
 
 extension [BrowserTabInformation] {
+	func contains(_ url: URL) -> Bool {
+		contains { $0.url == url }
+	}
+
 	var names: String {
 		compactMap { $0.title }.joined(separator: ", ")
 	}
@@ -61,7 +66,7 @@ extension [BrowserTabInformation] {
 	}
 	
 	init(namesAndURLs raw: String, browser: BrowserKind, ignoring: [URL] = BrowserTabInformation.ignoredURLs) throws {
-		guard let arrays = raw.twoDArray else { throw BrowserTabInformationError.unableToExtract3DStringArray }
+		guard let arrays = raw.twoDArray else { throw BrowserTabInformationError.unableToExtract2DStringArray }
 		let names = arrays[0]
 		let urls = arrays[1]
 		

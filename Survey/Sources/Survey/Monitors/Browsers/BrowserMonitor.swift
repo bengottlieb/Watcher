@@ -26,7 +26,9 @@ class BrowserMonitor: NSObject {
 		self.delegate = delegate
 
 		if let initialState {
-			delegate.receivedEvents([.browserEvent(.initialState(initialState), Date())])
+			let initialEvent = RecordedEvent.browserEvent(.initialState(initialState), Date())
+			history = [initialEvent]
+			delegate.receivedEvents([initialEvent])
 		}
 	}
 	

@@ -22,7 +22,8 @@ import Cocoa
 		lastState = .current
 		
 		self.delegate = delegate
-		delegate.receivedEvents([.applicationEvent(.initialState(.current), Date())])
+		let initialEvent = RecordedEvent.applicationEvent(.initialState(.current), Date())
+		delegate.receivedEvents([initialEvent])
 		
 		NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(didActivateApplication), name: NSWorkspace.didActivateApplicationNotification, object: nil)
 		NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(didLaunchApplication), name: NSWorkspace.didLaunchApplicationNotification, object: nil)

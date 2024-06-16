@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			var sequence = await Surveyor.instance.recordedEvents().makeAsyncIterator()
 			while let event = await sequence.next() {
 				
-				print(event.description)
+				print("Event: \(event.description)")
 			}
 		}
 		

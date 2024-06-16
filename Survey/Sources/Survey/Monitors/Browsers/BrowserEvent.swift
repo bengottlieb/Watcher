@@ -18,10 +18,10 @@ public enum BrowserEvent: Codable, CustomStringConvertible {
 		switch self {
 		case .initialState(let state): "Starting tabs: \(state.all.count)"
 		case .openedTab(let tab): "Opened \(tab.title ?? "--")"
-		case .closedTab(let tab, let duration): "Closed \(tab.title ?? "--") \(duration?.durationString() ?? "")"
+		case .closedTab(let tab, let duration): "Closed \(tab.title ?? "--") \(duration?.durationString(style: .secondsMaybeHours, showLeadingZero: true) ?? "")"
 		case .switchedToTab(let tab): "Switched to \(tab.title ?? "--")"
 		case .switchedAwayFromTab(let tab, let duration):
-			"Switched away from \(tab.title ?? "") \(duration?.durationString() ?? "")"
+			"Switched away from \(tab.title ?? "") \(duration?.durationString(style: .secondsMaybeHours, showLeadingZero: true) ?? "")s"
 		}
 	}
 }
