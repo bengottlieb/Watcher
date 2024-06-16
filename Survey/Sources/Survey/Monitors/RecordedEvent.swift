@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum RecordedEvent: Codable, CustomStringConvertible {
+public enum RecordedEvent: Codable, CustomStringConvertible, Equatable, Hashable {
 	case browserEvent(BrowserEvent, Date)
 	case applicationEvent(ApplicationEvent, Date)
 	

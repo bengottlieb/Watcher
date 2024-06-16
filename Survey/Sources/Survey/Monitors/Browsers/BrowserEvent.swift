@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum BrowserEvent: Codable, CustomStringConvertible {
+public enum BrowserEvent: Codable, CustomStringConvertible, Equatable, Hashable {
 	case initialState(BrowserState)
 	case openedTab(BrowserTabInformation)
 	case closedTab(BrowserTabInformation, TimeInterval?)

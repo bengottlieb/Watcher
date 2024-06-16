@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct BrowserState: Codable {
+public struct BrowserState: Codable, Equatable, Hashable {
 	public let all: BrowserTabCollection
 	public let visible: BrowserTabCollection
 

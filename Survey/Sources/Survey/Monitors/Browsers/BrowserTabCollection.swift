@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct BrowserTabCollection: Codable {
+public struct BrowserTabCollection: Codable, Equatable, Hashable {
 	public let tabs: Set<BrowserTabInformation>
 	public var count: Int { tabs.count }
 	
